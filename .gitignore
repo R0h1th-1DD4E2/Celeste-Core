@@ -47,3 +47,5 @@
 /synth.log
 /synth.v
 .*.swp
+.nvim/
+.hdl_checker/

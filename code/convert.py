@@ -22,6 +22,13 @@ def image_to_file(input_image_path, output_file_path, width=240):
         # Write the pixel values
         for row in pixel_values:
             f.write(" ".join(map(str, row)) + "\n")
+    
+    with open(output_file_path, "r") as file:
+        data = file.readlines()[1:]  # Skip the first line with dimensions
+
+    with open("image_data.hex", "w") as outfile:
+        for line in data:
+            outfile.write(" ".join(f"{int(value):02x}" for value in line.split()) + "\n")
 
     print(f"Converted image to file: {output_file_path}")
 

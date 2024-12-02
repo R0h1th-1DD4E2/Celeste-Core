@@ -56,8 +56,12 @@ module testbench;
 		.trace_data  (trace_data )
 	);
 
-	reg [7:0] memory [0:256*1024-1];
-	initial $readmemh("main.hex", memory);
+	reg [7:0] memory [0:512*1024-1];
+  initial begin 
+    // $readmemh("main.hex", memory);
+    $readmemh("main.hex", memory, 'h10000);
+    $readmemh("image_data.hex", memory, 20'h22a5c);
+  end
 
 	assign mem_ready = 1;
 
