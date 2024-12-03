@@ -88,10 +88,10 @@ module testbench;
 		end
 	end
 
-	initial begin
-		$dumpfile("testbench.vcd");
-		$dumpvars(0, testbench);
-	end
+	//initial begin
+	//	$dumpfile("testbench.vcd");
+	//	$dumpvars(0, testbench);
+	//end
 
 	integer trace_file;
 
@@ -112,6 +112,9 @@ module testbench;
 	always @(posedge clk) begin
 		if (resetn && trap) begin
 			repeat (10) @(posedge clk);
+			// Dump memory to a file
+    		$writememh("memory_dump.hex", memory);
+			$display("Memory was dumped ");
 			$display("TRAP");
 			$finish;
 		end
