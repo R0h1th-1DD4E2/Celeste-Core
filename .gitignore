@@ -49,3 +49,6 @@
 .*.swp
 .nvim/
 .hdl_checker/
+*.log
+*.jou
+.Xil/
