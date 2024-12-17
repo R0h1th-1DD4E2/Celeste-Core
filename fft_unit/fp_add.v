@@ -50,8 +50,6 @@ module fp_add (
                 normalized_exponent = normalized_exponent - 1;
         end
         normalized_mantissa = temp_mant[23:1]; // Remove leading 1 bit
-        $display("aligned A = %b, aligned B = %b, mant_sum = %b", 
-         aligned_mant_a[23:0], aligned_mant_b[23:0], mant_sum[24:0]);
     end
     
     assign result = {sign_result, normalized_exponent, normalized_mantissa};
