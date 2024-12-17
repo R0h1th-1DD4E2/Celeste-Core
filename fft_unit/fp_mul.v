@@ -1,4 +1,6 @@
-module fp_mul (
+`timescale 1ns / 1ps
+
+module fp_mul(
      // Floating-point (IEEE 754 format)
     input [31:0] a,
     input [31:0] b,
@@ -28,4 +30,5 @@ module fp_mul (
     assign normalized_exponent = (mantissa_mult[47]) ? exponent_result + 1 : exponent_result;
     
     assign result = {sign_result, normalized_exponent, normalized_mantissa}; // result => [31](sign) + [30 : 23](exponent) + [22 : 0](Mantissa)
+    
 endmodule

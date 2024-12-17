@@ -31,7 +31,7 @@ module fp_add (
     wire [24:0] mant_sum;
     wire sign_result;
 
-    assign mant_sum = (sign_a == sign_b) ? (aligned_mant_a + aligned_mant_b) : (aligned_mant_a - aligned_mant_b);
+    assign mant_sum = (sign_a == sign_b) ? (aligned_mant_a + aligned_mant_b) : (aligned_mant_a > aligned_mant_b) ? (aligned_mant_a - aligned_mant_b) : (aligned_mant_b - aligned_mant_a);
 
     assign sign_result = (sign_a == sign_b) ? sign_a : (aligned_mant_a > aligned_mant_b ? sign_a : sign_b);
 
@@ -43,13 +43,15 @@ module fp_add (
         temp_mant = mant_sum;
 
         // Normalize mantissa and adjust exponent
-        normalized_exponent = (sign_a == sign_b) ? ((exp_a > exp_b) ? exp_a : exp_b) : ((exp_a > exp_b) ? exp_b : exp_a);
+        normalized_exponent = (sign_a == sign_b) ? ((exp_a > exp_b) ? exp_a : exp_b) : ((exp_a > exp_b) ? exp_a + 1 : exp_b + 1);
         while (temp_mant[24] == 1'b0 && normalized_exponent > 0) begin
             temp_mant = temp_mant << 1;
             if (sign_a != sign_b)
                 normalized_exponent = normalized_exponent - 1;
         end
         normalized_mantissa = temp_mant[23:1]; // Remove leading 1 bit
+$display("aligned A = %b, aligned B = %b, mant_sum = %b", aligned_mant_a, aligned_mant_b, mant_sum);
+
     end
     
     assign result = {sign_result, normalized_exponent, normalized_mantissa};
