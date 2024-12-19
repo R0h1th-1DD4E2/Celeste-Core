@@ -6,7 +6,8 @@ module fp_add (
     input [31:0] b,
     output [31:0] result
 );
-
+    reg [7:0] i;
+    
     // Extract
     wire sign_a, sign_b;
     wire [7:0] exp_a, exp_b;
@@ -44,10 +45,12 @@ module fp_add (
 
         // Normalize mantissa and adjust exponent
         normalized_exponent = (sign_a == sign_b) ? ((exp_a > exp_b) ? exp_a : exp_b) : ((exp_a > exp_b) ? exp_a + 1 : exp_b + 1);
-        while (temp_mant[24] == 1'b0 && normalized_exponent > 0) begin
-            temp_mant = temp_mant << 1;
-            if (sign_a != sign_b)
-                normalized_exponent = normalized_exponent - 1;
+        for (i = 0; i < 24; i = i + 1) begin
+            if (temp_mant[24] == 1'b0 && normalized_exponent > 0) begin
+                temp_mant = temp_mant << 1;
+                if (sign_a != sign_b) 
+                    normalized_exponent = normalized_exponent - 1;
+            end
         end
         normalized_mantissa = temp_mant[23:1]; // Remove leading 1 bit
         // $display("aligned A = %b, aligned B = %b, mant_sum = %b", aligned_mant_a, aligned_mant_b, mant_sum);

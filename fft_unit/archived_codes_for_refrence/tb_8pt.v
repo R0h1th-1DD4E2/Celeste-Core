@@ -27,7 +27,7 @@ module tb_integrated_2pt_fft;
         x0_real = 16'd1; x0_imag = 16'd0;
         x1_real = 16'd2; x1_imag = 16'd0;
         twiddle_real = 16'd1; twiddle_imag = 16'd0; // Twiddle factor for 2-point FFT
-        #100;
+        #120;
         $display("Test Case 1:\n X0_real = %d, X0_imag = %d, X1_real = %d, X1_imag = %d\n",
                  X0_real, X0_imag, X1_real, X1_imag);
 
@@ -35,7 +35,7 @@ module tb_integrated_2pt_fft;
         x0_real = 16'd3; x0_imag = 16'd0;
         x1_real = -16'd1; x1_imag = 16'd0;
         twiddle_real = 16'd1; twiddle_imag = 16'd0; // Twiddle factor for 2-point FFT
-        #100;
+        #120;
         $display("Test Case 2:\n X0_real = %d, X0_imag = %d, X1_real = %d, X1_imag = %d\n",
                  X0_real, X0_imag, X1_real, X1_imag);
 
@@ -43,7 +43,7 @@ module tb_integrated_2pt_fft;
         x0_real = 16'd100; x0_imag = 16'd0;
         x1_real = 16'd50; x1_imag = 16'd0;
         twiddle_real = 16'd1; twiddle_imag = 16'd0; // Twiddle factor for 2-point FFT
-        #100;
+        #120;
         $display("Test Case 3:\n X0_real = %d, X0_imag = %d, X1_real = %d, X1_imag = %d\n",
                  X0_real, X0_imag, X1_real, X1_imag);
 
@@ -51,7 +51,7 @@ module tb_integrated_2pt_fft;
         x0_real = 16'd32767; x0_imag = 16'd0;
         x1_real = -16'd32768; x1_imag = 16'd0;
         twiddle_real = 16'd1; twiddle_imag = 16'd0; // Twiddle factor for 2-point FFT
-        #100;
+        #120;
         $display("Test Case 4:\n X0_real = %d, X0_imag = %d, X1_real = %d, X1_imag = %d\n",
                  X0_real, X0_imag, X1_real, X1_imag);
 
