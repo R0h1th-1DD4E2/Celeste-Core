@@ -1,110 +1,60 @@
-`timescale 1ns / 1ps
-
-module tb_8pt;
-    parameter N = 16;  // Bit-width for inputs and outputs
+module tb_integrated_2pt_fft;
+    parameter N = 32; // Parameter for data width
 
     // Inputs
     reg clk;
-    reg signed [N-1:0] xr0, xi0, xr1, xi1, xr2, xi2, xr3, xi3, xr4, xi4, xr5, xi5, xr6, xi6, xr7, xi7; // Inputs
-    reg signed [N-1:0] w2r0, w2i0;               // For 2-point FFTs
-    reg signed [N-1:0] w4r0, w4i0, w4r1, w4i1;       // For 4-point FFTs
-    reg signed [N-1:0] w8r0, w8i0, w8r1, w8i1, w8r2, w8i2, w8r3, w8i3; // For 8-point combination
+    reg signed [N-1:0] x0_real, x0_imag, x1_real, x1_imag;
+    reg signed [N-1:0] twiddle_real, twiddle_imag;
 
     // Outputs
-    wire signed [N-1:0] Xr0, Xi0, Xr1, Xi1, Xr2, Xi2, Xr3, Xi3,Xr4, Xi4, Xr5, Xi5, Xr6, Xi6, Xr7, Xi7; // FFT outputs
+    wire signed [N-1:0] X0_real, X0_imag, X1_real, X1_imag;
 
-    // Instantiate the fft4pt module
-    fft8pt #(N) uut (
-        .clk(clk),
-        .xr0(xr0), .xi0(xi0),
-        .xr1(xr1), .xi1(xi1),
-        .xr2(xr2), .xi2(xi2),
-        .xr3(xr3), .xi3(xi3),
-        .xr4(xr4), .xi4(xi4),
-        .xr5(xr5), .xi5(xi5),
-        .xr6(xr6), .xi6(xi6),
-        .xr7(xr7), .xi7(xi7),
-        .w2r0(w2r0), .w2i0(w2i0),
-        .w4r0(w4r0), .w4i0(w4i0), .w4r1(w4r1), .w4i1(w4i1),
-        .w8r0(w8r0), .w8i0(w8i0), .w8r1(w8r1), .w8i1(w8i1), .w8r2(w8r2), .w8i2(w8i2), .w8r3(w8r3), .w8i3(w8i3),
-        .Xr0(Xr0), .Xi0(Xi0),
-        .Xr1(Xr1), .Xi1(Xi1),
-        .Xr2(Xr2), .Xi2(Xi2),
-        .Xr3(Xr3), .Xi3(Xi3),
-        .Xr4(Xr4), .Xi4(Xi4),
-        .Xr5(Xr5), .Xi5(Xi5),
-        .Xr6(Xr6), .Xi6(Xi6),
-        .Xr7(Xr7), .Xi7(Xi7)
+
+    // Instantiate the module under test
+    integrated_2pt #(.N(N)) uut ( .clk(clk),
+        .x0_real(x0_real), .x0_imag(x0_imag),
+        .x1_real(x1_real), .x1_imag(x1_imag),
+        .twiddle_real(twiddle_real), .twiddle_imag(twiddle_imag),
+        .X0_real(X0_real), .X0_imag(X0_imag),
+        .X1_real(X1_real), .X1_imag(X1_imag)
     );
-   
+    
+    initial clk = 0;
+    always #10 clk = ~clk;
 
-    // Clock generation
     initial begin
-        clk = 0;  // Initialize clock
-    end
-    always #10 clk = ~clk;  // Clock toggles every 5ns
+        // Test Case 1: Real FFT inputs (imaginary parts are zero)
+        x0_real = 16'd1; x0_imag = 16'd0;
+        x1_real = 16'd2; x1_imag = 16'd0;
+        twiddle_real = 16'd1; twiddle_imag = 16'd0; // Twiddle factor for 2-point FFT
+        #100;
+        $display("Test Case 1:\n X0_real = %d, X0_imag = %d, X1_real = %d, X1_imag = %d\n",
+                 X0_real, X0_imag, X1_real, X1_imag);
 
-    // Apply stimuli
-    initial begin
+        // Test Case 2: Real FFT with negative values
+        x0_real = 16'd3; x0_imag = 16'd0;
+        x1_real = -16'd1; x1_imag = 16'd0;
+        twiddle_real = 16'd1; twiddle_imag = 16'd0; // Twiddle factor for 2-point FFT
+        #100;
+        $display("Test Case 2:\n X0_real = %d, X0_imag = %d, X1_real = %d, X1_imag = %d\n",
+                 X0_real, X0_imag, X1_real, X1_imag);
 
+        // Test Case 3: Real FFT with larger inputs
+        x0_real = 16'd100; x0_imag = 16'd0;
+        x1_real = 16'd50; x1_imag = 16'd0;
+        twiddle_real = 16'd1; twiddle_imag = 16'd0; // Twiddle factor for 2-point FFT
+        #100;
+        $display("Test Case 3:\n X0_real = %d, X0_imag = %d, X1_real = %d, X1_imag = %d\n",
+                 X0_real, X0_imag, X1_real, X1_imag);
 
-        w2r0=1;w2i0=0;
+        // Test Case 4: Real FFT edge case
+        x0_real = 16'd32767; x0_imag = 16'd0;
+        x1_real = -16'd32768; x1_imag = 16'd0;
+        twiddle_real = 16'd1; twiddle_imag = 16'd0; // Twiddle factor for 2-point FFT
+        #100;
+        $display("Test Case 4:\n X0_real = %d, X0_imag = %d, X1_real = %d, X1_imag = %d\n",
+                 X0_real, X0_imag, X1_real, X1_imag);
 
-        w4r0=1;w4i0=0;
-        w4r1=0;w4i1=-1;
-
-        w8r0=1;w8i0=0;
-        w8r1=0;w8i1=-1;
-
-
-        w8r2=0.7071067812;                                       
-        w8i2=-0.7071067812;  
-
-        w8r3=-0.7071067812;
-        w8i3=-0.7071067812;
-
-
-
-xr0=0;xi0=0;
-xr1=1;xi1=0;
-xr2=2;xi2=0;
-xr3=3;xi3=0;
-xr4=4;xi4=0;
-xr5=5;xi5=0;
-xr6=6;xi6=0;
-xr7=7;xi7=0;
-
-        #100;  // Wait for results
-
-    $display("Xr0",Xr0);
-    $display("Xi0",Xi0);
-        $display("  ");
-    $display("Xr1",Xr1);
-    $display("Xi1",Xi1);
-        $display("  ");
-    $display("Xr2",Xr2);
-    $display("Xi2",Xi2);
-        $display("  ");
-    $display("Xr3",Xr3);
-    $display("Xi3",Xi3);
-        $display("  ");
-    $display("Xr4",Xr4);
-    $display("Xi4",Xi4);
-        $display("  ");
-    $display("Xr5",Xr5);
-    $display("Xi5",Xi5);
-        $display("  ");
-    $display("Xr6",Xr6);
-    $display("Xi6",Xi6);
-        $display("  ");
-    $display("Xr7",Xr7);
-    $display("Xi7",Xi7);
-
-
-
-
-
-
-        $finish;
+        $stop;
     end
 endmodule
