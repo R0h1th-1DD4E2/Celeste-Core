@@ -37,7 +37,7 @@ module integrated_2pt #(parameter N = 16) (
   fp_add one  (fp_x0_real,   RR1,  II1, fp_X0_real);
   fp_add two  (fp_x0_imag ,  RI1,  IR1, fp_X0_imag);
   fp_add three(fp_x0_real,  -RR1,  II1, fp_X1_real);
-  fp_add four (fp_x0_imag,  RI1,   IR1, fp_X1_imag);
+  fp_add four (fp_x0_imag,  RI1,  - IR1, fp_X1_imag);
                     
 
         // Convert results back to decimal representation
