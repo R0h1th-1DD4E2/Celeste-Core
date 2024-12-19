@@ -1,6 +1,6 @@
 `timescale 1ns / 1ps
 
-module fp_add_3in (
+module fp_add_3in(
     // Floating-point (IEEE 754 format) inputs
     input [31:0] a,
     input [31:0] b,

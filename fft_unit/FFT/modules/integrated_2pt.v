@@ -1,4 +1,5 @@
-// Code your design here
+`timescale 1ns / 1ps
+
 module integrated_2pt #(parameter N = 16) (
     input clk,
     input signed [N-1:0] x0_real, x0_imag, x1_real, x1_imag,
@@ -18,29 +19,29 @@ module integrated_2pt #(parameter N = 16) (
     dec_2_fp dec2fp_twiddle_real (.in(twiddle_real), .out(fp_twiddle_real));
     dec_2_fp dec2fp_twiddle_imag (.in(twiddle_imag), .out(fp_twiddle_imag));
   
-      reg signed [N-1:0] RR1,II1,RI1,IR1;
+    reg signed [N-1:0] RR1,II1,RI1,IR1;
   
-      fp_mult first  (fp_x1_real , fp_twiddle_real, RR1);
-      fp_mult second (fp_x1_imag , fp_twiddle_imag, II1);
-      fp_mult third  (fp_x1_real , fp_twiddle_imag, RI1);
-      fp_mult fourth (fp_x1_imag , fp_twiddle_real, IR1);
+    fp_mul first  (fp_x1_real , fp_twiddle_real, RR1);
+    fp_mul second (fp_x1_imag , fp_twiddle_imag, II1);
+    fp_mul third  (fp_x1_real , fp_twiddle_imag, RI1);
+    fp_mul fourth (fp_x1_imag , fp_twiddle_real, IR1);
 
-//     
-//         // Perform the 2-point DFT in floating-point
-//       fp_X0_real = fp_x0_real + ( RR1) - (II1);
-//       fp_X0_imag = fp_x0_imag +(RI1) + (IR1);
+    
+// Perform the 2-point DFT in floating-point
+    //fp_X0_real = fp_x0_real + ( RR1) - (II1);
+    //fp_X0_imag = fp_x0_imag +(RI1) + (IR1);
 
-//       fp_X1_real = fp_x0_real - (RR1) + (II1);
-//       fp_X1_imag = fp_x0_imag - (RI1) - (IR1);
-  
-  always @(posedge clk) begin   
-  fp_add one  (fp_x0_real,   RR1,  II1, fp_X0_real);
-  fp_add two  (fp_x0_imag ,  RI1,  IR1, fp_X0_imag);
-  fp_add three(fp_x0_real,  -RR1,  II1, fp_X1_real);
-  fp_add four (fp_x0_imag,  RI1,  - IR1, fp_X1_imag);
+    //fp_X1_real = fp_x0_real - (RR1) + (II1);
+    //fp_X1_imag = fp_x0_imag - (RI1) - (IR1);
+
+    always @(posedge clk) begin
+        fp_add_3in one(fp_x0_real, RR1, II1, fp_X0_real);
+        fp_add_3in two(fp_x0_imag ,  RI1,  IR1, fp_X0_imag);
+        fp_add_3in three(fp_x0_real,  -RR1,  II1, fp_X1_real);
+        fp_add_3in four(fp_x0_imag,  RI1,  - IR1, fp_X1_imag);
                     
-
-        // Convert results back to decimal representation
+                    
+    // Convert results back to decimal representation
         fp_2_dec fp2dec_X0_real (.in(fp_X0_real), .out(X0_real));
         fp_2_dec fp2dec_X0_imag (.in(fp_X0_imag), .out(X0_imag));
         fp_2_dec fp2dec_X1_real (.in(fp_X1_real), .out(X1_real));
