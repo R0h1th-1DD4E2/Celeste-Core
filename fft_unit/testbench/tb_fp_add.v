@@ -22,7 +22,7 @@
 
 `timescale 1ns / 1ps
 
-module tb_fp_add;
+module tb_adder;
 
     // Testbench signals
     reg [31:0] a, b;       // Inputs to the FP adder
