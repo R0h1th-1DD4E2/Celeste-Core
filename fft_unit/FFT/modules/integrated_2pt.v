@@ -2,7 +2,7 @@ module integrated_2pt #(parameter N = 32) (
     input clk,
     input signed [N-1:0] x0_real, x0_imag, x1_real, x1_imag,
     input signed [N-1:0] twiddle_real, twiddle_imag,  // Twiddle factors
-    output signed [N-1:0] X0_real, X0_imag, X1_real, X1_imag
+    output reg signed [N-1:0] X0_real, X0_imag, X1_real, X1_imag
 );
     // Internal signals for floating-point representations
     wire signed [N-1:0] fp_x0_real, fp_x0_imag, fp_x1_real, fp_x1_imag;
@@ -18,6 +18,7 @@ module integrated_2pt #(parameter N = 32) (
     reg signed [N-1:0] FP_X0_REAL, FP_X0_IMAG, FP_X1_REAL, FP_X1_IMAG;
     reg signed [N-1:0] FP_TWIDDLE_REAL, FP_TWIDDLE_IMAG;
     
+
     // Intermediate registers for complex multiplication results
     reg signed [N-1:0] RR1, II1, RI1, IR1;
     
@@ -35,20 +36,19 @@ module integrated_2pt #(parameter N = 32) (
     dec_2_fp dec2fp_twiddle_imag ((twiddle_imag), (fp_twiddle_imag));
     
     // Complex multiplication
-    fp_mul first  (.a(FP_X0_REAL), .b(FP_TWIDDLE_REAL), .result(rr1));
-    fp_mul second (.a(FP_X0_IMAG), .b(FP_TWIDDLE_IMAG), .result(ii1));
-    fp_mul third  (.a(FP_X1_REAL), .b(FP_TWIDDLE_IMAG), .result(ri1));
-    fp_mul fourth (.a(FP_X1_IMAG), .b(FP_TWIDDLE_REAL), .result(ir1));
+    fp_mul first  (.a(FP_X1_REAL), .b(FP_TWIDDLE_REAL), .result(rr1)); // cx
+    fp_mul second (.a(FP_X1_IMAG), .b(FP_TWIDDLE_IMAG), .result(ii1)); // dy
+    fp_mul third  (.a(FP_X1_REAL), .b(FP_TWIDDLE_IMAG), .result(ri1)); // cy
+    fp_mul fourth (.a(FP_X1_IMAG), .b(FP_TWIDDLE_REAL), .result(ir1)); // dx
     
     // Butterfly computation using intermediate wires
-    fp_add add1  (.a(FP_X0_REAL), .b(RR1), .result(t1));
-    fp_add add2  (.a(T1), .b(-II1), .result(temp_X0_real));
-    fp_add add3  (.a(FP_X0_IMAG), .b(RI1), .result(t2));
-    fp_add add4  (.a(T2), .b(IR1), .result(temp_X0_imag));
-    fp_add add5  (.a(FP_X0_REAL), .b(-RR1), .result(t3));
-    fp_add add6  (.a(T3), .b(II1), .result(temp_X1_real));
-    fp_add add7  (.a(FP_X0_IMAG), .b(-RI1), .result(t4));
-    fp_add add8  (.a(T4), .b(-IR1), .result(temp_X1_imag));
+    fp_add add1  (.a(RR1), .b(-II1), .result(t1));    // l = cx - dy
+    fp_add add2  (.a(T1), .b(FP_X0_REAL), .result(temp_X0_real));   // A + l
+    fp_add add3  (.a(-T1), .b(FP_X0_REAL), .result(temp_X1_real));  // A - l
+
+    fp_add add4  (.a(RI1), .b(IR1), .result(t2));    // m = cy + dx
+    fp_add add5  (.a(T2), .b(FP_X0_IMAG), .result(temp_X0_imag));   // B + m
+    fp_add add6  (.a(-T2), .b(FP_X0_IMAG), .result(temp_X1_imag));  // B - m
     
     // Convert results back to decimal representation
     fp_2_dec fp2dec_X0_real ((TEMP_X0_REAL), (X0_real));
@@ -62,19 +62,31 @@ module integrated_2pt #(parameter N = 32) (
         FP_X0_IMAG <= fp_x0_imag;
         FP_X1_REAL <= fp_x1_real;
         FP_X1_IMAG <= fp_x1_imag;
-
+        
+        $display("input real = %h, input imag= %h, input real = %h, input imag = %h\n",
+                 FP_X0_REAL, FP_X1_IMAG, FP_X0_REAL, FP_X1_IMAG);
+                 
         FP_TWIDDLE_REAL <= fp_twiddle_real;
         FP_TWIDDLE_IMAG <= fp_twiddle_imag;
+        
+        $display("twiddle real = %h, twiddle imag= %h\n",
+                 FP_TWIDDLE_REAL, FP_TWIDDLE_IMAG);
 
         RR1 <= rr1;
         II1 <= ii1;
         RI1 <= ri1;
         IR1 <= ir1;
+        
+        $display("cx = %h, dy = %h, cy = %h, dx = %h\n",
+                 RR1, II1, RI1, IR1);
 
         T1 <= t1;
         T2 <= t2;
         T3 <= t3;
         T4 <= t4;
+        
+        $display("l = %h, m = %h \n",
+                 T1, T2);
 
         TEMP_X0_REAL <= temp_X0_real;
         TEMP_X0_IMAG <= temp_X0_imag;

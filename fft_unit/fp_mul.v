@@ -29,6 +29,6 @@ module fp_mul(
     assign normalized_mantissa = (mantissa_mult[47]) ? mantissa_mult[46:24] : mantissa_mult[45:23]; // If MSB is 1 then normalize 
     assign normalized_exponent = (mantissa_mult[47]) ? exponent_result + 1 : exponent_result;
     
-    assign result = {sign_result, normalized_exponent, normalized_mantissa}; // result => [31](sign) + [30 : 23](exponent) + [22 : 0](Mantissa)
+    assign result = (a == 32'd0 || b == 32'd0) ? 32'd0 : {sign_result, normalized_exponent, normalized_mantissa}; // If either operand is zero, result is zero
     
 endmodule
