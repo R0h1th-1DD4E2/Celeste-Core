@@ -1,4 +1,3 @@
-`timescale 1ns / 1ps
 
 module dec_2_fp(
     input [31:0] dec,
@@ -10,7 +9,8 @@ module dec_2_fp(
     reg [7:0] exponent;
     reg [22:0] mantissa;
     reg [4:0] position;
-
+    wire Zero=(dec==0);
+	 
     always @(*) begin
         // if zero input
         if (dec == 32'b0) begin
@@ -33,7 +33,7 @@ module dec_2_fp(
             // Shift left to align MSB with the 24th bit (1.mantissa format)
             mantissa = (abs_value << (23 - position)) & 23'h7FFFFF;
 
-            ieee_out = {sign, exponent, mantissa};
+            ieee_out = Zero?0:({sign, exponent, mantissa});
         end
     end
 
