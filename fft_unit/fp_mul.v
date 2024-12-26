@@ -1,34 +1,39 @@
-`timescale 1ns / 1ps
+module fp_mul #(parameter XLEN=32)
+               (input [XLEN-1:0] A,
+                input [XLEN-1:0] B,
+                output [XLEN-1:0] result);
 
-module fp_mul(
-     // Floating-point (IEEE 754 format)
-    input [31:0] a,
-    input [31:0] b,
-    output [31:0] result
-);
-    wire sign_a, sign_b, sign_result;
-    wire [7:0] exponent_a, exponent_b, exponent_result;
-    wire [23:0] mantissa_a, mantissa_b, mantissa_result;
-    wire [47:0] mantissa_mult;
+					 
+					 reg [47:0] Temp_Mantissa;
+reg [8:0] Temp_Exponent;  // one bit bigger because of potential overflow
+reg [7:0] Exponent;       // Changed to reg to allow procedural assignment
+reg Sign;
+wire [23:0] A_Mantissa = {1'b1, A[22:0]}, B_Mantissa = {1'b1, B[22:0]};
+wire [7:0] A_Exponent = A[30:23], B_Exponent = B[30:23];
+wire A_sign = A[31], B_sign = B[31];
 
-    assign sign_a = a[31];
-    assign sign_b = b[31];
-    assign sign_result = sign_a ^ sign_b;  // XOR to find the sign
+wire [22:0] Mantissa = Temp_Mantissa[45:23];  // highest bits of Temp_Mantissa, except for 1 carry bit (which causes bitshift)
 
-    assign exponent_a = a[30:23];
-    assign exponent_b = b[30:23];
-    assign exponent_result = exponent_a + exponent_b - 8'd127;  // 2^a * 2^b = 2^(a+b)
+wire Zero=(A==0)||(B==0);
+assign result =Zero?0:( {Sign, Exponent, Mantissa});
 
-    assign mantissa_a = {1'b1, a[22:0]};  // Implicit representation 
-    assign mantissa_b = {1'b1, b[22:0]};
+always @(*) begin
+    Temp_Exponent = (A_Exponent + B_Exponent < 'd127) ? 8'd0 : A_Exponent + B_Exponent - 'd127;  // prevent exponent underflow
+    Temp_Mantissa = A_Mantissa * B_Mantissa;
 
-    assign mantissa_mult = mantissa_a * mantissa_b; // Multiply mantissas
+    // "carry"... increase exponent, shift
+    if (Temp_Mantissa[47]) begin
+        Temp_Mantissa = Temp_Mantissa >> 1;  // Corrected: Mantissa = Temp_Mantissa[46:24]
+        Exponent = Temp_Exponent[7:0] + 1;  // Use Temp_Exponent for addition
+    end else begin
+        Exponent = Temp_Exponent[7:0];      // No carry; direct assignment
+    end
 
-    wire [22:0] normalized_mantissa;
-    wire [7:0] normalized_exponent;
-    assign normalized_mantissa = (mantissa_mult[47]) ? mantissa_mult[46:24] : mantissa_mult[45:23]; // If MSB is 1 then normalize 
-    assign normalized_exponent = (mantissa_mult[47]) ? exponent_result + 1 : exponent_result;
-    
-    assign result = (a == 32'd0 || b == 32'd0) ? 32'd0 : {sign_result, normalized_exponent, normalized_mantissa}; // If either operand is zero, result is zero
-    
+    // prevent exponent overflow
+    if (Temp_Exponent[8]) begin
+        Exponent = 8'hff;
+    end
+
+    Sign = A_sign ^ B_sign;
+end
 endmodule
