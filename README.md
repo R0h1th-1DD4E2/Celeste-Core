@@ -1,5 +1,4 @@
-
-[miniprojectREADME.md](https://github.com/user-attachments/files/18302857/miniprojectREADME.md)# **Celeste-Core**
+# **Celeste-Core**
 Celeste-Core is a specialised hardware block dedicated to handle convolution operations. PicoRV32 RISC-V core is adopted as the processor, utilizing extensions such as multiplication, vector extension and division. It is implemented using the Fast Fourier Transform or FFT algorithm with a time complexity of O(NlogN). This operates on a kernel size of 8x8.
 
 ## Introduction:
@@ -21,3 +20,4 @@ FFT reduces convolution’s arithmetic complexity by transforming the spatial do
 
 A modified radix-4 FFT architecture is employed which significantly reduces hardware resource usage by sharing resources between the FFT and Inverse FFT blocks. Additionally, complex multiplication is further optimized by reducing the number of real multiplications required from four to three. This reduction not only minimizes hardware demands but also enhances computational efficiency. Fast Fourier transform convolution (FFT), has a time complexity of O(NlogN)  as opposed to conventional algorithm having a complexity of O(N2) and higher complexity as the dimensions increases. 
 
+[miniprojectREADME.md](https://github.com/user-attachments/files/18302857/miniprojectREADME.md)
