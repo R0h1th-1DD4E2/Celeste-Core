@@ -1,8 +1,7 @@
 
-module fp_add#(parameter XLEN=32)
-                        (input [XLEN-1:0]A,
-                         input [XLEN-1:0]B,
-                         output reg  [XLEN-1:0] result);
+module fp_add#(parameter XLEN=32) (
+                            input [XLEN-1:0]A,B,
+                            output reg  [XLEN-1:0] result );
 
 reg [31:0] A_swap, B_swap;  // comparison-based swap
 wire [23:0] A_Mantissa = {1'b1, A_swap[22:0]}, B_Mantissa = {1'b1, B_swap[22:0]};  // stored mantissa is 23b, this is {1'b1, mantissa} = 24b long
@@ -64,8 +63,7 @@ result = {Sign,Exponent,Mantissa};
 end
 endmodule
 
-module FloatingCompare (input [31:0]A,
-                        input [31:0]B,
+module FloatingCompare (input [31:0]A,B,
                         output reg result);
 
     always @(*) begin
