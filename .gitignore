@@ -51,4 +51,8 @@
 .hdl_checker/
 *.log
 *.jou
+*.jpeg
+*.jpg
+*.png
+*.hex
 .Xil/

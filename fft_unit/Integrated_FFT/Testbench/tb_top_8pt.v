@@ -77,10 +77,10 @@ x0_real=1;x0_imag=0;
 x1_real=1;x1_imag=0;
 x2_real=1;x2_imag=0;
 x3_real=1;x3_imag=0;
-x4_real=2;x4_imag=0;
-x5_real=2;x5_imag=0;
-x6_real=2;x6_imag=0;
-x7_real=2;x7_imag=0;    
+x4_real=-1;x4_imag=0;
+x5_real=-1;x5_imag=0;
+x6_real=-1;x6_imag=0;
+x7_real=-1;x7_imag=0;    
 
 
       
