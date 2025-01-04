@@ -1,4 +1,4 @@
-module integrated_2pt #(parameter N = 32) (
+module integrated_i2pt #(parameter N = 32) (
     input clk,
     input signed [N-1:0] x0_real, x0_imag, x1_real, x1_imag,
     input signed [N-1:0] twiddle_real, twiddle_imag,  // Twiddle factors

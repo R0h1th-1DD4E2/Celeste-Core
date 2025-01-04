@@ -10,7 +10,8 @@ module dec_2_fp(
     reg [7:0] exponent;
     reg [22:0] mantissa;
     reg [4:0] position;
-
+    
+	 
     always @(*) begin
         // if zero input
         if (dec == 32'b0) begin
