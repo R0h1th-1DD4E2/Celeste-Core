@@ -19,7 +19,7 @@ module tb_top_8pt;
     wire signed [N-1:0] fp_X4_real, fp_X4_imag, fp_X5_real, fp_X5_imag, fp_X6_real, fp_X6_imag, fp_X7_real, fp_X7_imag;
 
     // Instantiate the DUT (Device Under Test)
-    top_module_8pt #(.N(N)) DUT (
+    clked_8pt #(.N(N)) DUT (
         .clk(clk),
         .x0_real(x0_real), .x0_imag(x0_imag),
         .x1_real(x1_real), .x1_imag(x1_imag),
@@ -49,6 +49,10 @@ module tb_top_8pt;
     );
 
     // Clock generation
+    initial begin
+        clk = 0;
+        forever #(CLK_PERIOD/2) clk = ~clk;
+    end
    
 
     // Stimulus generation
@@ -63,14 +67,15 @@ module tb_top_8pt;
         // x6_real = 32'h40c00000;  x6_imag = 32'h00000000; // 6.0 in IEEE 754
         // x7_real = 32'h40e00000;  x7_imag = 32'h00000000; // 7.0 in IEEE 754
 //test case 1
-// x0_real=0;x0_imag=0;
-// x1_real=1;x1_imag=0;
-// x2_real=2;x2_imag=0;
-// x3_real=3;x3_imag=0;
-// x4_real=4;x4_imag=0;
-// x5_real=5;x5_imag=0;
-// x6_real=6;x6_imag=0;
-// x7_real=7;x7_imag=0;
+ x0_real=0;x0_imag=0;
+ x1_real=1;x1_imag=0;
+ x2_real=2;x2_imag=0;
+ x3_real=3;x3_imag=0;
+ x4_real=4;x4_imag=0;
+ x5_real=5;x5_imag=0;
+ x6_real=6;x6_imag=0;
+ x7_real=7;x7_imag=0;
+#10;
 
         // Wait for a few clock cycles to observe output
 x0_real=1;x0_imag=0;
@@ -80,13 +85,24 @@ x3_real=1;x3_imag=0;
 x4_real=-1;x4_imag=0;
 x5_real=-1;x5_imag=0;
 x6_real=-1;x6_imag=0;
-x7_real=-1;x7_imag=0;    
+x7_real=-1;x7_imag=0;   
+#10;
+
+ x0_real=1;x0_imag=0;
+ x1_real=1;x1_imag=0;
+ x2_real=1;x2_imag=0;
+ x3_real=1;x3_imag=0;
+ x4_real=2;x4_imag=0;
+ x5_real=2;x5_imag=0;
+ x6_real=2;x6_imag=0;
+ x7_real=2;x7_imag=0;
+#10; 
 
 
       
 
         // Finish simulation
-          #1000;
+          #10;
     $display("fp_X0_real  = %h", fp_X0_real);
     $display("fp_X0_imag  = %h", fp_X0_imag);
     $display("fp_X1_real  = %h", fp_X1_real);
