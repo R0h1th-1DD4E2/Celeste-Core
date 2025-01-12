@@ -42,7 +42,7 @@ Traditional convolution involves direct computation in the spatial domain. The *
 
 ### **Advantages of FFT-Based Convolution:**
 - 🚀 Reduced complexity: **O(NlogN)** compared to O(N²).
-- 📉 Lower memory consumption using **Decimation in Frequency (DIF)** methodology.
+- 📉 Lower memory consumption using **Decimation in Time (DIT)** methodology.
 - 🔧 Resource-efficient: Shared FFT and IFFT resources with optimized multiplication.
 
 ---
