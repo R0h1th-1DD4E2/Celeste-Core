@@ -1,6 +1,6 @@
-module fp_mul (input [XLEN-1:0] A,
-                input [XLEN-1:0] B,
-                output [XLEN-1:0] result);
+module fp_mul (input [31:0] A,
+                input [31:0] B,
+                output [31:0] result);
 
 					 
 					 reg [47:0] Temp_Mantissa;
