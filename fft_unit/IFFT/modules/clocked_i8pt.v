@@ -20,7 +20,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module clked_i8pt(
+module top_module_8pt(
     input clk,
     input signed  [31:0] x0_real, x0_imag, x1_real, x1_imag, x2_real, x2_imag, x3_real, x3_imag,
                         x4_real, x4_imag, x5_real, x5_imag, x6_real, x6_imag, x7_real, x7_imag,
@@ -54,6 +54,17 @@ wire signed [31:0] fft_X0_real, fft_X0_imag, fft_X1_real, fft_X1_imag;
 wire signed [31:0] fft_X2_real, fft_X2_imag, fft_X3_real, fft_X3_imag;
 wire signed [31:0] fft_X4_real, fft_X4_imag, fft_X5_real, fft_X5_imag;
 wire signed [31:0] fft_X6_real, fft_X6_imag, fft_X7_real, fft_X7_imag;
+
+wire signed [31:0] dec_X0_real, dec_X0_imag, dec_X1_real, dec_X1_imag;
+wire signed [31:0] dec_X2_real, dec_X2_imag, dec_X3_real, dec_X3_imag;
+wire signed [31:0] dec_X4_real, dec_X4_imag, dec_X5_real, dec_X5_imag;
+wire signed [31:0] dec_X6_real, dec_X6_imag, dec_X7_real, dec_X7_imag;
+
+wire signed [31:0] temp_X0_real, temp_X0_imag, temp_X1_real, temp_X1_imag;
+wire signed [31:0] temp_X2_real, temp_X2_imag, temp_X3_real, temp_X3_imag;
+wire signed [31:0] temp_X4_real, temp_X4_imag, temp_X5_real, temp_X5_imag;
+wire signed [31:0] temp_X6_real, temp_X6_imag, temp_X7_real, temp_X7_imag;
+
 
 // Register input values
 always @(posedge clk) begin
@@ -131,28 +142,44 @@ always @(posedge clk) begin
     fp_X7_real <= fft_X7_real; fp_X7_imag <= fft_X7_imag;
 end
 
-// Floating point to decimal conversion
-wire signed [31:0] dec_X0_real, dec_X0_imag, dec_X1_real, dec_X1_imag;
-wire signed [31:0] dec_X2_real, dec_X2_imag, dec_X3_real, dec_X3_imag;
-wire signed [31:0] dec_X4_real, dec_X4_imag, dec_X5_real, dec_X5_imag;
-wire signed [31:0] dec_X6_real, dec_X6_imag, dec_X7_real, dec_X7_imag;
+fp_div dins1(fp_X0_real, 32'h41000000, temp_X0_real);
+fp_div dins2(fp_X0_imag, 32'h41000000, temp_X0_imag);
+fp_div dins3(fp_X1_real, 32'h41000000, temp_X1_real);
+fp_div dins4(fp_X1_imag, 32'h41000000, temp_X1_imag);
+fp_div dins5(fp_X2_real, 32'h41000000, temp_X2_real);
+fp_div dins6(fp_X2_imag, 32'h41000000, temp_X2_imag);
+fp_div dins7(fp_X3_real, 32'h41000000, temp_X3_real);
+fp_div dins8(fp_X3_imag, 32'h41000000, temp_X3_imag);
+fp_div dins9(fp_X4_real, 32'h41000000, temp_X4_real);
+fp_div dins10(fp_X4_imag, 32'h41000000, temp_X4_imag);
+fp_div dins11(fp_X5_real, 32'h41000000, temp_X5_real);
+fp_div dins12(fp_X5_imag, 32'h41000000, temp_X5_imag);
+fp_div dins13(fp_X6_real, 32'h41000000, temp_X6_real);
+fp_div dins14(fp_X6_imag, 32'h41000000, temp_X6_imag);
+fp_div dins15(fp_X7_real, 32'h41000000, temp_X7_real);
+fp_div dins16(fp_X7_imag, 32'h41000000, temp_X7_imag);
 
-fp_2_dec op17(fp_X0_real, dec_X0_real);
-fp_2_dec op18(fp_X0_imag, dec_X0_imag);
-fp_2_dec op19(fp_X1_real, dec_X1_real);
-fp_2_dec op20(fp_X1_imag, dec_X1_imag);
-fp_2_dec op21(fp_X2_real, dec_X2_real);
-fp_2_dec op22(fp_X2_imag, dec_X2_imag);
-fp_2_dec op23(fp_X3_real, dec_X3_real);
-fp_2_dec op24(fp_X3_imag, dec_X3_imag);
-fp_2_dec op25(fp_X4_real, dec_X4_real);
-fp_2_dec op26(fp_X4_imag, dec_X4_imag);
-fp_2_dec op27(fp_X5_real, dec_X5_real);
-fp_2_dec op28(fp_X5_imag, dec_X5_imag);
-fp_2_dec op29(fp_X6_real, dec_X6_real);
-fp_2_dec op30(fp_X6_imag, dec_X6_imag);
-fp_2_dec op31(fp_X7_real, dec_X7_real);
-fp_2_dec op32(fp_X7_imag, dec_X7_imag);
+
+// Floating point to decimal conversion
+
+
+fp_2_dec op17(temp_X0_real, dec_X0_real);
+fp_2_dec op18(temp_X0_imag, dec_X0_imag);
+fp_2_dec op19(temp_X1_real, dec_X1_real);
+fp_2_dec op20(temp_X1_imag, dec_X1_imag);
+fp_2_dec op21(temp_X2_real, dec_X2_real);
+fp_2_dec op22(temp_X2_imag, dec_X2_imag);
+fp_2_dec op23(temp_X3_real, dec_X3_real);
+fp_2_dec op24(temp_X3_imag, dec_X3_imag);
+fp_2_dec op25(temp_X4_real, dec_X4_real);
+fp_2_dec op26(temp_X4_imag, dec_X4_imag);
+fp_2_dec op27(temp_X5_real, dec_X5_real);
+fp_2_dec op28(temp_X5_imag, dec_X5_imag);
+fp_2_dec op29(temp_X6_real, dec_X6_real);
+fp_2_dec op30(temp_X6_imag, dec_X6_imag);
+fp_2_dec op31(temp_X7_real, dec_X7_real);
+fp_2_dec op32(temp_X7_imag, dec_X7_imag);
+
 
 // Register final decimal outputs
 always @(posedge clk) begin
