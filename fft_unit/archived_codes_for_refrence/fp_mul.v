@@ -1,5 +1,4 @@
-module fp_mul #(parameter XLEN=32)
-               (input [XLEN-1:0] A,
+module fp_mul (input [XLEN-1:0] A,
                 input [XLEN-1:0] B,
                 output [XLEN-1:0] result);
 
