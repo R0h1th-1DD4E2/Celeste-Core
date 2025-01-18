@@ -1,74 +1,80 @@
-`timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
-// Create Date: 01/11/2025 06:31:06 PM
-// Design Name: 
-// Module Name: ram
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
-// 
-// Dependencies: 
-// 
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-// 
-//////////////////////////////////////////////////////////////////////////////////
-
-
-
-// parameters for port A
 module ram(
-    // parameters for port A
+    // Port A
     input clkA,
     input write_enA,
     input read_enA,
-    input [31:0] data_inA,          // Changed to 32-bit
-    output reg [31:0] data_outA,    // Changed to 32-bit
-    input [3:0] read_addrA,         // Changed to 4-bit
-    input [3:0] write_addrA,        // Changed to 4-bit
-    // input parameters for port B
+    input [31:0] data_inA,
+    output reg [31:0] data_outA,
+    input [31:0] read_addrA,
+    input [31:0] write_addrA,
+    
+    // Port B
     input clkB,
     input write_enB,
     input read_enB,
-    input [31:0] data_inB,          // Changed to 32-bit
-    output reg [31:0] data_outB,    // Changed to 32-bit
-    input [3:0] read_addrB,         // Changed to 4-bit
-    input [3:0] write_addrB         // Changed to 4-bit
-);
-
-
-    reg [31:0] mem [0:8639];
+    input [31:0] data_inB,
+    output reg [31:0] data_outB,
+    input [31:0] read_addrB,
+    input [31:0] write_addrB,
     
-  initial   
+    // Port C
+    input clkC,
+    input write_enC,
+    input read_enC,
+    input [31:0] data_inC,
+    output reg [31:0] data_outC,
+    input [31:0] read_addrC,
+    input [31:0] write_addrC,
+    
+    // Port D
+    input clkD,
+    input write_enD,
+    input read_enD,
+    input [31:0] data_inD,
+    output reg [31:0] data_outD,
+    input [31:0] read_addrD,
+    input [31:0] write_addrD
+);
+    // Memory array
+    reg [31:0] mem [0:1023];
+    
+    // Initialize memory from hex file
+    initial begin
+        $readmemh("/home/sateesh/pico_ws/RAM/ram_test.hex", mem);
+        $display("Initial RAM content: %h", mem[0]);
+    end
 
- $readmemh("ram_test.hex", mem);
- 
-always@(posedge clkA)
-begin
-  if(write_enA && !read_enA)
-    mem[write_addrA] <= data_inA;
-  else if(!write_enA && read_enA)
-    data_outA <= mem[read_addrA];
-  else
-    data_outA <= 8'b0;
-end
 
-always@(posedge clkB)
-begin
-  if(write_enB && !read_enB)
-    mem[write_addrB] <= data_inB;
-  else if(!write_enB && read_enB)
-    data_outB <= mem[read_addrB];
-  else
-    data_outB <= 8'b0;
-end
+    // Port A logic
+    always @(posedge clkA) begin
+        if (write_enA)
+            mem[write_addrA] <= data_inA;
+        else if (read_enA)
+            data_outA <= mem[read_addrA];
+    end
+
+    // Port B logic
+    always @(posedge clkB) begin
+        if (write_enB)
+            mem[write_addrB] <= data_inB;
+        else if (read_enB)
+            data_outB <= mem[read_addrB];
+    end
+
+    // Port C logic
+    always @(posedge clkC) begin
+        if (write_enC)
+            mem[write_addrC] <= data_inC;
+        else if (read_enC)
+            data_outC <= mem[read_addrC];
+    end
+
+    // Port D logic
+    always @(posedge clkD) begin
+        if (write_enD)
+            mem[write_addrD] <= data_inD;
+        else if (read_enD)
+            data_outD <= mem[read_addrD];
+    end
 
 endmodule
-
-
-
