@@ -27,8 +27,8 @@ module tb_ram;
     reg read_enA, read_enB;
     reg [31:0] data_inA, data_inB;
     wire [31:0] data_outA, data_outB;
-    reg [10:0] write_addrA, write_addrB;
-    reg [10:0] read_addrA, read_addrB;
+    reg [31:0] write_addrA, write_addrB;
+    reg [31:0] read_addrA, read_addrB;
 
     // Instantiate the RAM module
     ram uut (
