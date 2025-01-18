@@ -18,58 +18,58 @@
 // Additional Comments:
 // 
 //////////////////////////////////////////////////////////////////////////////////
-module cmpx_mul#(parameter N =32)
+module cmpx_mul
 ( 
-  input [N-1:0] x0_real, x0_imag,
-  input [N-1:0] x1_real, x1_imag,
-  input [N-1:0] x2_real, x2_imag,
-  input [N-1:0] x3_real, x3_imag,
-  input [N-1:0] x4_real, x4_imag,
-  input [N-1:0] x5_real, x5_imag,
-  input [N-1:0] x6_real, x6_imag,
-  input [N-1:0] x7_real, x7_imag,
-  input [N-1:0] x8_real, x8_imag,
-  input [N-1:0] x9_real, x9_imag,
-  input [N-1:0] x10_real, x10_imag,
-  input [N-1:0] x11_real, x11_imag,
-  input [N-1:0] x12_real, x12_imag,
-  input [N-1:0] x13_real, x13_imag,
-  input [N-1:0] x14_real, x14_imag,
-  input [N-1:0] x15_real, x15_imag,
+  input [31:0] x0_real, x0_imag,
+  input [31:0] x1_real, x1_imag,
+  input [31:0] x2_real, x2_imag,
+  input [31:0] x3_real, x3_imag,
+  input [31:0] x4_real, x4_imag,
+  input [31:0] x5_real, x5_imag,
+  input [31:0] x6_real, x6_imag,
+  input [31:0] x7_real, x7_imag,
+  input [31:0] x8_real, x8_imag,
+  input [31:0] x9_real, x9_imag,
+  input [31:0] x10_real, x10_imag,
+  input [31:0] x11_real, x11_imag,
+  input [31:0] x12_real, x12_imag,
+  input [31:0] x13_real, x13_imag,
+  input [31:0] x14_real, x14_imag,
+  input [31:0] x15_real, x15_imag,
 
-  input [N-1:0] y0_real,  y0_imag,
-  input [N-1:0] y1_real,  y1_imag,
-  input [N-1:0] y2_real,  y2_imag,
-  input [N-1:0] y3_real,  y3_imag,
-  input [N-1:0] y4_real,  y4_imag,
-  input [N-1:0] y5_real,  y5_imag,
-  input [N-1:0] y6_real,  y6_imag,
-  input [N-1:0] y7_real,  y7_imag,
-  input [N-1:0] y8_real,  y8_imag,
-  input [N-1:0] y9_real,  y9_imag,
-  input [N-1:0] y10_real, y10_imag,
-  input [N-1:0] y11_real, y11_imag,
-  input [N-1:0] y12_real, y12_imag,
-  input [N-1:0] y13_real, y13_imag,
-  input [N-1:0] y14_real, y14_imag,
-  input [N-1:0] y15_real, y15_imag,
+  input [31:0] y0_real,  y0_imag,
+  input [31:0] y1_real,  y1_imag,
+  input [31:0] y2_real,  y2_imag,
+  input [31:0] y3_real,  y3_imag,
+  input [31:0] y4_real,  y4_imag,
+  input [31:0] y5_real,  y5_imag,
+  input [31:0] y6_real,  y6_imag,
+  input [31:0] y7_real,  y7_imag,
+  input [31:0] y8_real,  y8_imag,
+  input [31:0] y9_real,  y9_imag,
+  input [31:0] y10_real, y10_imag,
+  input [31:0] y11_real, y11_imag,
+  input [31:0] y12_real, y12_imag,
+  input [31:0] y13_real, y13_imag,
+  input [31:0] y14_real, y14_imag,
+  input [31:0] y15_real, y15_imag,
 
-  output [N-1:0] X0_real, X0_imag,
-  output [N-1:0] X1_real, X1_imag,
-  output [N-1:0] X2_real, X2_imag,
-  output [N-1:0] X3_real, X3_imag,
-  output [N-1:0] X4_real, X4_imag,
-  output [N-1:0] X5_real, X5_imag,
-  output [N-1:0] X6_real, X6_imag,
-  output [N-1:0] X7_real, X7_imag,
-  output [N-1:0] X8_real,  X8_imag,
-  output [N-1:0] X9_real,  X9_imag,
-  output [N-1:0] X10_real, X10_imag,
-  output [N-1:0] X11_real, X11_imag,
-  output [N-1:0] X12_real, X12_imag,
-  output [N-1:0] X13_real, X13_imag,
-  output [N-1:0] X14_real, X14_imag,
-  output [N-1:0] X15_real, X15_imag);
+  output [31:0] X0_real, X0_imag,
+  output [31:0] X1_real, X1_imag,
+  output [31:0] X2_real, X2_imag,
+  output [31:0] X3_real, X3_imag,
+  output [31:0] X4_real, X4_imag,
+  output [31:0] X5_real, X5_imag,
+  output [31:0] X6_real, X6_imag,
+  output [31:0] X7_real, X7_imag,
+  output [31:0] X8_real,  X8_imag,
+  output [31:0] X9_real,  X9_imag,
+  output [31:0] X10_real, X10_imag,
+  output [31:0] X11_real, X11_imag,
+  output [31:0] X12_real, X12_imag,
+  output [31:0] X13_real, X13_imag,
+  output [31:0] X14_real, X14_imag,
+  output [31:0] X15_real, X15_imag);
 
 //multiplication of kernal y with x image
 //first row
@@ -101,12 +101,12 @@ end
 endmodule
 
 //multiplication module 
-module cmpx_mul_2#(parameter N = 32)(
-input [N-1:0] real0,real1,imag0,imag1,
-output [N-1:0] out_r,out_imag
+module cmpx_mul_2(
+input [31:0] real0,real1,imag0,imag1,
+output [31:0] out_r,out_imag
     );
 
-wire [N-1:0]mul1,mul2,mul3,mul4;
+wire [31:0]mul1,mul2,mul3,mul4;
 
 fp_mul mult1(real0,real1,mul1);//real with real
 fp_mul mult2(imag0,imag1,mul2);//imag with imag

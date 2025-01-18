@@ -22,48 +22,48 @@
 
 module top_module_8pt(
     input clk,
-    input signed  [31:0] x0_real, x0_imag, x1_real, x1_imag, x2_real, x2_imag, x3_real, x3_imag,
+    input  [31:0] x0_real, x0_imag, x1_real, x1_imag, x2_real, x2_imag, x3_real, x3_imag,
                         x4_real, x4_imag, x5_real, x5_imag, x6_real, x6_imag, x7_real, x7_imag,
-    output reg signed [31:0] X0_real, X0_imag, X1_real, X1_imag, X2_real, X2_imag, X3_real, X3_imag,
+    output reg [31:0] X0_real, X0_imag, X1_real, X1_imag, X2_real, X2_imag, X3_real, X3_imag,
                             X4_real, X4_imag, X5_real, X5_imag, X6_real, X6_imag, X7_real, X7_imag,
-    output reg signed [31:0] fp_X0_real, fp_X0_imag, fp_X1_real, fp_X1_imag, fp_X2_real, fp_X2_imag, 
+    output reg [31:0] fp_X0_real, fp_X0_imag, fp_X1_real, fp_X1_imag, fp_X2_real, fp_X2_imag, 
                             fp_X3_real, fp_X3_imag, fp_X4_real, fp_X4_imag, fp_X5_real, fp_X5_imag,
                             fp_X6_real, fp_X6_imag, fp_X7_real, fp_X7_imag
 );
 
 // Input registers for decimal values
-reg signed [31:0] x0_real_reg, x0_imag_reg, x1_real_reg, x1_imag_reg;
-reg signed [31:0] x2_real_reg, x2_imag_reg, x3_real_reg, x3_imag_reg;
-reg signed [31:0] x4_real_reg, x4_imag_reg, x5_real_reg, x5_imag_reg;
-reg signed [31:0] x6_real_reg, x6_imag_reg, x7_real_reg, x7_imag_reg;
+reg [31:0] x0_real_reg, x0_imag_reg, x1_real_reg, x1_imag_reg;
+reg [31:0] x2_real_reg, x2_imag_reg, x3_real_reg, x3_imag_reg;
+reg [31:0] x4_real_reg, x4_imag_reg, x5_real_reg, x5_imag_reg;
+reg [31:0] x6_real_reg, x6_imag_reg, x7_real_reg, x7_imag_reg;
 
 // Wires for floating point conversion outputs
-wire signed [31:0] fp_x0_real, fp_x0_imag, fp_x1_real, fp_x1_imag;
-wire signed [31:0] fp_x2_real, fp_x2_imag, fp_x3_real, fp_x3_imag;
-wire signed [31:0] fp_x4_real, fp_x4_imag, fp_x5_real, fp_x5_imag;
-wire signed [31:0] fp_x6_real, fp_x6_imag, fp_x7_real, fp_x7_imag;
+wire [31:0] fp_x0_real, fp_x0_imag, fp_x1_real, fp_x1_imag;
+wire [31:0] fp_x2_real, fp_x2_imag, fp_x3_real, fp_x3_imag;
+wire [31:0] fp_x4_real, fp_x4_imag, fp_x5_real, fp_x5_imag;
+wire [31:0] fp_x6_real, fp_x6_imag, fp_x7_real, fp_x7_imag;
 
 // Registers for floating point values
-reg signed [31:0] fp_x0_real_reg, fp_x0_imag_reg, fp_x1_real_reg, fp_x1_imag_reg;
-reg signed [31:0] fp_x2_real_reg, fp_x2_imag_reg, fp_x3_real_reg, fp_x3_imag_reg;
-reg signed [31:0] fp_x4_real_reg, fp_x4_imag_reg, fp_x5_real_reg, fp_x5_imag_reg;
-reg signed [31:0] fp_x6_real_reg, fp_x6_imag_reg, fp_x7_real_reg, fp_x7_imag_reg;
+reg [31:0] fp_x0_real_reg, fp_x0_imag_reg, fp_x1_real_reg, fp_x1_imag_reg;
+reg [31:0] fp_x2_real_reg, fp_x2_imag_reg, fp_x3_real_reg, fp_x3_imag_reg;
+reg [31:0] fp_x4_real_reg, fp_x4_imag_reg, fp_x5_real_reg, fp_x5_imag_reg;
+reg [31:0] fp_x6_real_reg, fp_x6_imag_reg, fp_x7_real_reg, fp_x7_imag_reg;
 
 // Wires for FFT outputs
-wire signed [31:0] fft_X0_real, fft_X0_imag, fft_X1_real, fft_X1_imag;
-wire signed [31:0] fft_X2_real, fft_X2_imag, fft_X3_real, fft_X3_imag;
-wire signed [31:0] fft_X4_real, fft_X4_imag, fft_X5_real, fft_X5_imag;
-wire signed [31:0] fft_X6_real, fft_X6_imag, fft_X7_real, fft_X7_imag;
+wire [31:0] fft_X0_real, fft_X0_imag, fft_X1_real, fft_X1_imag;
+wire [31:0] fft_X2_real, fft_X2_imag, fft_X3_real, fft_X3_imag;
+wire [31:0] fft_X4_real, fft_X4_imag, fft_X5_real, fft_X5_imag;
+wire [31:0] fft_X6_real, fft_X6_imag, fft_X7_real, fft_X7_imag;
 
-wire signed [31:0] dec_X0_real, dec_X0_imag, dec_X1_real, dec_X1_imag;
-wire signed [31:0] dec_X2_real, dec_X2_imag, dec_X3_real, dec_X3_imag;
-wire signed [31:0] dec_X4_real, dec_X4_imag, dec_X5_real, dec_X5_imag;
-wire signed [31:0] dec_X6_real, dec_X6_imag, dec_X7_real, dec_X7_imag;
+wire [31:0] dec_X0_real, dec_X0_imag, dec_X1_real, dec_X1_imag;
+wire [31:0] dec_X2_real, dec_X2_imag, dec_X3_real, dec_X3_imag;
+wire [31:0] dec_X4_real, dec_X4_imag, dec_X5_real, dec_X5_imag;
+wire [31:0] dec_X6_real, dec_X6_imag, dec_X7_real, dec_X7_imag;
 
-wire signed [31:0] temp_X0_real, temp_X0_imag, temp_X1_real, temp_X1_imag;
-wire signed [31:0] temp_X2_real, temp_X2_imag, temp_X3_real, temp_X3_imag;
-wire signed [31:0] temp_X4_real, temp_X4_imag, temp_X5_real, temp_X5_imag;
-wire signed [31:0] temp_X6_real, temp_X6_imag, temp_X7_real, temp_X7_imag;
+wire [31:0] temp_X0_real, temp_X0_imag, temp_X1_real, temp_X1_imag;
+wire [31:0] temp_X2_real, temp_X2_imag, temp_X3_real, temp_X3_imag;
+wire [31:0] temp_X4_real, temp_X4_imag, temp_X5_real, temp_X5_imag;
+wire [31:0] temp_X6_real, temp_X6_imag, temp_X7_real, temp_X7_imag;
 
 
 // Register input values

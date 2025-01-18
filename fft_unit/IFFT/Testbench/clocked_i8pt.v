@@ -3,23 +3,23 @@
 module tb_top_8pt;
 
     // Parameters
-    parameter N = 32; // Example: 16-bit width for fixed-point representation
+    //parameter N = 32; // Example: 16-bit width for fixed-point representation
     parameter CLK_PERIOD = 5;
 
     // Inputs
     reg clk;
-    reg signed [N-1:0] x0_real, x0_imag, x1_real, x1_imag, x2_real, x2_imag, x3_real, x3_imag;
-    reg signed [N-1:0] x4_real, x4_imag, x5_real, x5_imag, x6_real, x6_imag, x7_real, x7_imag;
+    reg [31:0] x0_real, x0_imag, x1_real, x1_imag, x2_real, x2_imag, x3_real, x3_imag;
+    reg [31:0] x4_real, x4_imag, x5_real, x5_imag, x6_real, x6_imag, x7_real, x7_imag;
 
 
     // Outputs
-    wire signed [N-1:0] X0_real, X0_imag, X1_real, X1_imag, X2_real, X2_imag, X3_real, X3_imag;
-    wire signed [N-1:0] X4_real, X4_imag, X5_real, X5_imag, X6_real, X6_imag, X7_real, X7_imag;
-    wire signed [N-1:0] fp_X0_real, fp_X0_imag, fp_X1_real, fp_X1_imag, fp_X2_real, fp_X2_imag, fp_X3_real, fp_X3_imag;
-    wire signed [N-1:0] fp_X4_real, fp_X4_imag, fp_X5_real, fp_X5_imag, fp_X6_real, fp_X6_imag, fp_X7_real, fp_X7_imag;
+    wire [31:0] X0_real, X0_imag, X1_real, X1_imag, X2_real, X2_imag, X3_real, X3_imag;
+    wire [31:0] X4_real, X4_imag, X5_real, X5_imag, X6_real, X6_imag, X7_real, X7_imag;
+    wire [31:0] fp_X0_real, fp_X0_imag, fp_X1_real, fp_X1_imag, fp_X2_real, fp_X2_imag, fp_X3_real, fp_X3_imag;
+    wire [31:0] fp_X4_real, fp_X4_imag, fp_X5_real, fp_X5_imag, fp_X6_real, fp_X6_imag, fp_X7_real, fp_X7_imag;
 
     // Instantiate the DUT (Device Under Test)
-    clked_ifft_8pt #(.N(N)) DUT (
+    clked_ifft_8pt DUT (
         .clk(clk),
         .x0_real(x0_real), .x0_imag(x0_imag),
         .x1_real(x1_real), .x1_imag(x1_imag),

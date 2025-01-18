@@ -1,17 +1,17 @@
 `timescale 1ns / 1ps
 
 module tb_8pt;
-    parameter N = 16;  // Bit-width for inputs and outputs
+    //parameter N = 16;  // Bit-width for inputs and outputs
 
     // Inputs
     reg clk;
-    reg signed [N-1:0] xr0, xi0, xr1, xi1, xr2, xi2, xr3, xi3, xr4, xi4, xr5, xi5, xr6, xi6, xr7, xi7; // Inputs
+    reg [31:0] xr0, xi0, xr1, xi1, xr2, xi2, xr3, xi3, xr4, xi4, xr5, xi5, xr6, xi6, xr7, xi7; // Inputs
 
 
     // Outputs
-    wire signed [N-1:0] Xr0, Xi0, Xr1, Xi1, Xr2, Xi2, Xr3, Xi3,Xr4, Xi4, Xr5, Xi5, Xr6, Xi6, Xr7, Xi7;// FFT outputs                             // FFT outputs0
+    wire [31:0] Xr0, Xi0, Xr1, Xi1, Xr2, Xi2, Xr3, Xi3,Xr4, Xi4, Xr5, Xi5, Xr6, Xi6, Xr7, Xi7;// FFT outputs                             // FFT outputs0
     // Instantiate the fft4pt module
-    fft8pt #(N) uut (
+    fft8pt uut (
         .clk(clk),
         .xr0(xr0), .xi0(xi0),
         .xr1(xr1), .xi1(xi1),

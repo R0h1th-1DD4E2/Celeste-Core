@@ -2,7 +2,7 @@
 module tb_ker_mul;
 
     // Testbench parameters
-    parameter N = 32;
+    //parameter N = 32;
 
     // Declare the signals to be used
     reg clk;
@@ -12,44 +12,42 @@ module tb_ker_mul;
     wire out_valid;
     reg out_ready;
     
-    reg [N-1:0] x0_real, x0_imag;
-    reg [N-1:0] x1_real, x1_imag;
-    reg [N-1:0] x2_real, x2_imag;
-    reg [N-1:0] x3_real, x3_imag;
-    reg [N-1:0] x4_real, x4_imag;
-    reg [N-1:0] x5_real, x5_imag;
-    reg [N-1:0] x6_real, x6_imag;
-    reg [N-1:0] x7_real, x7_imag;
-    reg [N-1:0] x8_real, x8_imag;
-    reg [N-1:0] x9_real, x9_imag;
-    reg [N-1:0] x10_real, x10_imag;
-    reg [N-1:0] x11_real, x11_imag;
-    reg [N-1:0] x12_real, x12_imag;
-    reg [N-1:0] x13_real, x13_imag;
-    reg [N-1:0] x14_real, x14_imag;
-    reg [N-1:0] x15_real, x15_imag;
+    reg [31:0] x0_real, x0_imag;
+    reg [31:0] x1_real, x1_imag;
+    reg [31:0] x2_real, x2_imag;
+    reg [31:0] x3_real, x3_imag;
+    reg [31:0] x4_real, x4_imag;
+    reg [31:0] x5_real, x5_imag;
+    reg [31:0] x6_real, x6_imag;
+    reg [31:0] x7_real, x7_imag;
+    reg [31:0] x8_real, x8_imag;
+    reg [31:0] x9_real, x9_imag;
+    reg [31:0] x10_real, x10_imag;
+    reg [31:0] x11_real, x11_imag;
+    reg [31:0] x12_real, x12_imag;
+    reg [31:0] x13_real, x13_imag;
+    reg [31:0] x14_real, x14_imag;
+    reg [31:0] x15_real, x15_imag;
 
-    wire [N-1:0] X0_real, X0_imag;
-    wire [N-1:0] X1_real, X1_imag;
-    wire [N-1:0] X2_real, X2_imag;
-    wire [N-1:0] X3_real, X3_imag;
-    wire [N-1:0] X4_real, X4_imag;
-    wire [N-1:0] X5_real, X5_imag;
-    wire [N-1:0] X6_real, X6_imag;
-    wire [N-1:0] X7_real, X7_imag;
-    wire [N-1:0] X8_real, X8_imag;
-    wire [N-1:0] X9_real, X9_imag;
-    wire [N-1:0] X10_real, X10_imag;
-    wire [N-1:0] X11_real, X11_imag;
-    wire [N-1:0] X12_real, X12_imag;
-    wire [N-1:0] X13_real, X13_imag;
-    wire [N-1:0] X14_real, X14_imag;
-    wire [N-1:0] X15_real, X15_imag;
+    wire [31:0] X0_real, X0_imag;
+    wire [31:0] X1_real, X1_imag;
+    wire [31:0] X2_real, X2_imag;
+    wire [31:0] X3_real, X3_imag;
+    wire [31:0] X4_real, X4_imag;
+    wire [31:0] X5_real, X5_imag;
+    wire [31:0] X6_real, X6_imag;
+    wire [31:0] X7_real, X7_imag;
+    wire [31:0] X8_real, X8_imag;
+    wire [31:0] X9_real, X9_imag;
+    wire [31:0] X10_real, X10_imag;
+    wire [31:0] X11_real, X11_imag;
+    wire [31:0] X12_real, X12_imag;
+    wire [31:0] X13_real, X13_imag;
+    wire [31:0] X14_real, X14_imag;
+    wire [31:0] X15_real, X15_imag;
 
     // Instantiate the cmpx_mul module
-    ker_mul #(
-        .N(N)
-    ) uut (
+    ker_mul uut (
         .clk(clk),
         .rst(rst),
         .in_valid(in_valid),

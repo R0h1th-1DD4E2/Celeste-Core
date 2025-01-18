@@ -2,19 +2,18 @@
 
 module tb_4pt;
 
-    // Parameters
-    parameter N = 16;
+    
 
     // Inputs
   
-    reg signed [N-1:0] xr0, xi0, xr1, xi1, xr2, xi2, xr3, xi3;
-    reg signed [N-1:0] w2r0, w2i0, w4r0, w4i0, w4r1, w4i1;
+    reg [31:0] xr0, xi0, xr1, xi1, xr2, xi2, xr3, xi3;
+    reg [31:0] w2r0, w2i0, w4r0, w4i0, w4r1, w4i1;
 
     // Outputs
-    wire signed [N-1:0] Xr0, Xi0, Xr1, Xi1, Xr2, Xi2, Xr3, Xi3;
+    wire [31:0] Xr0, Xi0, Xr1, Xi1, Xr2, Xi2, Xr3, Xi3;
 
     // Instantiate the fft4pt module
-    fft4pt #(N) uut (
+    fft4pt uut (
        
         .xr0(xr0), .xi0(xi0),
         .xr1(xr1), .xi1(xi1),
