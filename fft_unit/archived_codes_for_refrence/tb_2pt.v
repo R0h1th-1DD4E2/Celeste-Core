@@ -1,17 +1,16 @@
 `timescale 1ns / 1ps  // Time unit and precision
 
 module tb_2pt;
-    parameter N = 16;  // Parameter for bit width
+    parameter N = 32;  // Parameter for bit width
 
     // Declare input and output signals
-    reg clk;  // Clock signal
+//    reg clk;  // Clock signal
     reg  [N-1:0] x0_real, x0_imag, x1_real, x1_imag;
     reg  [N-1:0] twiddle_real, twiddle_imag;
     wire [N-1:0] X0_real, X0_imag, X1_real, X1_imag;
 
     // Instantiate the 2-point FFT module
-    fft2pt #(N) modins (
-        .clk(clk),  // Pass clock to the module
+    fft_2pt #(N) modins (
         .x0_real(x0_real),
         .x0_imag(x0_imag),
         .x1_real(x1_real),
@@ -25,12 +24,12 @@ module tb_2pt;
     );
 
     // Initialize clock signal
-    initial begin
-        clk = 0;  // Start clock at 0
-    end
+//    initial begin
+//        clk = 0;  // Start clock at 0
+//    end
 
     // Generate clock signal with a 10ns period (5ns high, 5ns low)
-    always #5 clk = ~clk;
+//    always #5 clk = ~clk;
 
     // Test stimuli
     initial begin
@@ -44,11 +43,25 @@ module tb_2pt;
         // $display("Output: X0 = %d + j%d, X1 = %d + j%d\n", X0_real, X0_imag, X1_real, X1_imag);
 
         // Apply test case 2: x = {2 + j0, 3 + j0}
-        x0_real = 16'd2; x0_imag = 16'd0;  // Input x0 = 2 + j0
-        x1_real = 16'd3; x1_imag = 16'd0;  // Input x1 = 3 + j0
-        twiddle_real = 16'd1;              // Twiddle factor = 1 (cos(0))
-        twiddle_imag = 16'd0;              // Twiddle factor = 0 (sin(0))
+//        x0_real = 16'd2; x0_imag = 16'd0;  // Input x0 = 2 + j0
+//        x1_real = 16'd3; x1_imag = 16'd0;  // Input x1 = 3 + j0
+//        twiddle_real = 16'd1;              // Twiddle factor = 1 (cos(0))
+//        twiddle_imag = 16'd0;              // Twiddle factor = 0 (sin(0))
+        x0_real = 32'h40000000; x0_imag = 32'h0;  // Input x0 = 2 + j0
+        x1_real = 32'h40400000; x1_imag = 32'h0;  // Input x1 = 3 + j0
+        twiddle_real = 32'h3f800000;              // Twiddle factor = 1 (cos(0))
+        twiddle_imag = 32'd0;              // Twiddle factor = 0 (sin(0))
         #10;  // Wait 10 time units
+         x0_real = 32'h40000000; x0_imag = 32'h40000000;  // Input x0 = 2 + j2
+        x1_real = 32'h40400000; x1_imag = 32'h40000000;  // Input x1 = 3 + j2
+        twiddle_real = 32'h3f800000;              // Twiddle factor = 1 (cos(0))
+        twiddle_imag = 32'd0;              // Twiddle factor = 0 (sin(0))
+        #10;
+        x0_real = 32'h40000000; x0_imag = 32'h40400000;  // Input x0 = 2 + j3
+        x1_real = 32'h40400000; x1_imag = 32'h40400000;  // Input x1 = 3 + j3
+        twiddle_real = 32'h3f800000;              // Twiddle factor = 1 (cos(0))
+        twiddle_imag = 32'd0;              // Twiddle factor = 0 (sin(0))
+        #10;
         // $display("Test case 2: x(n) = {2+oj, 3+j0}");
         // $display("Output: X0 = %d + j%d, X1 = %d + j%d\n", X0_real, X0_imag, X1_real, X1_imag);
 
