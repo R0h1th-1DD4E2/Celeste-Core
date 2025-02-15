@@ -12,8 +12,8 @@ module tb_chunker;
     reg [31:0] image_base_addr;
     reg [31:0] image_width;
     reg [31:0] image_height;
-    reg [255:0] mem_data_in1;
-    reg [255:0] mem_data_in2;
+    wire [255:0] mem_data_in1;
+    wire [255:0] mem_data_in2;
     wire [511:0] chunk_data_out;
     wire chunk_valid;
     wire [31:0] mem_addr_out1;
@@ -36,6 +36,45 @@ module tb_chunker;
         .mem_addr_out2(mem_addr_out2),
         .done(done)
     );
+        // Instantiate the 4-port RAM
+    ram_4port ram (
+        .reset(rst),
+        // Port A
+        .clkA(clk),
+        .write_enA(1'b0),  // We are not writing to Port A, only reading
+        .read_enA(1'b1),
+        .data_inA(256'h0),
+        .data_outA(mem_data_in1),
+        .read_addrA(mem_addr_out1),
+        .write_addrA(32'b0),
+        
+        // Port B
+        .clkB(clk),
+        .write_enB(1'b0),
+        .read_enB(1'b1),
+        .data_inB(256'h0),
+        .data_outB(mem_data_in2),
+        .read_addrB(mem_addr_out2),
+        .write_addrB(32'b0),
+
+        // Port C
+        .clkC(clk),
+        .write_enC(1'b0),
+        .read_enC(1'b0),
+        .data_inC(256'h0),
+        .data_outC(data_outC),
+        .read_addrC(32'b0),
+        .write_addrC(32'b0),
+        
+        // Port D
+        .clkD(clk),
+        .write_enD(1'b0),
+        .read_enD(1'b0),
+        .data_inD(256'h0),
+        .data_outD(data_outD),
+        .read_addrD(32'b0),
+        .write_addrD(32'b0)
+    );
 
     // Clock generation
     initial begin
@@ -51,26 +90,9 @@ module tb_chunker;
         image_base_addr = 32'h0000_0000;
         image_width = 32'd32;  // Example width (2 chunks per row)
         image_height = 32'd32; // Example height (2 chunks per column)
-        mem_data_in1 = 256'h0;
-        mem_data_in2 = 256'h0;
 
-        // Apply reset
-        #(2 * CLK_PERIOD);
-        rst = 0;
-
-        // Start the chunker
-        #(CLK_PERIOD);
-        start = 1;
-
-        // Simulate memory data inputs and processing
-        #(CLK_PERIOD);
-        start = 0;
-
-        // Feed in memory data
-        mem_data_in1 = 256'h00000001_00000002_00000003_00000004_00000005_00000006_00000007_00000008;
-        mem_data_in2 = 256'h00000009_0000000A_0000000B_0000000C_0000000D_0000000E_0000000F_00000010;
-
-        // Wait for the chunker to process
+        
+        #10 start = 1;rst = 0;
         
 
         // Observe outputs
@@ -81,10 +103,19 @@ module tb_chunker;
         // Wait for completion
        
         $display("Processing done.");
+        
+
 
         // Finish simulation
         #9000;
        $finish;
     end
+
+always@(*)begin
+        if(done)begin
+        start =0;
+        end
+        end
+
 
 endmodule

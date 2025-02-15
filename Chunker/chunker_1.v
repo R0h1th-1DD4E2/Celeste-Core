@@ -34,7 +34,8 @@ module chunker_1 (
     reg [31:0] chunks_processed;   // Counter for processed chunks
     reg [31:0] total_chunks;       // Total number of chunks to process
     reg [31:0] base_addr;
-    reg [1:0] chunk_count;
+    
+    reg [7:0] row_shift = 8'd3;    // used to shift row after row chunked out
     
     // Pipeline registers
     reg [511:0] conversion_buffer; // Buffer for parallel conversion
@@ -86,7 +87,7 @@ module chunker_1 (
             end
             
             SEND: begin
-                if (chunks_processed == total_chunks-1) begin
+                if ((chunks_processed == total_chunks-1) && current_row == 3) begin
                     next_state = DONE;
                 end else begin
                     next_state = FETCH;
@@ -106,7 +107,7 @@ module chunker_1 (
             current_row <= 32'b0;
             current_col <= 32'b0;
             chunks_processed <= 32'b0;
-            chunk_count<= 0;
+            
             total_chunks <= 32'b0;
             mem_addr_out1 <= 32'b0;
             mem_addr_out2 <= 32'b0;
@@ -128,7 +129,7 @@ module chunker_1 (
                     current_row <= 32'b0;
                     current_col <= 32'b0;
                     chunks_processed <= 32'b0;
-                    chunk_count<=0;
+                    
                     total_chunks <= total_col*total_rows;
                     mem_addr_out1 <= base_addr;
                     mem_addr_out2 <= base_addr + image_width;
@@ -147,28 +148,36 @@ module chunker_1 (
                 end
 
                 SEND: begin
-                    chunk_valid <= 1'b1;
-                    if (chunk_count == 3)begin
-                    chunks_processed <= chunks_processed + 1;
-                    chunk_count<=0;
-                    end
-                    chunk_count <= chunk_count+1;
-                    // Update row and column counters
-                    if (current_row == total_rows - 1) begin
-                        current_row <= 0;
-                        current_col <= current_col + 1;
-                        // When moving to a new column, update base address
-                        base_addr <= base_addr + 8;  // Move 8 pixels right
-                        // Update memory addresses for the start of the new column
-                        mem_addr_out1 <= base_addr + 8;
-                        mem_addr_out2 <= base_addr + 8 + image_width;
-                    end else begin
-                        current_row <= current_row + 1;
-                        // Update memory addresses for the next two rows in the current column
-                        mem_addr_out1 <= mem_addr_out1 + (image_width << 1);  // Skip two rows
-                        mem_addr_out2 <= mem_addr_out2 + (image_width << 1);  // Skip two rows
-                    end
-                end
+
+//                     Update row and column counters
+                    
+            if ((current_col == total_col-1) && (current_row == 4'd3)) begin  // End of row of chunks
+                current_col <= 4'd0;
+                current_row <= 4'd0;
+                chunks_processed <= chunks_processed + 1;
+                row_shift <= row_shift + 1'b1;
+                base_addr <= image_base_addr + (image_width << row_shift);
+                // Setup addresses for first two rows of new chunk
+                mem_addr_out1 <= image_base_addr + (image_width << row_shift);
+                mem_addr_out2 <= image_base_addr + (image_width << row_shift) + image_width;
+            end
+            else if (current_row == 4'd3) begin  // End of current chunk
+                current_row <= 4'd0;
+                current_col <= current_col + 1'b1;
+                base_addr <= base_addr + 8;
+                chunks_processed <= chunks_processed + 1;
+                // Setup addresses for first two rows of new chunk
+                mem_addr_out1 <= base_addr + 8;
+                mem_addr_out2 <= base_addr + 8 + image_width;
+            end
+            else begin  // Processing rows within current chunk
+                current_row <= current_row + 1'b1;
+                // Move to next pair of rows
+                
+                mem_addr_out1 <= mem_addr_out1 + (image_width << 1);
+                mem_addr_out2 <= mem_addr_out2 + (image_width << 1);
+            end
+        end
 
                 DONE: begin
                     done <= 1'b1;
