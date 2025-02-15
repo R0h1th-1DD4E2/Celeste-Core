@@ -35,7 +35,7 @@ module chunker_1 (
     reg [31:0] total_chunks;       // Total number of chunks to process
     reg [31:0] base_addr;
     
-    reg [7:0] row_shift = 8'd3;    // used to shift row after row chunked out
+    reg [7:0] row_shift = 8'd3;    // used to count total chunk row 
     
     // Pipeline registers
     reg [511:0] conversion_buffer; // Buffer for parallel conversion
@@ -79,6 +79,7 @@ module chunker_1 (
             end
             
             FETCH: begin
+            // data is converted only after reciveing both row data
                 if (mem_data_in1 && mem_data_in2) next_state = CONVERT;
             end
             
@@ -87,6 +88,8 @@ module chunker_1 (
             end
             
             SEND: begin
+            
+            // done logic only after total chunkes processed with all rows calculated
                 if ((chunks_processed == total_chunks-1) && current_row == 3) begin
                     next_state = DONE;
                 end else begin
@@ -113,10 +116,13 @@ module chunker_1 (
             mem_addr_out2 <= 32'b0;
             chunk_valid <= 1'b0;
             done <= 1'b0;
+            
             conversion_in_progress <= 1'b0;
             conversion_buffer <= 512'b0;
             base_addr <= image_base_addr;
-        end else begin
+        end 
+        
+        else begin
             case (current_state)
                 IDLE: begin
                     chunk_valid <= 1'b0;
@@ -148,32 +154,47 @@ module chunker_1 (
                 end
 
                 SEND: begin
-
-//                     Update row and column counters
                     
             if ((current_col == total_col-1) && (current_row == 4'd3)) begin  // End of row of chunks
                 current_col <= 4'd0;
                 current_row <= 4'd0;
+                
+                //total chunk count
                 chunks_processed <= chunks_processed + 1;
+                
+                //total chunk row count
                 row_shift <= row_shift + 1'b1;
+                
+                //base address is updated with next chunk row address
                 base_addr <= image_base_addr + (image_width << row_shift);
+                
                 // Setup addresses for first two rows of new chunk
                 mem_addr_out1 <= image_base_addr + (image_width << row_shift);
                 mem_addr_out2 <= image_base_addr + (image_width << row_shift) + image_width;
             end
+            
+            
             else if (current_row == 4'd3) begin  // End of current chunk
                 current_row <= 4'd0;
+                
+                //totatl column count
                 current_col <= current_col + 1'b1;
                 base_addr <= base_addr + 8;
+                
+                //total chunk count
                 chunks_processed <= chunks_processed + 1;
+                
+                
                 // Setup addresses for first two rows of new chunk
                 mem_addr_out1 <= base_addr + 8;
                 mem_addr_out2 <= base_addr + 8 + image_width;
             end
+            
+            
             else begin  // Processing rows within current chunk
                 current_row <= current_row + 1'b1;
-                // Move to next pair of rows
                 
+                // Move to next pair of rows
                 mem_addr_out1 <= mem_addr_out1 + (image_width << 1);
                 mem_addr_out2 <= mem_addr_out2 + (image_width << 1);
             end
