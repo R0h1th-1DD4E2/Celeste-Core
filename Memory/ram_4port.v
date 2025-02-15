@@ -1,5 +1,5 @@
-`timescale 1ns / 1ps
-module ram_4port_mul_push(
+
+module ram_4port(
     input reset,
     // Port A
     input clkA,
@@ -38,31 +38,39 @@ module ram_4port_mul_push(
     input [31:0] write_addrD
 );
     // Memory array
-    reg [31:0] mem [0:1023];
+    reg [31:0] mem [0:16384];
+    
+        initial begin
+        $readmemh("/home/sateesh/pico_ws/Chunker/ram/result.hex",mem);
+//        $display("Initial RAM content: %h", mem[0]);
+       
+    end
     
     // Address boundary checking function
     function automatic is_valid_addr;
         input [31:0] addr;
         begin
-            is_valid_addr = (addr + 7) < 1024;  // Ensure 8-word block fits in memory
+            is_valid_addr = (addr + 7) < 16384;  // Ensure 8-word block fits in memory
         end
     endfunction
     
     // Initialize memory on reset
-    integer i;
-    always @(posedge reset) begin
-        if (reset) begin
-            for (i = 0; i < 1024; i = i + 1) begin
-                mem[i] <= 32'b0;
-            end
-        end
-    end
+//    integer i;
+//    always @(posedge reset) begin
+//        if (reset) begin
+//            for (i = 0; i < 1024; i = i + 1) begin
+//                mem[i] <= 32'b0;
+//            end
+//        end
+//    end
+    
 
     // Port A logic
     always @(posedge clkA) begin
         if (reset) begin
             data_outA <= 256'b0;
         end else begin
+         
             if (write_enA && !read_enA && is_valid_addr(write_addrA)) begin
                 mem[write_addrA + 0] <= data_inA[255:224];
                 mem[write_addrA + 1] <= data_inA[223:192];
@@ -73,10 +81,12 @@ module ram_4port_mul_push(
                 mem[write_addrA + 6] <= data_inA[63:32];
                 mem[write_addrA + 7] <= data_inA[31:0];
             end else if (!write_enA && read_enA && is_valid_addr(read_addrA)) begin
-                data_outA <= {mem[read_addrA + 0], mem[read_addrA + 1],
+                data_outA = {mem[read_addrA + 0], mem[read_addrA + 1],
                             mem[read_addrA + 2], mem[read_addrA + 3],
                             mem[read_addrA + 4], mem[read_addrA + 5],
                             mem[read_addrA + 6], mem[read_addrA + 7]};
+//                            $display("read_addrA: %h", read_addrA);
+//                            $display("data_outA: %h", data_outA);
             end else begin
                 data_outA <= 256'b0;
             end
@@ -98,7 +108,7 @@ module ram_4port_mul_push(
                 mem[write_addrB + 6] <= data_inB[63:32];
                 mem[write_addrB + 7] <= data_inB[31:0];
             end else if (!write_enB && read_enB && is_valid_addr(read_addrB)) begin
-                data_outB <= {mem[read_addrB + 0], mem[read_addrB + 1],
+                data_outB = {mem[read_addrB + 0], mem[read_addrB + 1],
                             mem[read_addrB + 2], mem[read_addrB + 3],
                             mem[read_addrB + 4], mem[read_addrB + 5],
                             mem[read_addrB + 6], mem[read_addrB + 7]};
@@ -123,7 +133,7 @@ module ram_4port_mul_push(
                 mem[write_addrC + 6] <= data_inC[63:32];
                 mem[write_addrC + 7] <= data_inC[31:0];
             end else if (!write_enC && read_enC && is_valid_addr(read_addrC)) begin
-                data_outC <= {mem[read_addrC + 0], mem[read_addrC + 1],
+                data_outC = {mem[read_addrC + 0], mem[read_addrC + 1],
                             mem[read_addrC + 2], mem[read_addrC + 3],
                             mem[read_addrC + 4], mem[read_addrC + 5],
                             mem[read_addrC + 6], mem[read_addrC + 7]};
@@ -148,7 +158,7 @@ module ram_4port_mul_push(
                 mem[write_addrD + 6] <= data_inD[63:32];
                 mem[write_addrD + 7] <= data_inD[31:0];
             end else if (!write_enD && read_enD && is_valid_addr(read_addrD)) begin
-                data_outD <= {mem[read_addrD + 0], mem[read_addrD + 1],
+                data_outD = {mem[read_addrD + 0], mem[read_addrD + 1],
                             mem[read_addrD + 2], mem[read_addrD + 3],
                             mem[read_addrD + 4], mem[read_addrD + 5],
                             mem[read_addrD + 6], mem[read_addrD + 7]};
