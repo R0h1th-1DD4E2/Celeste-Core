@@ -1,19 +1,19 @@
-module fft_2pt (
+module fft_2pt  (
     input clk,
-    input [31:0] x0_real, x0_imag, x1_real, x1_imag,
-    input [31:0] twiddle_real, twiddle_imag,  // Twiddle factors
-    output [31:0] X0_real, X0_imag, X1_real, X1_imag,rr1, ii1, ri1, ir1, RR1,RI1,IR1,II1,t1, t2,t3,t4
+    input signed [31:0] x0_real, x0_imag, x1_real, x1_imag,
+    input signed [31:0] twiddle_real, twiddle_imag,  // Twiddle factors
+    output  signed [31:0]  X0_real, X0_imag, X1_real, X1_imag,rr1, ii1, ri1, ir1, RR1,RI1,IR1,II1,t1, t2,t3,t4
     
 );
 
-    // output  [31:0] teX0_real, teX0_imag, temp_X1_real, temp_X1_imag;
+    // output signed  [N-1:0] teX0_real, teX0_imag, temp_X1_real, temp_X1_imag;
 
    
-    //wire   [31:0] rr1, ii1, ri1, ir1;
-   // wire   [31:0] t1, t2,t3,t4;
-    localparam minus_one = 32'hbf800000;
+    //wire   [N-1:0] rr1, ii1, ri1, ir1;
+   // wire   [N-1:0] t1, t2,t3,t4;
+    localparam [31:0] minus_one = 32'hbf800000;
 
- //   wire [31:0] RR1,RI1,IR1,II1;
+ //   wire [N-1:0] RR1,RI1,IR1,II1;
 
 
 fp_mul mul1(x1_real,twiddle_real,rr1);

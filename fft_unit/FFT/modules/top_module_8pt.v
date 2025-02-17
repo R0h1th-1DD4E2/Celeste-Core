@@ -20,7 +20,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module clked_8pt(
+module top_module_8pt(
     input clk,
     input  [31:0] x0_real, x0_imag, x1_real, x1_imag, x2_real, x2_imag, x3_real, x3_imag,
                         x4_real, x4_imag, x5_real, x5_imag, x6_real, x6_imag, x7_real, x7_imag,
@@ -54,6 +54,14 @@ wire [31:0] fft_X0_real, fft_X0_imag, fft_X1_real, fft_X1_imag;
 wire [31:0] fft_X2_real, fft_X2_imag, fft_X3_real, fft_X3_imag;
 wire [31:0] fft_X4_real, fft_X4_imag, fft_X5_real, fft_X5_imag;
 wire [31:0] fft_X6_real, fft_X6_imag, fft_X7_real, fft_X7_imag;
+
+wire [31:0] dec_X0_real, dec_X0_imag, dec_X1_real, dec_X1_imag;
+wire [31:0] dec_X2_real, dec_X2_imag, dec_X3_real, dec_X3_imag;
+wire [31:0] dec_X4_real, dec_X4_imag, dec_X5_real, dec_X5_imag;
+wire [31:0] dec_X6_real, dec_X6_imag, dec_X7_real, dec_X7_imag;
+
+
+
 
 // Register input values
 always @(posedge clk) begin
@@ -131,11 +139,6 @@ always @(posedge clk) begin
     fp_X7_real <= fft_X7_real; fp_X7_imag <= fft_X7_imag;
 end
 
-// Floating point to decimal conversion
-wire [31:0] dec_X0_real, dec_X0_imag, dec_X1_real, dec_X1_imag;
-wire [31:0] dec_X2_real, dec_X2_imag, dec_X3_real, dec_X3_imag;
-wire [31:0] dec_X4_real, dec_X4_imag, dec_X5_real, dec_X5_imag;
-wire [31:0] dec_X6_real, dec_X6_imag, dec_X7_real, dec_X7_imag;
 
 fp_2_dec op17(fp_X0_real, dec_X0_real);
 fp_2_dec op18(fp_X0_imag, dec_X0_imag);
@@ -153,6 +156,7 @@ fp_2_dec op29(fp_X6_real, dec_X6_real);
 fp_2_dec op30(fp_X6_imag, dec_X6_imag);
 fp_2_dec op31(fp_X7_real, dec_X7_real);
 fp_2_dec op32(fp_X7_imag, dec_X7_imag);
+
 
 // Register final decimal outputs
 always @(posedge clk) begin
