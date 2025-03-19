@@ -1,8 +1,8 @@
-module fft_2pt  (
-    input clk,
+module fft_2pt #(parameter N = 32) (
+
     input signed [31:0] x0_real, x0_imag, x1_real, x1_imag,
     input signed [31:0] twiddle_real, twiddle_imag,  // Twiddle factors
-    output  signed [31:0]  X0_real, X0_imag, X1_real, X1_imag,rr1, ii1, ri1, ir1, RR1,RI1,IR1,II1,t1, t2,t3,t4
+    output  signed [31:0] X0_real, X0_imag, X1_real, X1_imag,rr1, ii1, ri1, ir1, RR1,RI1,IR1,II1,t1, t2,t3,t4
     
 );
 
@@ -11,7 +11,7 @@ module fft_2pt  (
    
     //wire   [N-1:0] rr1, ii1, ri1, ir1;
    // wire   [N-1:0] t1, t2,t3,t4;
-    localparam [31:0] minus_one = 32'hbf800000;
+    localparam minus_one = 32'hbf800000;
 
  //   wire [N-1:0] RR1,RI1,IR1,II1;
 

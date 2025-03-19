@@ -4,7 +4,7 @@ module tb_top_8pt;
 
     // Parameters
     parameter N = 32; // Example: 16-bit width for fixed-point representation
-    parameter CLK_PERIOD = 5;
+    parameter CLK_PERIOD = 10;
 
     // Inputs
     reg clk;
@@ -19,8 +19,8 @@ module tb_top_8pt;
     wire signed [N-1:0] fp_X4_real, fp_X4_imag, fp_X5_real, fp_X5_imag, fp_X6_real, fp_X6_imag, fp_X7_real, fp_X7_imag;
 
     // Instantiate the DUT (Device Under Test)
-    top_module_8pt #(.N(N)) DUT (
-        .clk(clk),
+    top_module_8pt  DUT (
+        
         .x0_real(x0_real), .x0_imag(x0_imag),
         .x1_real(x1_real), .x1_imag(x1_imag),
         .x2_real(x2_real), .x2_imag(x2_imag),
@@ -49,10 +49,6 @@ module tb_top_8pt;
     );
 
     // Clock generation
-    initial begin
-        clk = 0;
-        forever #(CLK_PERIOD/2) clk = ~clk;
-    end
    
 
     // Stimulus generation
@@ -66,52 +62,32 @@ module tb_top_8pt;
         // x5_real = 32'h40a00000;  x5_imag = 32'h00000000; // 5.0 in IEEE 754
         // x6_real = 32'h40c00000;  x6_imag = 32'h00000000; // 6.0 in IEEE 754
         // x7_real = 32'h40e00000;  x7_imag = 32'h00000000; // 7.0 in IEEE 754
+        
 //test case 1
- x0_real=0;x0_imag=0;
- x1_real=1;x1_imag=0;
- x2_real=2;x2_imag=0;
- x3_real=3;x3_imag=0;
- x4_real=4;x4_imag=0;
- x5_real=5;x5_imag=0;
- x6_real=6;x6_imag=0;
- x7_real=7;x7_imag=0;
-#5;
+// x0_real=0;x0_imag=0;
+// x1_real=1;x1_imag=0;
+// x2_real=2;x2_imag=0;
+// x3_real=3;x3_imag=0;
+// x4_real=4;x4_imag=0;
+// x5_real=5;x5_imag=0;
+// x6_real=6;x6_imag=0;
+// x7_real=7;x7_imag=0;
 
         // Wait for a few clock cycles to observe output
-//x0_real=1;x0_imag=0;
-//x1_real=1;x1_imag=0;
-//x2_real=1;x2_imag=0;
-//x3_real=1;x3_imag=0;
-//x4_real=-1;x4_imag=0;
-//x5_real=-1;x5_imag=0;
-//x6_real=-1;x6_imag=0;
-//x7_real=-1;x7_imag=0;   
-//#5;
+x0_real=0;x0_imag=0;
+x1_real=1;x1_imag=0;
+x2_real=2;x2_imag=0;
+x3_real=3;x3_imag=0;
+x4_real=4;x4_imag=0;
+x5_real=5;x5_imag=0;
+x6_real=6;x6_imag=0;
+x7_real=7;x7_imag=0;    
 
-// x0_real=1;x0_imag=0;
-// x1_real=1;x1_imag=0;
-// x2_real=1;x2_imag=0;
-// x3_real=1;x3_imag=0;
-// x4_real=2;x4_imag=0;
-// x5_real=2;x5_imag=0;
-// x6_real=2;x6_imag=0;
-// x7_real=2;x7_imag=0;
-//#5; 
-
-// x0_real=3;x0_imag=5;
-// x1_real=9;x1_imag=8;
-// x2_real=4;x2_imag=0;
-// x3_real=1;x3_imag=9;
-// x4_real=6;x4_imag=2;
-// x5_real=7;x5_imag=6;
-// x6_real=0;x6_imag=8;
-// x7_real=2;x7_imag=1;
-//#5; 
 
       
 
         // Finish simulation
-          #500;
+          #1000;
     $display("fp_X0_real  = %h", fp_X0_real);
     $display("fp_X0_imag  = %h", fp_X0_imag);
     $display("fp_X1_real  = %h", fp_X1_real);
@@ -157,6 +133,9 @@ module tb_top_8pt;
 
     $display("X7_real  = %d", X7_real);
     $display("X7_imag  = %d", X7_imag);
+
+
+
 
     end
 

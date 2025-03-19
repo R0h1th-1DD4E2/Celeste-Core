@@ -1,5 +1,5 @@
 module ifft8pt (
-    input clk,
+    
     input [31:0] xr0, xi0, xr1, xi1, xr2, xi2, xr3, xi3, xr4, xi4, xr5, xi5, xr6, xi6, xr7, xi7,
     output [31:0] Xr0, Xi0, Xr1, Xi1, Xr2, Xi2, Xr3, Xi3,
     output [31:0] Xr4, Xi4, Xr5, Xi5, Xr6, Xi6, Xr7, Xi7
@@ -17,7 +17,7 @@ module ifft8pt (
 
     // First stage: Two 4-point FFTs
     ifft4pt ifft4_1 (  
-        .clk(clk),  
+         
         .xr0(xr0), .xi0(xi0), .xr1(xr2), .xi1(xi2),
         .xr2(xr4), .xi2(xi4), .xr3(xr6), .xi3(xi6),
         .w2r0(w2r0), .w2i0(w2i0),
@@ -29,7 +29,7 @@ module ifft8pt (
 
 
     ifft4pt ifft4_2 (  
-        .clk(clk),
+        
         .xr0(xr1), .xi0(xi1), .xr1(xr3), .xi1(xi3),
         .xr2(xr5), .xi2(xi5), .xr3(xr7), .xi3(xi7),
         .w2r0(w2r0), .w2i0(w2i0),
@@ -40,19 +40,19 @@ module ifft8pt (
     );
 
     // Final stage: Combine results with twiddle factors
-    ifft_2pt ifft2_1 (.clk(clk), .x0_real(mr0), .x0_imag(mi0), .x1_real(mr4), .x1_imag(mi4),
+    ifft_2pt ifft2_1 (.x0_real(mr0), .x0_imag(mi0), .x1_real(mr4), .x1_imag(mi4),
                         .twiddle_real(w8r0), .twiddle_imag(w8i0),
                         .X0_real(Xr0), .X0_imag(Xi0), .X1_real(Xr4), .X1_imag(Xi4));
 
-    ifft_2pt ifft2_2 (.clk(clk), .x0_real(mr1), .x0_imag(mi1), .x1_real(mr5), .x1_imag(mi5),
+    ifft_2pt ifft2_2 ( .x0_real(mr1), .x0_imag(mi1), .x1_real(mr5), .x1_imag(mi5),
                         .twiddle_real(w8r1), .twiddle_imag(w8i1),
                         .X0_real(Xr1), .X0_imag(Xi1), .X1_real(Xr5), .X1_imag(Xi5));
 
-    ifft_2pt ifft2_3 (.clk(clk), .x0_real(mr2), .x0_imag(mi2), .x1_real(mr6), .x1_imag(mi6),
+    ifft_2pt ifft2_3 ( .x0_real(mr2), .x0_imag(mi2), .x1_real(mr6), .x1_imag(mi6),
                         .twiddle_real(w8r2), .twiddle_imag(w8i2),
                         .X0_real(Xr2), .X0_imag(Xi2), .X1_real(Xr6), .X1_imag(Xi6));
 
-    ifft_2pt ifft2_4 (.clk(clk), .x0_real(mr3), .x0_imag(mi3), .x1_real(mr7), .x1_imag(mi7),
+    ifft_2pt ifft2_4 ( .x0_real(mr3), .x0_imag(mi3), .x1_real(mr7), .x1_imag(mi7),
                         .twiddle_real(w8r3), .twiddle_imag(w8i3),
                         .X0_real(Xr3), .X0_imag(Xi3), .X1_real(Xr7), .X1_imag(Xi7));
 

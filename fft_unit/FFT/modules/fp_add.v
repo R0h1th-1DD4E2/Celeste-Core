@@ -39,6 +39,7 @@ always @(*) begin
     // Handle zero result directly
     if (Temp_Mantissa == 0) begin
         result = 0;
+
     end
 
     // adjust mantissa to format 1.xxxx (bit 23 is 1)

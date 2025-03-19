@@ -1,4 +1,3 @@
-`timescale 1ns / 1ps
 
 module dec_2_fp(
     input [31:0] dec,
