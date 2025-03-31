@@ -1,4 +1,3 @@
-Below is an example of a README.md file that documents the structure and operation of the Arch_test1 module. You can save this as README.md in your project directory.
 
 ---
 
@@ -89,14 +88,9 @@ The **SpectralRegister** module latches the outputs from the column FFT stage an
 
 ---
 
-
+#Testbench  Documentation
 ```
 
-
-
-Here is a suggested `README.md` file for your testbench code:
-
----
 
 # Testbench for Archtest Module
 
