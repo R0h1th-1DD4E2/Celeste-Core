@@ -8,7 +8,7 @@ wire [23:0] A_Mantissa = {1'b1, A_swap[22:0]}, B_Mantissa = {1'b1, B_swap[22:0]}
 wire [7:0] A_Exponent = A_swap[30:23], B_Exponent = B_swap[30:23];
 wire A_sign = A_swap[31], B_sign = B_swap[31];
 
-wire Zero = (A_sign !=B_sign && A[30:0] == B[30:0]);
+wire Zero = ((A[30:0] == 0 && B[30:0] == 0) || (A_sign !=B_sign && A[30:0] == B[30:0]));
 reg [23:0] Temp_Mantissa, B_shifted_mantissa;
 reg [22:0] Mantissa;
 reg [7:0] Exponent;
