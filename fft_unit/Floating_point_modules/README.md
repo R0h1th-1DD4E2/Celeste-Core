@@ -1,4 +1,4 @@
-#Floating point modules
+##Floating point modules
 
 This document details the modules used in a floating-point processing unit designed to operate on IEEE 754 single precision (32-bit) numbers. The design includes converters, adders, multiplication modules, and comparison modules. The key feature is the precision handling and normalization routines to ensure IEEE compliance.
 
