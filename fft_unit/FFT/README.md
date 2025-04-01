@@ -1,4 +1,4 @@
-# top_FFT Module Documentation
+# FFT
 
 ## Module: `top_FFT`
 
