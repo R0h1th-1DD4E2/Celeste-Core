@@ -113,9 +113,22 @@ fp_mul mult2(imag0,imag1,mul2);//imag with imag
 fp_mul mult3(real0,imag1,mul3);//real with imag
 fp_mul mult4(imag0,real1,mul4);//imag with real
 
-fp_sub add2(mul1,mul2,out_r); //(real*real)-(imag*imag)
+fp_add add2(mul1,{~mul2[31],mul2[30:0]},out_r); //(real*real)-(imag*imag)
 fp_add add1(mul3,mul4,out_imag);//(real*imag)+(imag*real)
 
+//module fp_sub#(parameter XLEN=32)
+//                        (input [XLEN-1:0]A,
+//                         input [XLEN-1:0]B,
+//                         output[XLEN-1:0] result);
+								 
+//localparam minus_one = 32'hbf800000;
+//wire [XLEN-1:0]result1;
+//wire [XLEN-1:0]B1;
+//assign B1={~B[31],B[30:0]};
+
+//fp_add add(A,B1,result1);
+//assign result = result1;
+//endmodule
 
 
 endmodule
