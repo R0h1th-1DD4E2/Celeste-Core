@@ -15,8 +15,6 @@ module tb_top_8pt;
     // Outputs
     wire signed [N-1:0] X0_real, X0_imag, X1_real, X1_imag, X2_real, X2_imag, X3_real, X3_imag;
     wire signed [N-1:0] X4_real, X4_imag, X5_real, X5_imag, X6_real, X6_imag, X7_real, X7_imag;
-    wire signed [N-1:0] fp_X0_real, fp_X0_imag, fp_X1_real, fp_X1_imag, fp_X2_real, fp_X2_imag, fp_X3_real, fp_X3_imag;
-    wire signed [N-1:0] fp_X4_real, fp_X4_imag, fp_X5_real, fp_X5_imag, fp_X6_real, fp_X6_imag, fp_X7_real, fp_X7_imag;
 
     // Instantiate the DUT (Device Under Test)
     top_module_8pt  DUT (
@@ -37,14 +35,6 @@ module tb_top_8pt;
         .X5_real(X5_real), .X5_imag(X5_imag),
         .X6_real(X6_real), .X6_imag(X6_imag),
         .X7_real(X7_real), .X7_imag(X7_imag),
-        .fp_X0_real(fp_X0_real), .fp_X0_imag(fp_X0_imag),
-        .fp_X1_real(fp_X1_real), .fp_X1_imag(fp_X1_imag),
-        .fp_X2_real(fp_X2_real), .fp_X2_imag(fp_X2_imag),
-        .fp_X3_real(fp_X3_real), .fp_X3_imag(fp_X3_imag),
-        .fp_X4_real(fp_X4_real), .fp_X4_imag(fp_X4_imag),
-        .fp_X5_real(fp_X5_real), .fp_X5_imag(fp_X5_imag),
-        .fp_X6_real(fp_X6_real), .fp_X6_imag(fp_X6_imag),
-        .fp_X7_real(fp_X7_real), .fp_X7_imag(fp_X7_imag)
 
     );
 
