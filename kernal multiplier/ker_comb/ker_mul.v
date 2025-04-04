@@ -1,5 +1,38 @@
 module ker_mul(
 
+  //Module Description:
+/*
+This module implements a complex multiplication operation between FFT inputs and kernel inputs
+for a 64-point (8x8) 2D operation. The module:
+
+- Takes 64 complex inputs (x0-x63) where each input has:
+  * 32-bit real component 
+  * 32-bit imaginary component
+  * Total input width of 64 x 64 = 4096 bits
+
+- Takes 64 complex kernel inputs (y0-y63) where each input has:
+  * 32-bit real component
+  * 32-bit imaginary component 
+  * Total kernel input width of 64 x 64 = 4096 bits
+
+- Produces 64 complex outputs (X0-X63) where each output has:
+  * 32-bit real component
+  * 32-bit imaginary component
+  * Total output width of 64 x 64 = 4096 bits
+
+- Architecture:
+  * Divides the 64-point operation into 4 separate 16-point complex multiply blocks
+  * Uses 4 instances of cmpx_mul submodule, each handling 16 points
+  * First block: Points 0-15
+  * Second block: Points 16-31  
+  * Third block: Points 32-47
+  * Fourth block: Points 48-63
+
+The module is designed for performing element-wise complex multiplication between 
+FFT data and a kernel function, typically used in frequency domain filtering or 
+convolution operations.
+*/
+
   // fft input
   input [31:0] x0_real, x0_imag,
   input [31:0] x1_real, x1_imag,
@@ -199,6 +232,9 @@ module ker_mul(
   output [31:0] X62_real, X62_imag,
   output [31:0] X63_real, X63_imag);
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//GUASSIAN KERNAL IEEE 754
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // localparam signed [31:0] 
 //     ker_r0  = 32'h3951b717, ker_r1  = 32'h399d4952, ker_r2  = 32'h3a03126f, ker_r3  = 32'h3b2a64c3, ker_r4  = 32'hbc7765fe, ker_r5  = 32'h3b2a64c3, ker_r6  = 32'h3a03126f, ker_r7  = 32'h399d4952,
@@ -218,9 +254,12 @@ module ker_mul(
 //                         ker_i40 = 32'h0, ker_i41 = 32'h0, ker_i42 = 32'h0, ker_i43 = 32'h0, ker_i44 = 32'h0, ker_i45 = 32'h0, ker_i46 = 32'h0, ker_i47 = 32'h0,
 //                         ker_i48 = 32'h0, ker_i49 = 32'h0, ker_i50 = 32'h0, ker_i51 = 32'h0, ker_i52 = 32'h0, ker_i53 = 32'h0, ker_i54 = 32'h0, ker_i55 = 32'h0,
 //                         ker_i56 = 32'h0, ker_i57 = 32'h0, ker_i58 = 32'h0, ker_i59 = 32'h0, ker_i60 = 32'h0, ker_i61 = 32'h0, ker_i62 = 32'h0, ker_i63 = 32'h0;
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
 //for 1st and 2nd row
-
 cmpx_mul u_cmpx_mul1 (
     // Inputs for x0 to x15
     .x0_real(x0_real),  .x0_imag(x0_imag),
@@ -241,22 +280,22 @@ cmpx_mul u_cmpx_mul1 (
     .x15_real(x15_real), .x15_imag(x15_imag),
 
     // Inputs for y0 to y15
-.y0_real(y0_real),  .y0_imag(y0_imag),
-.y1_real(y1_real),  .y1_imag(y1_imag),
-.y2_real(y2_real),  .y2_imag(y2_imag),
-.y3_real(y3_real),  .y3_imag(y3_imag),
-.y4_real(y4_real),  .y4_imag(y4_imag),
-.y5_real(y5_real),  .y5_imag(y5_imag),
-.y6_real(y6_real),  .y6_imag(y6_imag),
-.y7_real(y7_real),  .y7_imag(y7_imag),
-.y8_real(y8_real),  .y8_imag(y8_imag),
-.y9_real(y9_real),  .y9_imag(y9_imag),
-.y10_real(y10_real), .y10_imag(y10_imag),
-.y11_real(y11_real), .y11_imag(y11_imag),
-.y12_real(y12_real), .y12_imag(y12_imag),
-.y13_real(y13_real), .y13_imag(y13_imag),
-.y14_real(y14_real), .y14_imag(y14_imag),
-.y15_real(y15_real), .y15_imag(y15_imag),
+    .y0_real(y0_real),  .y0_imag(y0_imag),
+    .y1_real(y1_real),  .y1_imag(y1_imag),
+    .y2_real(y2_real),  .y2_imag(y2_imag),
+    .y3_real(y3_real),  .y3_imag(y3_imag),
+    .y4_real(y4_real),  .y4_imag(y4_imag),
+    .y5_real(y5_real),  .y5_imag(y5_imag),
+    .y6_real(y6_real),  .y6_imag(y6_imag),
+    .y7_real(y7_real),  .y7_imag(y7_imag),
+    .y8_real(y8_real),  .y8_imag(y8_imag),
+    .y9_real(y9_real),  .y9_imag(y9_imag),
+    .y10_real(y10_real), .y10_imag(y10_imag),
+    .y11_real(y11_real), .y11_imag(y11_imag),
+    .y12_real(y12_real), .y12_imag(y12_imag),
+    .y13_real(y13_real), .y13_imag(y13_imag),
+    .y14_real(y14_real), .y14_imag(y14_imag),
+    .y15_real(y15_real), .y15_imag(y15_imag),
 
     // Outputs for X0 to X15
     .X0_real(X0_real), .X0_imag(X0_imag),
@@ -299,22 +338,22 @@ cmpx_mul u_cmpx_mul2 (
     .x15_real(x31_real), .x15_imag(x31_imag),
 
     // Inputs for y0 to y15
-.y0_real(y16_real),  .y0_imag(y16_imag),
-.y1_real(y17_real),  .y1_imag(y17_imag),
-.y2_real(y18_real),  .y2_imag(y18_imag),
-.y3_real(y19_real),  .y3_imag(y19_imag),
-.y4_real(y20_real),  .y4_imag(y20_imag),
-.y5_real(y21_real),  .y5_imag(y21_imag),
-.y6_real(y22_real),  .y6_imag(y22_imag),
-.y7_real(y23_real),  .y7_imag(y23_imag),
-.y8_real(y24_real),  .y8_imag(y24_imag),
-.y9_real(y25_real),  .y9_imag(y25_imag),
-.y10_real(y26_real), .y10_imag(y26_imag),
-.y11_real(y27_real), .y11_imag(y27_imag),
-.y12_real(y28_real), .y12_imag(y28_imag),
-.y13_real(y29_real), .y13_imag(y29_imag),
-.y14_real(y30_real), .y14_imag(y30_imag),
-.y15_real(y31_real), .y15_imag(y31_imag),
+    .y0_real(y16_real),  .y0_imag(y16_imag),
+    .y1_real(y17_real),  .y1_imag(y17_imag),
+    .y2_real(y18_real),  .y2_imag(y18_imag),
+    .y3_real(y19_real),  .y3_imag(y19_imag),
+    .y4_real(y20_real),  .y4_imag(y20_imag),
+    .y5_real(y21_real),  .y5_imag(y21_imag),
+    .y6_real(y22_real),  .y6_imag(y22_imag),
+    .y7_real(y23_real),  .y7_imag(y23_imag),
+    .y8_real(y24_real),  .y8_imag(y24_imag),
+    .y9_real(y25_real),  .y9_imag(y25_imag),
+    .y10_real(y26_real), .y10_imag(y26_imag),
+    .y11_real(y27_real), .y11_imag(y27_imag),
+    .y12_real(y28_real), .y12_imag(y28_imag),
+    .y13_real(y29_real), .y13_imag(y29_imag),
+    .y14_real(y30_real), .y14_imag(y30_imag),
+    .y15_real(y31_real), .y15_imag(y31_imag),
 
     // Outputs for X0 to X15
     .X0_real(X16_real), .X0_imag(X16_imag),

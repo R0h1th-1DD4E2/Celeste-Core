@@ -1,23 +1,28 @@
 `timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
-// Create Date: 01/11/2025 11:51:06 AM
-// Design Name: 
-// Module Name: cmpx_mul
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
-// 
-// Dependencies: 
-// 
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-// 
-//////////////////////////////////////////////////////////////////////////////////
+
+/* 
+Module Description:
+
+This module implements a 16-point complex number multiplication unit that performs 
+element-wise multiplication of two 16-element complex number arrays (x and y).
+Each complex number consists of 32-bit real and imaginary components.
+
+Inputs:
+- 16 pairs of 32-bit complex numbers from array x (x0_real/imag through x15_real/imag)
+- 16 pairs of 32-bit complex numbers from array y (y0_real/imag through y15_real/imag)
+
+Outputs:
+- 16 pairs of 32-bit complex multiplication results (X0_real/imag through X15_real/imag)
+
+The module uses cmpx_mul_2 submodules to perform individual complex multiplications,
+where each multiplication follows the formula:
+- Real part = (real0 * real1) - (imag0 * imag1)
+- Imaginary part = (real0 * imag1) + (imag0 * real1)
+
+Implementation uses floating-point multipliers (fp_mul) and adders (fp_add) for computations.
+*/
+
+
 module cmpx_mul
 ( 
   input [31:0] x0_real, x0_imag,
@@ -115,20 +120,5 @@ fp_mul mult4(imag0,real1,mul4);//imag with real
 
 fp_add add2(mul1,{~mul2[31],mul2[30:0]},out_r); //(real*real)-(imag*imag)
 fp_add add1(mul3,mul4,out_imag);//(real*imag)+(imag*real)
-
-//module fp_sub#(parameter XLEN=32)
-//                        (input [XLEN-1:0]A,
-//                         input [XLEN-1:0]B,
-//                         output[XLEN-1:0] result);
-								 
-//localparam minus_one = 32'hbf800000;
-//wire [XLEN-1:0]result1;
-//wire [XLEN-1:0]B1;
-//assign B1={~B[31],B[30:0]};
-
-//fp_add add(A,B1,result1);
-//assign result = result1;
-//endmodule
-
 
 endmodule
