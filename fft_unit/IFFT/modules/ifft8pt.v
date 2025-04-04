@@ -5,11 +5,15 @@ module ifft8pt (
     output [31:0] Xr4, Xi4, Xr5, Xi5, Xr6, Xi6, Xr7, Xi7
     
 );
+// w4i1 should be 32'h3f800000
+// w8i2 should be 32'h3f800000
+// w8i1 should be 32'h3f350481
+// w8i3 should be 32'h3f350481
     parameter [31:0] w2r0 = 32'h3f800000, w2i0 = 32'h0;
-    parameter [31:0] w4r0 = 32'h3f800000, w4i0 = 32'h0, w4r1 = 32'h0, w4i1 = 32'hbf800000;
-    parameter [31:0] w8r0 = 32'h3f800000, w8i0 = 32'h0, w8r2 = 32'h0, w8i2 = 32'hbf800000;
-    parameter [31:0] w8r1 = 32'h3f350481, w8i1 = 32'hbf350481;
-    parameter [31:0] w8r3 = 32'hbf350481, w8i3 = 32'hbf350481;
+    parameter [31:0] w4r0 = 32'h3f800000, w4i0 = 32'h0, w4r1 = 32'h0, w4i1 = 32'h3f800000;
+    parameter [31:0] w8r0 = 32'h3f800000, w8i0 = 32'h0, w8r2 = 32'h0, w8i2 = 32'h3f800000;
+    parameter [31:0] w8r1 = 32'h3f350481, w8i1 = 32'h3f350481;
+    parameter [31:0] w8r3 = 32'hbf350481, w8i3 = 32'h3f350481;
 
 
     wire [31:0] mr0, mi0, mr1, mi1, mr2, mi2, mr3, mi3;
@@ -58,3 +62,4 @@ module ifft8pt (
 
 endmodule
 
+ 
