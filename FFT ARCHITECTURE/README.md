@@ -1,21 +1,21 @@
 ## DOCUMENTATION OF 2D CONVOLUTION ARCHITECTURE
 
-# variable name mapping
+# variable name mapping (strict naming convention)
 
-| name                                                                                                                       | function                                                          |
-|----------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------|
-| **clk** <br> **rst**                                                                                                       | system clock & active-high reset (input)                          |
-| **ip_0_r - ip_63_r** <br> **ip_0_i - ip_63_i**                                                                             | main inputs (real and imaginary parts)                            |
-| **op_0_r - op_63_r** <br> **op_0_i - op_63_i**                                                                             | main outputs (real and imaginary parts)                           |
-| **ker_in_0_r - ker_in_63_r** <br> **ker_in_0_i - ker_in_63_i**                                                             | kernel inputs for spectral filtering                             |
-| **rg1_0_r - rg1_63_r** <br> **rg1_0_i - rg1_63_i**                                                                         | input buffer register (rg1)                                        |
-| **rg2_0_r - rg2_63_r** <br> **rg2_0_i - rg2_63_i**                                                                         | transpose buffer register (rg2) – post row-fft pre-transpose         |
-| **rg3_0_r - rg3_63_r** <br> **rg3_0_i - rg3_63_i**                                                                         | spectral data buffer (rg3) – fft outputs                           |
-| **rg4_0_r - rg4_63_r** <br> **rg4_0_i - rg4_63_i**                                                                         | filtered frequency buffer (rg4) – after kernel multiplication       |
-| **rg5_0_r - rg5_63_r** <br> **rg5_0_i - rg5_63_i**                                                                         | transpose buffer 2 (rg5) – pre final ifft                          |
-| **ftr_0_r - ftr_63_r** <br> **ftr_0_i - ftr_63_i**                                                                         | fft row outputs (real and imaginary parts)                         |
-| **ftc_0_r - ftc_63_r** <br> **ftc_0_i - ftc_63_i**                                                                         | fft column outputs (real and imaginary parts)                      |
-| **iftr_0_r - iftr_63_r** <br> **iftr_0_i - iftr_63_i**                                                                     | ifft row outputs (real and imaginary parts)                        |
+| name                                                                  | function                                                |
+|-----------------------------------------------------------------------|---------------------------------------------------------|
+| **clk**, **rst**                                                      | system clock and reset (input)                          |
+| **Ip_0_R**, **Ip_0_I**                                                | main inputs (real and imaginary components)             |
+| **Op_0_R**, **Op_0_I**                                                | main outputs                                            |
+| **ker_in_0_R**, **ker_in_0_I**                                        | kernel inputs (real and imaginary)                      |
+| **rg1_0_R**, **rg1_0_I**                                              | input buffer register (rg1)                             |
+| **rg2_0_R**, **rg2_0_I**                                              | transpose buffer register (rg2)                         |
+| **rg3_0_R**, **rg3_0_I**                                              | spectral buffer register (rg3)                          |
+| **rg4_0_R**, **rg4_0_I**                                              | filtered frequency register (rg4)                       |
+| **rg5_0_R**, **rg5_0_I**                                              | pre-final transpose buffer (rg5)                        |
+| **ftr_17_R**, **ftr_17_I**                                            | FFT row outputs (index 17)                              |
+| **ftc_12_R**, **ftc_12_I**                                            | FFT column outputs (index 12)                           |
+| **iftr_20_R**, **iftr_20_I**                                          | IFFT row outputs (index 20)                             |
 
 
 
