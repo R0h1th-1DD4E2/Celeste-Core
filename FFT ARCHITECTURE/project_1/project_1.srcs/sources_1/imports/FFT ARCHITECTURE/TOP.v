@@ -1,3 +1,4 @@
+`timescale 1ns / 1ps
 /**********************************************************************
  * Signal Reference Documentation
  *
@@ -54,10 +55,11 @@
  *     as needed for your specific design.
  *
  **********************************************************************/
-
+ 
 module TOP(
     input clk,
     input rst,
+    input [2:0] type,
  
     input [31:0] Ip_0_Real, Ip_0_Img, Ip_1_Real, Ip_1_Img,
                  Ip_2_Real, Ip_2_Img, Ip_3_Real, Ip_3_Img,
@@ -128,72 +130,72 @@ module TOP(
 );
 
 //FOR MAKING WRITING OF TESTBENCH-EASIER ,KERNEL CAN BE WRITTEN USING assign OR USING MODULE INP/OP
-wire [31:0] ker_in_0_R, ker_in_0_I, ker_in_1_R, ker_in_1_I, ker_in_2_R, ker_in_2_I, ker_in_3_R, ker_in_3_I,
-            ker_in_4_R, ker_in_4_I, ker_in_5_R, ker_in_5_I, ker_in_6_R, ker_in_6_I, ker_in_7_R, ker_in_7_I,
-            ker_in_8_R, ker_in_8_I, ker_in_9_R, ker_in_9_I, ker_in_10_R, ker_in_10_I, ker_in_11_R, ker_in_11_I,
-            ker_in_12_R, ker_in_12_I, ker_in_13_R, ker_in_13_I, ker_in_14_R, ker_in_14_I, ker_in_15_R, ker_in_15_I,
-            ker_in_16_R, ker_in_16_I, ker_in_17_R, ker_in_17_I, ker_in_18_R, ker_in_18_I, ker_in_19_R, ker_in_19_I,
-            ker_in_20_R, ker_in_20_I, ker_in_21_R, ker_in_21_I, ker_in_22_R, ker_in_22_I, ker_in_23_R, ker_in_23_I,
-            ker_in_24_R, ker_in_24_I, ker_in_25_R, ker_in_25_I, ker_in_26_R, ker_in_26_I, ker_in_27_R, ker_in_27_I,
-            ker_in_28_R, ker_in_28_I, ker_in_29_R, ker_in_29_I, ker_in_30_R, ker_in_30_I, ker_in_31_R, ker_in_31_I,
-            ker_in_32_R, ker_in_32_I, ker_in_33_R, ker_in_33_I, ker_in_34_R, ker_in_34_I, ker_in_35_R, ker_in_35_I,
-            ker_in_36_R, ker_in_36_I, ker_in_37_R, ker_in_37_I, ker_in_38_R, ker_in_38_I, ker_in_39_R, ker_in_39_I,
-            ker_in_40_R, ker_in_40_I, ker_in_41_R, ker_in_41_I, ker_in_42_R, ker_in_42_I, ker_in_43_R, ker_in_43_I,
-            ker_in_44_R, ker_in_44_I, ker_in_45_R, ker_in_45_I, ker_in_46_R, ker_in_46_I, ker_in_47_R, ker_in_47_I,
-            ker_in_48_R, ker_in_48_I, ker_in_49_R, ker_in_49_I, ker_in_50_R, ker_in_50_I, ker_in_51_R, ker_in_51_I,
-            ker_in_52_R, ker_in_52_I, ker_in_53_R, ker_in_53_I, ker_in_54_R, ker_in_54_I, ker_in_55_R, ker_in_55_I,
-            ker_in_56_R, ker_in_56_I, ker_in_57_R, ker_in_57_I, ker_in_58_R, ker_in_58_I, ker_in_59_R, ker_in_59_I,
-            ker_in_60_R, ker_in_60_I, ker_in_61_R, ker_in_61_I, ker_in_62_R, ker_in_62_I, ker_in_63_R, ker_in_63_I;
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//GUASSIAN KERNAL IEEE 754
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-assign ker_in_0_R  = 32'h3951b717, ker_in_1_R  = 32'h399d4952, ker_in_2_R  = 32'h3a03126f, ker_in_3_R  = 32'h3b2a64c3,
-    ker_in_4_R  = 32'hbc7765fe, ker_in_5_R  = 32'h3b2a64c3, ker_in_6_R  = 32'h3a03126f, ker_in_7_R  = 32'h399d4952;
+// wire [31:0] ker_in_0_R, ker_in_0_I, ker_in_1_R, ker_in_1_I, ker_in_2_R, ker_in_2_I, ker_in_3_R, ker_in_3_I,
+//             ker_in_4_R, ker_in_4_I, ker_in_5_R, ker_in_5_I, ker_in_6_R, ker_in_6_I, ker_in_7_R, ker_in_7_I,
+//             ker_in_8_R, ker_in_8_I, ker_in_9_R, ker_in_9_I, ker_in_10_R, ker_in_10_I, ker_in_11_R, ker_in_11_I,
+//             ker_in_12_R, ker_in_12_I, ker_in_13_R, ker_in_13_I, ker_in_14_R, ker_in_14_I, ker_in_15_R, ker_in_15_I,
+//             ker_in_16_R, ker_in_16_I, ker_in_17_R, ker_in_17_I, ker_in_18_R, ker_in_18_I, ker_in_19_R, ker_in_19_I,
+//             ker_in_20_R, ker_in_20_I, ker_in_21_R, ker_in_21_I, ker_in_22_R, ker_in_22_I, ker_in_23_R, ker_in_23_I,
+//             ker_in_24_R, ker_in_24_I, ker_in_25_R, ker_in_25_I, ker_in_26_R, ker_in_26_I, ker_in_27_R, ker_in_27_I,
+//             ker_in_28_R, ker_in_28_I, ker_in_29_R, ker_in_29_I, ker_in_30_R, ker_in_30_I, ker_in_31_R, ker_in_31_I,
+//             ker_in_32_R, ker_in_32_I, ker_in_33_R, ker_in_33_I, ker_in_34_R, ker_in_34_I, ker_in_35_R, ker_in_35_I,
+//             ker_in_36_R, ker_in_36_I, ker_in_37_R, ker_in_37_I, ker_in_38_R, ker_in_38_I, ker_in_39_R, ker_in_39_I,
+//             ker_in_40_R, ker_in_40_I, ker_in_41_R, ker_in_41_I, ker_in_42_R, ker_in_42_I, ker_in_43_R, ker_in_43_I,
+//             ker_in_44_R, ker_in_44_I, ker_in_45_R, ker_in_45_I, ker_in_46_R, ker_in_46_I, ker_in_47_R, ker_in_47_I,
+//             ker_in_48_R, ker_in_48_I, ker_in_49_R, ker_in_49_I, ker_in_50_R, ker_in_50_I, ker_in_51_R, ker_in_51_I,
+//             ker_in_52_R, ker_in_52_I, ker_in_53_R, ker_in_53_I, ker_in_54_R, ker_in_54_I, ker_in_55_R, ker_in_55_I,
+//             ker_in_56_R, ker_in_56_I, ker_in_57_R, ker_in_57_I, ker_in_58_R, ker_in_58_I, ker_in_59_R, ker_in_59_I,
+//             ker_in_60_R, ker_in_60_I, ker_in_61_R, ker_in_61_I, ker_in_62_R, ker_in_62_I, ker_in_63_R, ker_in_63_I;
+// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// //GUASSIAN KERNAL IEEE 754
+// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// assign ker_in_0_R  = 32'h3951b717, ker_in_1_R  = 32'h399d4952, ker_in_2_R  = 32'h3a03126f, ker_in_3_R  = 32'h3b2a64c3,
+//     ker_in_4_R  = 32'hbc7765fe, ker_in_5_R  = 32'h3b2a64c3, ker_in_6_R  = 32'h3a03126f, ker_in_7_R  = 32'h399d4952;
 
-assign ker_in_8_R  = 32'h399d4952, ker_in_9_R  = 32'h399d4952, ker_in_10_R = 32'h3a1d4952, ker_in_11_R = 32'h3b4b295f,
-    ker_in_12_R = 32'hbc91d14e, ker_in_13_R = 32'h3b4b295f, ker_in_14_R = 32'h3a1d4952, ker_in_15_R = 32'h399d4952;
+// assign ker_in_8_R  = 32'h399d4952, ker_in_9_R  = 32'h399d4952, ker_in_10_R = 32'h3a1d4952, ker_in_11_R = 32'h3b4b295f,
+//     ker_in_12_R = 32'hbc91d14e, ker_in_13_R = 32'h3b4b295f, ker_in_14_R = 32'h3a1d4952, ker_in_15_R = 32'h399d4952;
 
-assign ker_in_16_R = 32'h3a03126f, ker_in_17_R = 32'h3a1d4952, ker_in_18_R = 32'h3a83126f, ker_in_19_R = 32'h3bb0f27c,
-    ker_in_20_R = 32'hbcfec56d, ker_in_21_R = 32'h3bb0f27c, ker_in_22_R = 32'h3a83126f, ker_in_23_R = 32'h3a1d4952;
+// assign ker_in_16_R = 32'h3a03126f, ker_in_17_R = 32'h3a1d4952, ker_in_18_R = 32'h3a83126f, ker_in_19_R = 32'h3bb0f27c,
+//     ker_in_20_R = 32'hbcfec56d, ker_in_21_R = 32'h3bb0f27c, ker_in_22_R = 32'h3a83126f, ker_in_23_R = 32'h3a1d4952;
 
-assign ker_in_24_R = 32'h3b2a64c3, ker_in_25_R = 32'h3b4b295f, ker_in_26_R = 32'h3bb0f27c, ker_in_27_R = 32'h3cf9db23,
-    ker_in_28_R = 32'hbe32e48f, ker_in_29_R = 32'h3cf9db23, ker_in_30_R = 32'h3bb0f27c, ker_in_31_R = 32'h3b4b295f;
+// assign ker_in_24_R = 32'h3b2a64c3, ker_in_25_R = 32'h3b4b295f, ker_in_26_R = 32'h3bb0f27c, ker_in_27_R = 32'h3cf9db23,
+//     ker_in_28_R = 32'hbe32e48f, ker_in_29_R = 32'h3cf9db23, ker_in_30_R = 32'h3bb0f27c, ker_in_31_R = 32'h3b4b295f;
 
-assign ker_in_32_R = 32'hbc7765fe, ker_in_33_R = 32'hbc91d14e, ker_in_34_R = 32'hbcfec56d, ker_in_35_R = 32'hbe32e48f,
-    ker_in_36_R = 32'h3f800000, ker_in_37_R = 32'hbe32e48f, ker_in_38_R = 32'hbcfec56d, ker_in_39_R = 32'hbc91d14e;
+// assign ker_in_32_R = 32'hbc7765fe, ker_in_33_R = 32'hbc91d14e, ker_in_34_R = 32'hbcfec56d, ker_in_35_R = 32'hbe32e48f,
+//     ker_in_36_R = 32'h3f800000, ker_in_37_R = 32'hbe32e48f, ker_in_38_R = 32'hbcfec56d, ker_in_39_R = 32'hbc91d14e;
 
-assign ker_in_40_R = 32'h3b2a64c3, ker_in_41_R = 32'h3b4b295f, ker_in_42_R = 32'h3bb0f27c, ker_in_43_R = 32'h3cf9db23,
-    ker_in_44_R = 32'hbe32e48f, ker_in_45_R = 32'h3cf9db23, ker_in_46_R = 32'h3bb0f27c, ker_in_47_R = 32'h3b4b295f;
+// assign ker_in_40_R = 32'h3b2a64c3, ker_in_41_R = 32'h3b4b295f, ker_in_42_R = 32'h3bb0f27c, ker_in_43_R = 32'h3cf9db23,
+//     ker_in_44_R = 32'hbe32e48f, ker_in_45_R = 32'h3cf9db23, ker_in_46_R = 32'h3bb0f27c, ker_in_47_R = 32'h3b4b295f;
 
-assign ker_in_48_R = 32'h3a03126f, ker_in_49_R = 32'h3a1d4952, ker_in_50_R = 32'h3a83126f, ker_in_51_R = 32'h3bb0f27c,
-    ker_in_52_R = 32'hbcfec56d, ker_in_53_R = 32'h3bb0f27c, ker_in_54_R = 32'h3a83126f, ker_in_55_R = 32'h3a1d4952;
+// assign ker_in_48_R = 32'h3a03126f, ker_in_49_R = 32'h3a1d4952, ker_in_50_R = 32'h3a83126f, ker_in_51_R = 32'h3bb0f27c,
+//     ker_in_52_R = 32'hbcfec56d, ker_in_53_R = 32'h3bb0f27c, ker_in_54_R = 32'h3a83126f, ker_in_55_R = 32'h3a1d4952;
 
-assign ker_in_56_R = 32'h399d4952, ker_in_57_R = 32'h399d4952, ker_in_58_R = 32'h3a1d4952, ker_in_59_R = 32'h3b4b295f,
-    ker_in_60_R = 32'hbc91d14e, ker_in_61_R = 32'h3b4b295f, ker_in_62_R = 32'h3a1d4952, ker_in_63_R = 32'h399d4952;
+// assign ker_in_56_R = 32'h399d4952, ker_in_57_R = 32'h399d4952, ker_in_58_R = 32'h3a1d4952, ker_in_59_R = 32'h3b4b295f,
+//     ker_in_60_R = 32'hbc91d14e, ker_in_61_R = 32'h3b4b295f, ker_in_62_R = 32'h3a1d4952, ker_in_63_R = 32'h399d4952;
 
-assign ker_in_0_I = 32'h0, ker_in_1_I = 32'h0, ker_in_2_I = 32'h0, ker_in_3_I = 32'h0,
-    ker_in_4_I = 32'h0, ker_in_5_I = 32'h0, ker_in_6_I = 32'h0, ker_in_7_I = 32'h0;
+// assign ker_in_0_I = 32'h0, ker_in_1_I = 32'h0, ker_in_2_I = 32'h0, ker_in_3_I = 32'h0,
+//     ker_in_4_I = 32'h0, ker_in_5_I = 32'h0, ker_in_6_I = 32'h0, ker_in_7_I = 32'h0;
 
-assign ker_in_8_I = 32'h0, ker_in_9_I = 32'h0, ker_in_10_I = 32'h0, ker_in_11_I = 32'h0,
-    ker_in_12_I = 32'h0, ker_in_13_I = 32'h0, ker_in_14_I = 32'h0, ker_in_15_I = 32'h0;
+// assign ker_in_8_I = 32'h0, ker_in_9_I = 32'h0, ker_in_10_I = 32'h0, ker_in_11_I = 32'h0,
+//     ker_in_12_I = 32'h0, ker_in_13_I = 32'h0, ker_in_14_I = 32'h0, ker_in_15_I = 32'h0;
 
-assign ker_in_16_I = 32'h0, ker_in_17_I = 32'h0, ker_in_18_I = 32'h0, ker_in_19_I = 32'h0,
-    ker_in_20_I = 32'h0, ker_in_21_I = 32'h0, ker_in_22_I = 32'h0, ker_in_23_I = 32'h0;
+// assign ker_in_16_I = 32'h0, ker_in_17_I = 32'h0, ker_in_18_I = 32'h0, ker_in_19_I = 32'h0,
+//     ker_in_20_I = 32'h0, ker_in_21_I = 32'h0, ker_in_22_I = 32'h0, ker_in_23_I = 32'h0;
 
-assign ker_in_24_I = 32'h0, ker_in_25_I = 32'h0, ker_in_26_I = 32'h0, ker_in_27_I = 32'h0,
-    ker_in_28_I = 32'h0, ker_in_29_I = 32'h0, ker_in_30_I = 32'h0, ker_in_31_I = 32'h0;
+// assign ker_in_24_I = 32'h0, ker_in_25_I = 32'h0, ker_in_26_I = 32'h0, ker_in_27_I = 32'h0,
+//     ker_in_28_I = 32'h0, ker_in_29_I = 32'h0, ker_in_30_I = 32'h0, ker_in_31_I = 32'h0;
 
-assign ker_in_32_I = 32'h0, ker_in_33_I = 32'h0, ker_in_34_I = 32'h0, ker_in_35_I = 32'h0,
-    ker_in_36_I = 32'h0, ker_in_37_I = 32'h0, ker_in_38_I = 32'h0, ker_in_39_I = 32'h0;
+// assign ker_in_32_I = 32'h0, ker_in_33_I = 32'h0, ker_in_34_I = 32'h0, ker_in_35_I = 32'h0,
+//     ker_in_36_I = 32'h0, ker_in_37_I = 32'h0, ker_in_38_I = 32'h0, ker_in_39_I = 32'h0;
 
-assign ker_in_40_I = 32'h0, ker_in_41_I = 32'h0, ker_in_42_I = 32'h0, ker_in_43_I = 32'h0,
-    ker_in_44_I = 32'h0, ker_in_45_I = 32'h0, ker_in_46_I = 32'h0, ker_in_47_I = 32'h0;
+// assign ker_in_40_I = 32'h0, ker_in_41_I = 32'h0, ker_in_42_I = 32'h0, ker_in_43_I = 32'h0,
+//     ker_in_44_I = 32'h0, ker_in_45_I = 32'h0, ker_in_46_I = 32'h0, ker_in_47_I = 32'h0;
 
-assign ker_in_48_I = 32'h0, ker_in_49_I = 32'h0, ker_in_50_I = 32'h0, ker_in_51_I = 32'h0,
-    ker_in_52_I = 32'h0, ker_in_53_I = 32'h0, ker_in_54_I = 32'h0, ker_in_55_I = 32'h0;
+// assign ker_in_48_I = 32'h0, ker_in_49_I = 32'h0, ker_in_50_I = 32'h0, ker_in_51_I = 32'h0,
+//     ker_in_52_I = 32'h0, ker_in_53_I = 32'h0, ker_in_54_I = 32'h0, ker_in_55_I = 32'h0;
 
-assign ker_in_56_I = 32'h0, ker_in_57_I = 32'h0, ker_in_58_I = 32'h0, ker_in_59_I = 32'h0,
-    ker_in_60_I = 32'h0, ker_in_61_I = 32'h0, ker_in_62_I = 32'h0, ker_in_63_I = 32'h0;
+// assign ker_in_56_I = 32'h0, ker_in_57_I = 32'h0, ker_in_58_I = 32'h0, ker_in_59_I = 32'h0,
+//     ker_in_60_I = 32'h0, ker_in_61_I = 32'h0, ker_in_62_I = 32'h0, ker_in_63_I = 32'h0;
 
 wire [31:0] rg1_0_R, rg1_0_I, rg1_1_R, rg1_1_I, rg1_2_R, rg1_2_I, rg1_3_R, rg1_3_I, rg1_4_R, rg1_4_I, rg1_5_R, rg1_5_I, rg1_6_R, rg1_6_I, rg1_7_R, rg1_7_I,
                 rg1_8_R, rg1_8_I, rg1_9_R, rg1_9_I, rg1_10_R, rg1_10_I, rg1_11_R, rg1_11_I, rg1_12_R, rg1_12_I, rg1_13_R, rg1_13_I, rg1_14_R, rg1_14_I, rg1_15_R, rg1_15_I, rg1_16_R, rg1_16_I,
@@ -360,7 +362,7 @@ Register InputBuffer_rg1(
 
 
 
-Register TransposeBuffer_rg2(
+ TransposeRegister rg2(
     .clk(clk),
     .rst(rst),
     .in_0_R(ftr_0_R), .in_0_I(ftr_0_I), .in_1_R(ftr_1_R), .in_1_I(ftr_1_I),
@@ -519,7 +521,7 @@ wire [31:0] rg3_0_R, rg3_0_I, rg3_1_R, rg3_1_I, rg3_2_R, rg3_2_I, rg3_3_R, rg3_3
 
 
 
-SpectralRegister SpectralDataBuffer(
+Register SpectralDataBuffer(
     .clk(clk),
     .rst(rst),
     .in_0_R(ftc_0_R), .in_0_I(ftc_0_I), .in_1_R(ftc_1_R), .in_1_I(ftc_1_I),
@@ -589,7 +591,72 @@ SpectralRegister SpectralDataBuffer(
     .out_62_R(rg3_62_R), .out_62_I(rg3_62_I), .out_63_R(rg3_63_R), .out_63_I(rg3_63_I)
 );
 
+ker_reg kerreg(.clk(clk),.rst(rst),.type(type), .ker_r0(ker_in_0_R),.ker_i0(ker_in_0_I),
+    .ker_r1(ker_in_1_R), .ker_i1(ker_in_1_I),
+    .ker_r2(ker_in_2_R), .ker_i2(ker_in_2_I),
+    .ker_r3(ker_in_3_R), .ker_i3(ker_in_3_I),
+    .ker_r4(ker_in_4_R), .ker_i4(ker_in_4_I),
+    .ker_r5(ker_in_5_R), .ker_i5(ker_in_5_I),
+    .ker_r6(ker_in_6_R), .ker_i6(ker_in_6_I),
+    .ker_r7(ker_in_7_R), .ker_i7(ker_in_7_I),
+    .ker_r8(ker_in_8_R), .ker_i8(ker_in_8_I),
+    .ker_r9(ker_in_9_R), .ker_i9(ker_in_9_I),
+    .ker_r10(ker_in_10_R), .ker_i10(ker_in_10_I),
+    .ker_r11(ker_in_11_R), .ker_i11(ker_in_11_I),
+    .ker_r12(ker_in_12_R), .ker_i12(ker_in_12_I),
+    .ker_r13(ker_in_13_R), .ker_i13(ker_in_13_I),
+    .ker_r14(ker_in_14_R), .ker_i14(ker_in_14_I),
+    .ker_r15(ker_in_15_R), .ker_i15(ker_in_15_I),
+    .ker_r16(ker_in_16_R), .ker_i16(ker_in_16_I),
+    .ker_r17(ker_in_17_R), .ker_i17(ker_in_17_I),
+    .ker_r18(ker_in_18_R), .ker_i18(ker_in_18_I),
+    .ker_r19(ker_in_19_R), .ker_i19(ker_in_19_I),
+    .ker_r20(ker_in_20_R), .ker_i20(ker_in_20_I),
+    .ker_r21(ker_in_21_R), .ker_i21(ker_in_21_I),
+    .ker_r22(ker_in_22_R), .ker_i22(ker_in_22_I),
+    .ker_r23(ker_in_23_R), .ker_i23(ker_in_23_I),
+    .ker_r24(ker_in_24_R), .ker_i24(ker_in_24_I),
+    .ker_r25(ker_in_25_R), .ker_i25(ker_in_25_I),
+    .ker_r26(ker_in_26_R), .ker_i26(ker_in_26_I),
+    .ker_r27(ker_in_27_R), .ker_i27(ker_in_27_I),
+    .ker_r28(ker_in_28_R), .ker_i28(ker_in_28_I),
+    .ker_r29(ker_in_29_R), .ker_i29(ker_in_29_I),
+    .ker_r30(ker_in_30_R), .ker_i30(ker_in_30_I),
+    .ker_r31(ker_in_31_R), .ker_i31(ker_in_31_I),
+    .ker_r32(ker_in_32_R), .ker_i32(ker_in_32_I),
+    .ker_r33(ker_in_33_R), .ker_i33(ker_in_33_I),
+    .ker_r34(ker_in_34_R), .ker_i34(ker_in_34_I),
+    .ker_r35(ker_in_35_R), .ker_i35(ker_in_35_I),
+    .ker_r36(ker_in_36_R), .ker_i36(ker_in_36_I),
+    .ker_r37(ker_in_37_R), .ker_i37(ker_in_37_I),
+    .ker_r38(ker_in_38_R), .ker_i38(ker_in_38_I),
+    .ker_r39(ker_in_39_R), .ker_i39(ker_in_39_I),
+    .ker_r40(ker_in_40_R), .ker_i40(ker_in_40_I),
+    .ker_r41(ker_in_41_R), .ker_i41(ker_in_41_I),
+    .ker_r42(ker_in_42_R), .ker_i42(ker_in_42_I),
+    .ker_r43(ker_in_43_R), .ker_i43(ker_in_43_I),
+    .ker_r44(ker_in_44_R), .ker_i44(ker_in_44_I),
+    .ker_r45(ker_in_45_R), .ker_i45(ker_in_45_I),
+    .ker_r46(ker_in_46_R), .ker_i46(ker_in_46_I),
+    .ker_r47(ker_in_47_R), .ker_i47(ker_in_47_I),
+    .ker_r48(ker_in_48_R), .ker_i48(ker_in_48_I),
+    .ker_r49(ker_in_49_R), .ker_i49(ker_in_49_I),
+    .ker_r50(ker_in_50_R), .ker_i50(ker_in_50_I),
+    .ker_r51(ker_in_51_R), .ker_i51(ker_in_51_I),
+    .ker_r52(ker_in_52_R), .ker_i52(ker_in_52_I),
+    .ker_r53(ker_in_53_R), .ker_i53(ker_in_53_I),
+    .ker_r54(ker_in_54_R), .ker_i54(ker_in_54_I),
+    .ker_r55(ker_in_55_R), .ker_i55(ker_in_55_I),
+    .ker_r56(ker_in_56_R), .ker_i56(ker_in_56_I),
+    .ker_r57(ker_in_57_R), .ker_i57(ker_in_57_I),
+    .ker_r58(ker_in_58_R), .ker_i58(ker_in_58_I),
+    .ker_r59(ker_in_59_R), .ker_i59(ker_in_59_I),
+    .ker_r60(ker_in_60_R), .ker_i60(ker_in_60_I),
+    .ker_r61(ker_in_61_R), .ker_i61(ker_in_61_I),
+    .ker_r62(ker_in_62_R), .ker_i62(ker_in_62_I),
+    .ker_r63(ker_in_63_R), .ker_i63(ker_in_63_I)
 
+);
 
 wire [31:0] ker_out_0_R, ker_out_0_I, ker_out_1_R, ker_out_1_I, ker_out_2_R, ker_out_2_I, ker_out_3_R, ker_out_3_I,
             ker_out_4_R, ker_out_4_I, ker_out_5_R, ker_out_5_I, ker_out_6_R, ker_out_6_I, ker_out_7_R, ker_out_7_I,
@@ -609,7 +676,7 @@ wire [31:0] ker_out_0_R, ker_out_0_I, ker_out_1_R, ker_out_1_I, ker_out_2_R, ker
             ker_out_60_R, ker_out_60_I, ker_out_61_R, ker_out_61_I, ker_out_62_R, ker_out_62_I, ker_out_63_R, ker_out_63_I;
 
 KernelMultiplier inst(
-    .x0_real(rg3_0_R), .x0_imag(rg3_0_I), .x1_real(rg3_1_R), .x1_imag(rg3_1_I),
+    .x0_real(rg3_0_R), .x0_imag(rg3_0_I), .x1_real(rg3_1_R), .x1_imag(rg3_1_I), 
     .x2_real(rg3_2_R), .x2_imag(rg3_2_I), .x3_real(rg3_3_R), .x3_imag(rg3_3_I),
     .x4_real(rg3_4_R), .x4_imag(rg3_4_I), .x5_real(rg3_5_R), .x5_imag(rg3_5_I),
     .x6_real(rg3_6_R), .x6_imag(rg3_6_I), .x7_real(rg3_7_R), .x7_imag(rg3_7_I),
@@ -786,7 +853,7 @@ Register FilteredFrequencyBuffer(
     .out_56_R(rg4_56_R), .out_56_I(rg4_56_I), .out_57_R(rg4_57_R), .out_57_I(rg4_57_I),
     .out_58_R(rg4_58_R), .out_58_I(rg4_58_I), .out_59_R(rg4_59_R), .out_59_I(rg4_59_I),
     .out_60_R(rg4_60_R), .out_60_I(rg4_60_I), .out_61_R(rg4_61_R), .out_61_I(rg4_61_I),
-    .out_62_R(rg4_62_R), .out_62_I(rg4_62_I), .out_63_R(ker_out_63_R), .out_63_I(ker_out_63_I)
+    .out_62_R(rg4_62_R), .out_62_I(rg4_62_I), .out_63_R(rg4_63_R), .out_63_I(rg4_63_I)
 );
 
 wire [31:0] iftc_0_R, iftc_0_I, iftc_1_R, iftc_1_I, iftc_2_R, iftc_2_I, iftc_3_R, iftc_3_I,
@@ -875,7 +942,7 @@ wire [31:0] rg5_0_R, rg5_0_I, rg5_1_R, rg5_1_I, rg5_2_R, rg5_2_I, rg5_3_R, rg5_3
                 rg5_49_R, rg5_49_I, rg5_50_R, rg5_50_I, rg5_51_R, rg5_51_I, rg5_52_R, rg5_52_I, rg5_53_R, rg5_53_I, rg5_54_R, rg5_54_I, rg5_55_R, rg5_55_I, rg5_56_R, rg5_56_I,
                 rg5_57_R, rg5_57_I, rg5_58_R, rg5_58_I, rg5_59_R, rg5_59_I, rg5_60_R, rg5_60_I, rg5_61_R, rg5_61_I, rg5_62_R, rg5_62_I, rg5_63_R, rg5_63_I;
 
-Register TransposeBuffer2_rg5(
+TransposeRegister rg5(
     .clk(clk),
     .rst(rst),
     .in_0_R(iftc_0_R), .in_0_I(iftc_0_I), .in_1_R(iftc_1_R), .in_1_I(iftc_1_I),
@@ -917,7 +984,7 @@ Register TransposeBuffer2_rg5(
     .out_6_R(rg5_6_R), .out_6_I(rg5_6_I), .out_7_R(rg5_7_R), .out_7_I(rg5_7_I),
     .out_8_R(rg5_8_R), .out_8_I(rg5_8_I), .out_9_R(rg5_9_R), .out_9_I(rg5_9_I),
     .out_10_R(rg5_10_R), .out_10_I(rg5_10_I), .out_11_R(rg5_11_R), .out_11_I(rg5_11_I),
-    .out_12_R(rg5_12_R), .out_12_I(rg5_12_I), .out_13_R(rg5_13_R), .out_13_I(rg5_13_I),
+    .out_12_R(rg5_12_R), .out_12_I(rg5_12_I), .out_13_R(rg5_13_R), .out_13_I(rg5_13_I), 
     .out_14_R(rg5_14_R), .out_14_I(rg5_14_I), .out_15_R(rg5_15_R), .out_15_I(rg5_15_I),
     .out_16_R(rg5_16_R), .out_16_I(rg5_16_I), .out_17_R(rg5_17_R), .out_17_I(rg5_17_I),
     .out_18_R(rg5_18_R), .out_18_I(rg5_18_I), .out_19_R(rg5_19_R), .out_19_I(rg5_19_I),

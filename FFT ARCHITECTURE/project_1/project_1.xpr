@@ -107,10 +107,10 @@
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PSRCDIR/sources_1/imports/FFT ARCHITECTURE/Modules/SpectralRegister.v">
+      <File Path="$PSRCDIR/sources_1/imports/project_1/TransposeRegister.v">
         <FileInfo>
-          <Attr Name="ImportPath" Val="$PPRDIR/../Modules/SpectralRegister.v"/>
-          <Attr Name="ImportTime" Val="1744221575"/>
+          <Attr Name="ImportPath" Val="$PPRDIR/TransposeRegister.v"/>
+          <Attr Name="ImportTime" Val="1744270050"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
@@ -192,6 +192,15 @@
         <FileInfo>
           <Attr Name="ImportPath" Val="$PPRDIR/../Modules/ifft_2pt.v"/>
           <Attr Name="ImportTime" Val="1742413668"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/imports/project_1/ker_reg.v">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/ker_reg.v"/>
+          <Attr Name="ImportTime" Val="1744227863"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
