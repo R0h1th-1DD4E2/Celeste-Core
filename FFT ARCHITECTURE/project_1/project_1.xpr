@@ -89,9 +89,146 @@
   <FileSets Version="1" Minor="32">
     <FileSet Name="sources_1" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1" RelGenDir="$PGENDIR/sources_1">
       <Filter Type="Srcs"/>
+      <File Path="$PSRCDIR/sources_1/imports/FFT ARCHITECTURE/Modules/KernelMultiplier.v">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/../Modules/KernelMultiplier.v"/>
+          <Attr Name="ImportTime" Val="1744222708"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/imports/FFT ARCHITECTURE/Modules/Register.v">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/../Modules/Register.v"/>
+          <Attr Name="ImportTime" Val="1744215232"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/imports/FFT ARCHITECTURE/Modules/SpectralRegister.v">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/../Modules/SpectralRegister.v"/>
+          <Attr Name="ImportTime" Val="1744221575"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/imports/FFT ARCHITECTURE/Modules/cmpx_mul.v">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/../Modules/cmpx_mul.v"/>
+          <Attr Name="ImportTime" Val="1744119611"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/imports/FFT ARCHITECTURE/Modules/fft4pt.v">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/../Modules/fft4pt.v"/>
+          <Attr Name="ImportTime" Val="1742412834"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/imports/FFT ARCHITECTURE/Modules/fft8pt.v">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/../Modules/fft8pt.v"/>
+          <Attr Name="ImportTime" Val="1744224158"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/imports/FFT ARCHITECTURE/Modules/fft_2pt.v">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/../Modules/fft_2pt.v"/>
+          <Attr Name="ImportTime" Val="1742412775"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/imports/FFT ARCHITECTURE/Modules/fp_add.v">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/../Modules/fp_add.v"/>
+          <Attr Name="ImportTime" Val="1743787374"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/imports/FFT ARCHITECTURE/Modules/fp_mul.v">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/../Modules/fp_mul.v"/>
+          <Attr Name="ImportTime" Val="1743787374"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/imports/FFT ARCHITECTURE/Modules/ifft4pt.v">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/../Modules/ifft4pt.v"/>
+          <Attr Name="ImportTime" Val="1742413659"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/imports/FFT ARCHITECTURE/Modules/ifft8pt.v">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/../Modules/ifft8pt.v"/>
+          <Attr Name="ImportTime" Val="1744224512"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/imports/FFT ARCHITECTURE/Modules/ifft_2pt.v">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/../Modules/ifft_2pt.v"/>
+          <Attr Name="ImportTime" Val="1742413668"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/imports/FFT ARCHITECTURE/TOP.v">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/../TOP.v"/>
+          <Attr Name="ImportTime" Val="1744228158"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/imports/FFT ARCHITECTURE/Modules/top_IFFT.v">
+        <FileInfo>
+          <Attr Name="AutoDisabled" Val="1"/>
+          <Attr Name="ImportPath" Val="$PPRDIR/../Modules/top_IFFT.v"/>
+          <Attr Name="ImportTime" Val="1743525368"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/imports/FFT ARCHITECTURE/Modules/top_FFT.v">
+        <FileInfo>
+          <Attr Name="AutoDisabled" Val="1"/>
+          <Attr Name="ImportPath" Val="$PPRDIR/../Modules/top_FFT.v"/>
+          <Attr Name="ImportTime" Val="1743525368"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
       <Config>
         <Option Name="DesignMode" Val="RTL"/>
-        <Option Name="TopAutoSet" Val="TRUE"/>
+        <Option Name="TopModule" Val="TOP"/>
       </Config>
     </FileSet>
     <FileSet Name="constrs_1" Type="Constrs" RelSrcDir="$PSRCDIR/constrs_1" RelGenDir="$PGENDIR/constrs_1">
@@ -101,8 +238,11 @@
       </Config>
     </FileSet>
     <FileSet Name="sim_1" Type="SimulationSrcs" RelSrcDir="$PSRCDIR/sim_1" RelGenDir="$PGENDIR/sim_1">
+      <Filter Type="Srcs"/>
       <Config>
         <Option Name="DesignMode" Val="RTL"/>
+        <Option Name="TopModule" Val="top_IFFT"/>
+        <Option Name="TopLib" Val="xil_defaultlib"/>
         <Option Name="TopAutoSet" Val="TRUE"/>
         <Option Name="TransportPathDelay" Val="0"/>
         <Option Name="TransportIntDelay" Val="0"/>
@@ -142,9 +282,7 @@
   <Runs Version="1" Minor="22">
     <Run Id="synth_1" Type="Ft3:Synth" SrcSet="sources_1" Part="xc7k160tffv676-2" ConstrsSet="constrs_1" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="true" WriteIncrSynthDcp="false" State="current" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/synth_1" ParallelReportGen="true">
       <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2024">
-          <Desc>Vivado Synthesis Defaults</Desc>
-        </StratHandle>
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2024"/>
         <Step Id="synth_design"/>
       </Strategy>
       <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2024"/>
@@ -153,9 +291,7 @@
     </Run>
     <Run Id="impl_1" Type="Ft2:EntireDesign" Part="xc7k160tffv676-2" ConstrsSet="constrs_1" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" State="current" SynthRun="synth_1" IncludeInArchive="true" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/impl_1" ParallelReportGen="true">
       <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2024">
-          <Desc>Default settings for Implementation.</Desc>
-        </StratHandle>
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2024"/>
         <Step Id="init_design"/>
         <Step Id="opt_design"/>
         <Step Id="power_opt_design"/>

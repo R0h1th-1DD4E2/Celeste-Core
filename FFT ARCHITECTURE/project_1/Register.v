@@ -1,7 +1,7 @@
 `timescale 1ns / 1ps
 
 module Register(
-    input [31:0] in_1_R, in_1_I, in_2_R, in_2_I, in_3_R, in_3_I, in_4_R, in_4_I,
+    input [31:0] in_0_R,in_0_I,in_1_R, in_1_I, in_2_R, in_2_I, in_3_R, in_3_I, in_4_R, in_4_I,
     input [31:0] in_5_R, in_5_I, in_6_R, in_6_I, in_7_R, in_7_I, in_8_R, in_8_I,
     input [31:0] in_9_R, in_9_I, in_10_R, in_10_I, in_11_R, in_11_I, in_12_R, in_12_I,
     input [31:0] in_13_R, in_13_I, in_14_R, in_14_I, in_15_R, in_15_I, in_16_R, in_16_I,
@@ -13,7 +13,7 @@ module Register(
     input [31:0] in_37_R, in_37_I, in_38_R, in_38_I, in_39_R, in_39_I, in_40_R, in_40_I,
     input [31:0] in_41_R, in_41_I, in_42_R, in_42_I, in_43_R, in_43_I, in_44_R, in_44_I,
     input [31:0] in_45_R, in_45_I, in_46_R, in_46_I, in_47_R, in_47_I, in_48_R, in_48_I,
-    input [31:0] in_49_R, in_49_I, in_50_R, in_50_I, in_51_R, in_51_I, in_52_R, in_52_I,
+    input [31:0] in_49_R, in_49_I, in_50_R, in_50_I, in_51_R, in_51_I, in_52_R, in_52_I,  
     input [31:0] in_53_R, in_53_I, in_54_R, in_54_I, in_55_R, in_55_I, in_56_R, in_56_I,
     input [31:0] in_57_R, in_57_I, in_58_R, in_58_I, in_59_R, in_59_I, in_60_R, in_60_I,
     input [31:0] in_61_R, in_61_I, in_62_R, in_62_I, in_63_R, in_63_I,
