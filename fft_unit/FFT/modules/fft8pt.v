@@ -1,19 +1,19 @@
 module fft8pt  (
     
-    input signed [31:0] xr0, xi0, xr1, xi1, xr2, xi2, xr3, xi3, xr4, xi4, xr5, xi5, xr6, xi6, xr7, xi7,
-    output signed [31:0] Xr0, Xi0, Xr1, Xi1, Xr2, Xi2, Xr3, Xi3,
-    output signed [31:0] Xr4, Xi4, Xr5, Xi5, Xr6, Xi6, Xr7, Xi7
+    input  [31:0] xr0, xi0, xr1, xi1, xr2, xi2, xr3, xi3, xr4, xi4, xr5, xi5, xr6, xi6, xr7, xi7,
+    output[31:0] Xr0, Xi0, Xr1, Xi1, Xr2, Xi2, Xr3, Xi3,
+    output [31:0] Xr4, Xi4, Xr5, Xi5, Xr6, Xi6, Xr7, Xi7
     
 );
-    parameter signed [31:0] w2r0 = 32'h3f800000, w2i0 = 32'h0;
-    parameter signed [31:0] w4r0 = 32'h3f800000, w4i0 = 32'h0, w4r1 = 32'h0, w4i1 = 32'hbf800000;
-    parameter signed [31:0] w8r0 = 32'h3f800000, w8i0 = 32'h0, w8r2 = 32'h0, w8i2 = 32'hbf800000;
-    parameter signed [31:0] w8r1 = 32'h3f350481, w8i1 = 32'hbf350481;
-    parameter signed [31:0] w8r3 = 32'hbf350481, w8i3 = 32'hbf350481;
+    parameter  [31:0] w2r0 = 32'h3f800000, w2i0 = 32'h0;
+    parameter  [31:0] w4r0 = 32'h3f800000, w4i0 = 32'h0, w4r1 = 32'h0, w4i1 = 32'hbf800000;
+    parameter  [31:0] w8r0 = 32'h3f800000, w8i0 = 32'h0, w8r2 = 32'h0, w8i2 = 32'hbf800000;
+    parameter  [31:0] w8r1 = 32'h3f350481, w8i1 = 32'hbf350481;
+    parameter [31:0] w8r3 = 32'hbf350481, w8i3 = 32'hbf350481;
 
 
-    wire signed [31:0] mr0, mi0, mr1, mi1, mr2, mi2, mr3, mi3;
-    wire signed [31:0] mr4, mi4, mr5, mi5, mr6, mi6, mr7, mi7;
+    wire  [31:0] mr0, mi0, mr1, mi1, mr2, mi2, mr3, mi3;
+    wire [31:0] mr4, mi4, mr5, mi5, mr6, mi6, mr7, mi7;
 
     // First stage: Two 4-point FFTs
     fft4pt fft4_1 (  
