@@ -80,7 +80,8 @@ endmodule
 //     parameter [31:0] w8r1 = 32'h3f350481, w8i1 = 32'h3f350481;
 //     parameter [31:0] w8r3 = 32'hbf350481, w8i3 = 32'h3f350481;
 
-
+//     wire [31:0] Xr0_temp, Xi0_temp, Xr1_temp, Xi1_temp, Xr2_temp, Xi2_temp, Xr3_temp, Xi3_temp;
+//     wire [31:0] Xr4_temp, Xi4_temp, Xr5_temp, Xi5_temp, Xr6_temp, Xi6_temp, Xr7_temp, Xi7_temp;
 //     wire [31:0] mr0, mi0, mr1, mi1, mr2, mi2, mr3, mi3;
 //     wire [31:0] mr4, mi4, mr5, mi5, mr6, mi6, mr7, mi7;
 
