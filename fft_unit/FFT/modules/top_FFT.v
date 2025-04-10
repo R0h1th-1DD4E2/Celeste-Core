@@ -1,7 +1,7 @@
 module top_FFT (
-    input signed  [31:0] x0_real, x0_imag, x1_real, x1_imag, x2_real, x2_imag, x3_real, x3_imag, 
+    input   [31:0] x0_real, x0_imag, x1_real, x1_imag, x2_real, x2_imag, x3_real, x3_imag, 
                          x4_real, x4_imag, x5_real, x5_imag, x6_real, x6_imag, x7_real, x7_imag,
-    output signed [31:0] X0_real, X0_imag, X1_real, X1_imag, X2_real, X2_imag, X3_real, X3_imag, 
+    output  [31:0] X0_real, X0_imag, X1_real, X1_imag, X2_real, X2_imag, X3_real, X3_imag, 
                          X4_real, X4_imag, X5_real, X5_imag, X6_real, X6_imag, X7_real, X7_imag
 );
 
