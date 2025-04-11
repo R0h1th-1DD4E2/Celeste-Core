@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Product Version: Vivado v2024.1 (64-bit)                              -->
+<!-- Product Version: Vivado v2024.2 (64-bit)                              -->
 <!--                                                                         -->
 <!-- Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.                   -->
 <!-- Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.   -->
 
-<Project Product="Vivado" Version="7" Minor="67" Path="S:/git repos/Celeste-Core/FFT ARCHITECTURE/project_1/project_1.xpr">
+<Project Product="Vivado" Version="7" Minor="68" Path="/home/ronix/Documents/Mini Project/Celeste-Core/FFT ARCHITECTURE/project_1/project_1.xpr">
   <DefaultLaunch Dir="$PRUNDIR"/>
   <Configuration>
     <Option Name="Id" Val="dd19208c74f7475ea03368fe72bc2e7e"/>
@@ -29,12 +29,12 @@
     <Option Name="SimulatorGccInstallDirVCS" Val=""/>
     <Option Name="SimulatorGccInstallDirRiviera" Val=""/>
     <Option Name="SimulatorGccInstallDirActiveHdl" Val=""/>
-    <Option Name="SimulatorVersionXsim" Val="2024.1"/>
-    <Option Name="SimulatorVersionModelSim" Val="2023.2"/>
-    <Option Name="SimulatorVersionQuesta" Val="2023.2"/>
-    <Option Name="SimulatorVersionXcelium" Val="23.03.002"/>
-    <Option Name="SimulatorVersionVCS" Val="U-2023.03-1"/>
-    <Option Name="SimulatorVersionRiviera" Val="2023.04"/>
+    <Option Name="SimulatorVersionXsim" Val="2024.2"/>
+    <Option Name="SimulatorVersionModelSim" Val="2024.1"/>
+    <Option Name="SimulatorVersionQuesta" Val="2024.1"/>
+    <Option Name="SimulatorVersionXcelium" Val="24.03.003"/>
+    <Option Name="SimulatorVersionVCS" Val="V-2023.12-SP1"/>
+    <Option Name="SimulatorVersionRiviera" Val="2024.04"/>
     <Option Name="SimulatorVersionActiveHdl" Val="14.1"/>
     <Option Name="SimulatorGccVersionXsim" Val="9.3.0"/>
     <Option Name="SimulatorGccVersionModelSim" Val="7.4.0"/>
@@ -58,7 +58,7 @@
     <Option Name="IPUserFilesDir" Val="$PIPUSERFILESDIR"/>
     <Option Name="IPStaticSourceDir" Val="$PIPUSERFILESDIR/ipstatic"/>
     <Option Name="EnableBDX" Val="FALSE"/>
-    <Option Name="WTXSimLaunchSim" Val="0"/>
+    <Option Name="WTXSimLaunchSim" Val="13"/>
     <Option Name="WTModelSimLaunchSim" Val="0"/>
     <Option Name="WTQuestaLaunchSim" Val="0"/>
     <Option Name="WTIesLaunchSim" Val="0"/>
@@ -83,16 +83,16 @@
     <Option Name="SimTypes" Val="tlm_dpi"/>
     <Option Name="MEMEnableMemoryMapGeneration" Val="TRUE"/>
     <Option Name="DcpsUptoDate" Val="TRUE"/>
-    <Option Name="ClassicSocBoot" Val="FALSE"/>
+    <Option Name="UseInlineHdlIP" Val="TRUE"/>
     <Option Name="LocalIPRepoLeafDirName" Val="ip_repo"/>
   </Configuration>
   <FileSets Version="1" Minor="32">
     <FileSet Name="sources_1" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1" RelGenDir="$PGENDIR/sources_1">
       <Filter Type="Srcs"/>
-      <File Path="$PSRCDIR/sources_1/imports/FFT ARCHITECTURE/Modules/KernelMultiplier.v">
+      <File Path="$PSRCDIR/sources_1/imports/Modules/KernelMultiplier.v">
         <FileInfo>
           <Attr Name="ImportPath" Val="$PPRDIR/../Modules/KernelMultiplier.v"/>
-          <Attr Name="ImportTime" Val="1744222708"/>
+          <Attr Name="ImportTime" Val="1744308830"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
@@ -134,10 +134,10 @@
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PSRCDIR/sources_1/imports/FFT ARCHITECTURE/Modules/fft8pt.v">
+      <File Path="$PSRCDIR/sources_1/imports/Modules/fft8pt.v">
         <FileInfo>
           <Attr Name="ImportPath" Val="$PPRDIR/../Modules/fft8pt.v"/>
-          <Attr Name="ImportTime" Val="1744224158"/>
+          <Attr Name="ImportTime" Val="1744308830"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
@@ -161,10 +161,10 @@
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PSRCDIR/sources_1/imports/FFT ARCHITECTURE/Modules/fp_mul.v">
+      <File Path="$PSRCDIR/sources_1/imports/Modules/fp_mul.v">
         <FileInfo>
           <Attr Name="ImportPath" Val="$PPRDIR/../Modules/fp_mul.v"/>
-          <Attr Name="ImportTime" Val="1743787374"/>
+          <Attr Name="ImportTime" Val="1744306528"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
@@ -179,10 +179,10 @@
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PSRCDIR/sources_1/imports/FFT ARCHITECTURE/Modules/ifft8pt.v">
+      <File Path="$PSRCDIR/sources_1/imports/Modules/ifft8pt.v">
         <FileInfo>
           <Attr Name="ImportPath" Val="$PPRDIR/../Modules/ifft8pt.v"/>
-          <Attr Name="ImportTime" Val="1744224512"/>
+          <Attr Name="ImportTime" Val="1744310841"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
@@ -197,19 +197,19 @@
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PSRCDIR/sources_1/imports/project_1/ker_reg.v">
+      <File Path="$PSRCDIR/sources_1/imports/Modules/ker_reg.v">
         <FileInfo>
-          <Attr Name="ImportPath" Val="$PPRDIR/ker_reg.v"/>
-          <Attr Name="ImportTime" Val="1744227863"/>
+          <Attr Name="ImportPath" Val="$PPRDIR/../Modules/ker_reg.v"/>
+          <Attr Name="ImportTime" Val="1744308830"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PSRCDIR/sources_1/imports/FFT ARCHITECTURE/TOP.v">
+      <File Path="$PSRCDIR/sources_1/imports/Modules/TOP.v">
         <FileInfo>
-          <Attr Name="ImportPath" Val="$PPRDIR/../TOP.v"/>
-          <Attr Name="ImportTime" Val="1744228158"/>
+          <Attr Name="ImportPath" Val="$PPRDIR/../Modules/TOP.v"/>
+          <Attr Name="ImportTime" Val="1744308830"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
@@ -248,11 +248,31 @@
     </FileSet>
     <FileSet Name="sim_1" Type="SimulationSrcs" RelSrcDir="$PSRCDIR/sim_1" RelGenDir="$PGENDIR/sim_1">
       <Filter Type="Srcs"/>
+      <File Path="$PSRCDIR/sim_1/imports/Testbench/tb_top.sv">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/../Testbench/tb_top.sv"/>
+          <Attr Name="ImportTime" Val="1744287003"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sim_1/imports/Testbench/input_data_ieee754.txt">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/../Testbench/input_data_ieee754.txt"/>
+          <Attr Name="ImportTime" Val="1744282217"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sim_1/imports/Testbench/expected_output_ieee754.txt">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/../Testbench/expected_output_ieee754.txt"/>
+          <Attr Name="ImportTime" Val="1744282217"/>
+        </FileInfo>
+      </File>
       <Config>
         <Option Name="DesignMode" Val="RTL"/>
-        <Option Name="TopModule" Val="top_IFFT"/>
+        <Option Name="TopModule" Val="TOP_tb"/>
         <Option Name="TopLib" Val="xil_defaultlib"/>
-        <Option Name="TopAutoSet" Val="TRUE"/>
         <Option Name="TransportPathDelay" Val="0"/>
         <Option Name="TransportIntDelay" Val="0"/>
         <Option Name="SelectedSimModel" Val="rtl"/>
@@ -261,6 +281,10 @@
         <Option Name="PamSignalDriverFile" Val="xil_bypass_driver"/>
         <Option Name="PamPseudoTop" Val="pseudo_tb"/>
         <Option Name="SrcSet" Val="sources_1"/>
+        <Option Name="CosimPdi" Val=""/>
+        <Option Name="CosimPlatform" Val=""/>
+        <Option Name="CosimElf" Val=""/>
+        <Option Name="xsim.simulate.runtime" Val="10000ns"/>
       </Config>
     </FileSet>
     <FileSet Name="utils_1" Type="Utils" RelSrcDir="$PSRCDIR/utils_1" RelGenDir="$PGENDIR/utils_1">
@@ -281,11 +305,14 @@
     <Simulator Name="Questa">
       <Option Name="Description" Val="Questa Advanced Simulator"/>
     </Simulator>
+    <Simulator Name="Xcelium">
+      <Option Name="Description" Val="Xcelium Parallel Simulator"/>
+    </Simulator>
+    <Simulator Name="VCS">
+      <Option Name="Description" Val="Verilog Compiler Simulator (VCS)"/>
+    </Simulator>
     <Simulator Name="Riviera">
       <Option Name="Description" Val="Riviera-PRO Simulator"/>
-    </Simulator>
-    <Simulator Name="ActiveHDL">
-      <Option Name="Description" Val="Active-HDL Simulator"/>
     </Simulator>
   </Simulators>
   <Runs Version="1" Minor="22">

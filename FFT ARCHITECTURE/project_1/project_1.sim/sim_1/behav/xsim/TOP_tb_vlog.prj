@@ -1,0 +1,25 @@
+# compile verilog/system verilog design source files
+verilog xil_defaultlib  \
+"../../../../project_1.srcs/sources_1/imports/Modules/KernelMultiplier.v" \
+"../../../../project_1.srcs/sources_1/imports/FFT ARCHITECTURE/Modules/Register.v" \
+"../../../../project_1.srcs/sources_1/imports/Modules/TOP.v" \
+"../../../../project_1.srcs/sources_1/imports/project_1/TransposeRegister.v" \
+"../../../../project_1.srcs/sources_1/imports/FFT ARCHITECTURE/Modules/cmpx_mul.v" \
+"../../../../project_1.srcs/sources_1/imports/FFT ARCHITECTURE/Modules/fft4pt.v" \
+"../../../../project_1.srcs/sources_1/imports/Modules/fft8pt.v" \
+"../../../../project_1.srcs/sources_1/imports/FFT ARCHITECTURE/Modules/fft_2pt.v" \
+"../../../../project_1.srcs/sources_1/imports/FFT ARCHITECTURE/Modules/fp_add.v" \
+"../../../../project_1.srcs/sources_1/imports/Modules/fp_mul.v" \
+"../../../../project_1.srcs/sources_1/imports/FFT ARCHITECTURE/Modules/ifft4pt.v" \
+"../../../../project_1.srcs/sources_1/imports/Modules/ifft8pt.v" \
+"../../../../project_1.srcs/sources_1/imports/FFT ARCHITECTURE/Modules/ifft_2pt.v" \
+"../../../../project_1.srcs/sources_1/imports/Modules/ker_reg.v" \
+
+sv xil_defaultlib  \
+"../../../../project_1.srcs/sim_1/imports/Testbench/tb_top.sv" \
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort
