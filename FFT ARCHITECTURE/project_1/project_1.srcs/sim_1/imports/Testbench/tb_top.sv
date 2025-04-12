@@ -476,6 +476,8 @@ module TOP_tb;
             $finish;
         end
         
+        #1000;
+        
         // Read expected outputs
         for (i = 0; i < 64; i = i + 1) begin
             status = $fscanf(input_file, "%h %h", output_matlab_real[i], output_matlab_img[i]);
@@ -496,7 +498,7 @@ module TOP_tb;
         
         // Write hardware outputs to file
         for (i = 0; i < 64; i = i + 1) begin
-            $fdisplay(output_file, "%d %d", Op_Real[i], Op_Img[i]);
+            $fdisplay(output_file, "%h %h", Op_Real[i], Op_Img[i]);
         end
         $fclose(output_file);
         
@@ -509,7 +511,7 @@ module TOP_tb;
         end
         
         $display("Simulation complete. Check hw_output.txt for hardware results.");
-        #1000 $finish;
+        $finish;
     end
 
     // Monitor for debugging
