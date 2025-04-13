@@ -5,6 +5,23 @@ from PIL import Image
 import os
 import math
 import argparse
+import struct
+
+def ieee754_hex(value):
+    try:
+        # Convert to float in case input is int
+        float_val = float(value)
+
+        # Pack float into 4 bytes (32-bit), then unpack as unsigned int
+        packed = struct.pack('>f', float_val)
+        ieee754_32bit_int = struct.unpack('>I', packed)[0]
+
+        # Format as hex (8 digits, zero-padded)
+        ieee754_hex = f'{ieee754_32bit_int:08X}'  # Uppercase hex
+
+        return ieee754_hex
+    except Exception as e:
+        return f"Error: {e}"
 
 def process_image_to_mem(image_path, output_file, format_type='mem'):
     """
@@ -58,7 +75,8 @@ def process_image_to_mem(image_path, output_file, format_type='mem'):
                     # Linearize the chunk row by row
                     for row in chunk:
                         for pixel in row:
-                            pixel_values.append(f"{pixel:02x}")
+                            # pixel_values.append(f"{pixel:02x}")
+                            pixel_values.append(ieee754_hex(pixel))
             
             # Join all values with commas, last one with semicolon
             for i, value in enumerate(pixel_values):
@@ -89,7 +107,8 @@ def process_image_to_mem(image_path, output_file, format_type='mem'):
                     # Linearize the chunk row by row
                     for row_idx, row in enumerate(chunk):
                         for col_idx, pixel in enumerate(row):
-                            f.write(f"{pixel:02x}\n")
+                            # f.write(f"{pixel:02x}\n")
+                            f.write(f"{ieee754_hex(pixel)}\n")
 
 def main():
     parser = argparse.ArgumentParser(description='Convert an image to a memory file for Verilog')
@@ -100,8 +119,13 @@ def main():
     
     args = parser.parse_args()
     
-    process_image_to_mem(args.image_path, args.output, args.format)
-    print(f"Processed {args.image_path} and saved to {args.output}")
+    if args.format == 'mem':
+        output_file = args.output
+    else:
+        output_file = args.output.replace('.mem', '.coe')
+
+    process_image_to_mem(args.image_path, output_file, args.format)
+    print(f"Processed {args.image_path} and saved to {output_file}")
 
 if __name__ == "__main__":
     main()

@@ -4,6 +4,25 @@ import numpy as np
 from PIL import Image
 import re
 import argparse
+import struct
+
+def ieee754_32bit_int(hex_value):
+    try:
+        # Ensure the hex string is 8 characters (32 bits)
+        hex_value = hex_value.strip().replace("0x", "").zfill(8)
+
+        # Convert hex to 4-byte binary data
+        binary_data = bytes.fromhex(hex_value)
+
+        # Unpack the bytes as a 32-bit float
+        float_val = struct.unpack('>f', binary_data)[0]
+
+        # Return float and int if it's a whole number
+
+        return int(float_val)
+
+    except Exception as e:
+        return f"Error: {e}"
 
 def mem_to_image(input_file, output_file, width=None, height=None):
     """
@@ -65,13 +84,15 @@ def mem_to_image(input_file, output_file, width=None, height=None):
         
         # Split by commas and convert to integers
             hex_values = [x.strip() for x in cleaned_data.split(',')]
-            pixel_values = [int(x, 16) for x in hex_values if x.strip()]
+            pixel_values = [ieee754_32bit_int(x) for x in hex_values if x.strip()]
     else:
         # For MEM format
-        # Extract all hex values (ignoring comments)
-        hex_pattern = re.compile(r'^([0-9a-fA-F]{1,2})$', re.MULTILINE)
-        hex_matches = hex_pattern.findall(content)
-        pixel_values = [int(x, 16) for x in hex_matches]
+        # Regular expression to match 8-character hex values, ignoring comments
+        hex_pattern = re.compile(r'^(?!//)([0-9a-fA-F]{8})$', re.MULTILINE)
+        
+        # Find all hex values in the file
+        hex_values = hex_pattern.findall(content)
+        pixel_values = [ieee754_32bit_int(x) for x in hex_values]
     
     # If dimensions still not determined, try to make a square image
     if width is None or height is None:
