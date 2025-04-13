@@ -28,7 +28,7 @@ module tb;
     string output_line;
     
     integer pipeline_latency = 6;  // Initial latency before first output appears
-    integer total_chunks = chunk_in_x*chunk_in_x;
+    integer total_chunks;
     // Module instant
     // Clock and reset
     reg clk;
@@ -127,7 +127,7 @@ module tb;
     TOP dut (
         .clk(clk),
         .rst(rst),
-        .ker_sel(3'b101),
+        .ker_sel(3'b100),
         .Ip_0_Real(Ip_0_Real), .Ip_0_Img(Ip_0_Img), .Ip_1_Real(Ip_1_Real), .Ip_1_Img(Ip_1_Img),
         .Ip_2_Real(Ip_2_Real), .Ip_2_Img(Ip_2_Img), .Ip_3_Real(Ip_3_Real), .Ip_3_Img(Ip_3_Img),
         .Ip_4_Real(Ip_4_Real), .Ip_4_Img(Ip_4_Img), .Ip_5_Real(Ip_5_Real), .Ip_5_Img(Ip_5_Img),
@@ -598,6 +598,7 @@ module tb;
                     end
                     else if ($sscanf(line, "// Chunks: %0dx%0d", chunk_in_x, chunk_in_y) == 2) begin
 //                        $display("Found Chunk count \n Height: %d, Width: %d", chunk_in_x, chunk_in_y);
+                          total_chunks = chunk_in_x*chunk_in_x;
                     end
                     
                     else if ($sscanf(line, "// Total pixels: %0d", pixel_count) == 1) begin

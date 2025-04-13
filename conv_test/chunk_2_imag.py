@@ -106,7 +106,7 @@ def mem_to_image(input_file, output_file, width=None, height=None):
         raise ValueError("Invalid image dimensions. Please specify width and height manually.")
     
     # Create image array
-    img_array = np.zeros((height, width), dtype=np.uint8)
+    img_array = np.zeros((height, width), dtype=np.int32)
     
     # Determine chunk arrangement
     chunks_x = (width + 7) // 8
