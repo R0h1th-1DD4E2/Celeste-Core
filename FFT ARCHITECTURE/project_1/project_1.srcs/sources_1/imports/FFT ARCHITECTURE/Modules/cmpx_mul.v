@@ -97,12 +97,12 @@ cmpx_mul_2 d13(x13_real,y13_real,x13_imag,y13_imag,X13_real,X13_imag);
 cmpx_mul_2 d14(x14_real,y14_real,x14_imag,y14_imag,X14_real,X14_imag);
 cmpx_mul_2 d15(x15_real,y15_real,x15_imag,y15_imag,X15_real,X15_imag);
 
-always@(*)begin
-$display("x0_imag %h",x0_imag);
-$display("x0_real %h",x0_real);
-$display("y1_real %h",y1_real);
-$display("y1_imag %h",y1_imag);
-end
+//always@(*)begin
+//$display("x0_imag %h",x0_imag);
+//$display("x0_real %h",x0_real);
+//$display("y1_real %h",y1_real);
+//$display("y1_imag %h",y1_imag);
+//end
 endmodule
 
 //multiplication module 
