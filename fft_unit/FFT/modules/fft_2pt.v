@@ -2,7 +2,7 @@ module fft_2pt (
 
     input  [31:0] x0_real, x0_imag, x1_real, x1_imag,
     input  [31:0] twiddle_real, twiddle_imag,  // Twiddle factors
-    output   [31:0] X0_real, X0_imag, X1_real, X1_imag,rr1, ii1, ri1, ir1, RR1,RI1,IR1,II1,t1, t2,t3,t4
+    output   [31:0] X0_real, X0_imag, X1_real, X1_imag//,rr1, ii1, ri1, ir1, RR1,RI1,IR1,II1,t1, t2,t3,t4
     
 );
 
