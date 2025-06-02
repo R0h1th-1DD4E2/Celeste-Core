@@ -1,131 +1,129 @@
-
----
-
 # **Celeste-Core** 🚀  
 
-**Celeste-Core** is a specialized hardware block designed to handle **2D convolution operations** with lightning-fast performance using the **Fast Fourier Transform (FFT)** algorithm. This project leverages the **PicoRV32 RISC-V Core**, optimized with **multiplication** and **division extensions**, and focuses on efficient computation for kernel sizes of **8x8**.
+**Celeste-Core** is a specialized **2D convolution hardware block** designed to deliver lightning-fast performance using the **Fast Fourier Transform (FFT)** algorithm. This project provides a standalone, modular convolution accelerator that can be easily integrated into various digital signal processing systems, offering maximum flexibility for building custom processing pipelines.
 
 ---
 
 ## **🚩 Key Features**
-- ⚡ **Optimized Convolution**: Implements FFT-based convolution with a time complexity of **O(NlogN)**, outperforming traditional O(N²) methods.
-- 🧠 **Pipelined Architecture**: Ensures parallel execution of FFT stages, minimizing bottlenecks and latency.
-- 🏋️ **Reduced Multiplications**: Optimized complex multiplications, cutting hardware requirements.
-- 💻 **Built for Versatility**: Targets image processing, signal processing, and machine learning applications.
+- ⚡ **Optimized 2D Convolution**: Implements FFT-based convolution with **O(NlogN)** time complexity, significantly outperforming traditional O(N²) spatial domain methods
+- 🧠 **Fully Pipelined Architecture**: 7-stage processing pipeline ensuring efficient data flow and minimal latency
+- 🔧 **Modular Design**: Standalone convolution block provides flexibility to build custom processing systems around it
+- 🎯 **8x8 Kernel Optimization**: Specifically optimized for 8x8 convolution kernels with dedicated FFT units
+- 💾 **IEEE 754 Compatibility**: Built-in support for IEEE 754 floating-point kernel coefficients
+- 🔄 **Real-time Processing**: Efficient buffering and register management for continuous data processing
+- 💻 **Application Ready**: Perfect for image processing, signal processing, and machine learning acceleration
 
 ---
 
 ## **💡 Introduction**
-Convolution is the heart of signal and image processing, enabling operations such as:
-- **Image Processing**: Blurring, sharpening, edge detection, and feature extraction.
-- **Signal Processing**: Filtering, noise reduction, and system analysis. [*Still needs to work on*]
-- **Deep Learning**: Powering convolutional neural networks (CNNs) for tasks like image classification, object detection, and segmentation. [*would require a software layer*]
+Convolution operations are fundamental to modern digital signal processing, enabling critical functions such as:
+- **Image Processing**: Blurring, sharpening, edge detection, and feature extraction
+- **Signal Processing**: Filtering, noise reduction, and system analysis
+- **Deep Learning**: Powering convolutional neural networks (CNNs) for image classification, object detection, and segmentation
 
-However, convolution is a computationally expensive operation, especially for higher resolutions and larger datasets. **Celeste-Core** addresses this challenge by integrating an optimized FFT-based approach, reducing computation cycles and resource consumption.
+Traditional convolution implementations suffer from high computational complexity, especially for larger datasets and higher resolutions. **Celeste-Core** solves this challenge by providing a dedicated hardware block that leverages FFT-based convolution, dramatically reducing computation cycles while maintaining precision.
 
 ---
 
 ## **🎯 Project Objective**
-The goal of **Celeste-Core** is to design a **hardware accelerator** for convolution operations that:
-- 🚀 Achieves **faster performance** without disrupting normal ALU operation.
-- 🌍 Optimizes **power efficiency** while maintaining high computational throughput.
-- 🔄 Implements FFT with **pipelining** for superior resource utilization.
+The goal of **Celeste-Core** is to provide a **standalone convolution hardware block** that:
+- 🚀 Delivers **high-performance convolution** with minimal resource overhead
+- 🔧 Offers **maximum flexibility** for integration into custom processing systems
+- 🌍 Optimizes **power efficiency** while maintaining high computational throughput
+- 🔄 Implements a **fully pipelined FFT architecture** for superior resource utilization
+- 📐 Provides **modular design** allowing easy customization and extension
 
 ---
 
 ## **🧪 Algorithm Overview**
-### **Convolution Theorem:**
-Traditional convolution involves direct computation in the spatial domain. The **FFT algorithm** transforms the spatial domain into the frequency domain, leveraging the **Convolution Theorem** to replace convolution with element-wise multiplication. The pipeline:
-1. **Forward FFT**: Transform the input data and kernel to the frequency domain.
-2. **Pointwise Multiplication**: Multiply the transformed inputs in the frequency domain.
-3. **Inverse FFT**: Convert the result back to the spatial domain.
+### **FFT-Based Convolution Pipeline:**
+**Celeste-Core** implements a sophisticated 7-stage processing pipeline that transforms spatial domain convolution into efficient frequency domain operations:
 
-### **Advantages of FFT-Based Convolution:**
-- 🚀 Reduced complexity: **O(NlogN)** compared to O(N²).
-- 📉 Lower memory consumption using **Decimation in Time (DIT)** methodology.
-- 🔧 Resource-efficient: Shared FFT and IFFT resources with optimized multiplication.
+1. **Input Buffering** - Captures incoming 32-bit complex data
+2. **Row-wise FFT Processing** - 8 parallel FFT units process matrix rows
+3. **Column-wise FFT Processing** - Completes 2D FFT transformation with transposition
+4. **Kernel Multiplication** - Applies Gaussian kernel filtering in frequency domain
+5. **Column-wise Inverse FFT** - Begins transformation back to spatial domain
+6. **Row-wise IFFT** - Completes inverse transformation with transposition
+7. **Output Buffering** - Delivers final convolution results
 
----
-
-## **🏗️ Hardware Design**
-### **Core Highlights:**
-- Implements **PicoRV32 RISC-V Core** with custom extensions.
-- Fully pipelined architecture for FFT operations.
-
-### **Architecture at a Glance:**
-1. **Input Stage**: Accepts rows of the input matrix.
-2. **FFT Processing**:
-   - **Row-wise FFT** for the input matrix.
-   - Intermediate storage in buffer.
-   - **Column-wise FFT** on the transposed matrix.
-3. **Inverse FFT**: Final convolution result back in the spatial domain.
+### **Technical Advantages:**
+- 🚀 **Reduced Complexity**: O(NlogN) vs O(N²) traditional convolution
+- 📉 **Memory Efficient**: Optimized buffer management with register-based storage
+- 🔧 **Resource Optimized**: Shared FFT/IFFT resources with intelligent pipelining
+- ⚡ **High Throughput**: Parallel processing units maximize data flow
 
 ---
 
-## **⚙️ System Requirements**
-- **FPGA/ASIC**: Suitable for hardware implementations on resource-constrained platforms. [*work in progress*]
-- **PicoRV32 RISC-V Core**: Utilized for control logic and interfacing.
+## **🏗️ Hardware Architecture**
+### **Core Components:**
+- **8 Parallel FFT Units**: Dedicated 8-point FFT processors for row/column operations
+- **8 Parallel IFFT Units**: Inverse FFT processors for spatial domain reconstruction  
+- **5 Register Banks**: Specialized buffers (rg1-rg5) for different pipeline stages
+- **Kernel Multiplier**: IEEE 754 compatible Gaussian kernel processor
+- **Transpose Logic**: Efficient matrix reorientation between processing stages
 
----
+### **Signal Interface:**
+- **32-bit Complex I/O**: Separate real and imaginary components (Ip_0_R/I to Ip_63_R/I)
+- **Kernel Inputs**: Configurable kernel coefficients (ker_in_0_R/I to ker_in_63_R/I)
+- **Control Signals**: Standard clock and reset for system integration
+- **Output Ports**: Processed results (Op_0_R/I to Op_63_R/I)
 
-## **📊 Performance**
-- **Kernel Size**: Optimized for **8x8 kernels**.
-- **Time Complexity**: FFT convolution achieves **O(NlogN)**.
-- **Resource Efficiency**: Reduced real multiplications from 4 to 3 per complex operation.
-
----
-
-## **🚀 Get Started**
-### **Clone the Repository**
-
-```bash
-git clone https://github.com/R0h1th-1DD4E2/Celeste-Core.git
+### **Processing Flow:**
 ```
-
-### **Run Simulations**
-- Use **Vivado**, **ModelSim**, or other Verilog-compatible simulators.
-- Testbench provided in the repository.
-
----
-
-## **📂 Repository Structure**
-
-```python
-Celeste-Core/
-├── fft_unit/                # Verilog source files
-├── docs/                    # Documentation and design 
-├── results/                 # Performance metrics and analysis [will be soon updated]
-├── conv_test/               # Program file to simulate
-├── dhrystone/               # Pico testbench
-├── picosoc/                 # Implementation of PICO SoC
-└── README.md                # Project README
+Input → Buffer → Row FFT → Column FFT → 
+Kernel Filter → IFFT Column → IFFT Row → Output Buffer → Result
 ```
 
 ---
 
-## **🛠️ Contributing**
-Contributions are welcome! Feel free to fork this repository, create new features, fix bugs, or improve documentation.
-
-1. Fork the repository.
-2. Create your branch: `git checkout -b feature/awesome-feature`.
-3. Commit your changes: `git commit -m 'Add awesome feature'`.
-4. Push to the branch: `git push origin feature/awesome-feature`.
-5. Open a pull request!
-
----
-
-## **🌟 Future Enhancements**
-- Support for **dynamic kernel sizes**.
-- Integration with **machine learning accelerators**.
-- Implementation on **ASIC** for production-level applications.
+## **⚙️ Technical Specifications**
+- **Data Width**: 32-bit IEEE 754 floating-point
+- **Matrix Size**: 8x8 optimized processing
+- **Kernel Support**: Gaussian kernel with configurable coefficients
+- **Pipeline Depth**: 7 stages for maximum throughput
+- **Clock Domain**: Single clock domain design
+- **Reset**: Synchronous active-high reset
+- **Interface**: Standard Verilog module with clear naming conventions
 
 ---
 
-## **📄 License**
-This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for details.
+## **📊 Performance Metrics**
+- **Algorithm Complexity**: O(NlogN) FFT-based convolution
+- **Kernel Size**: Optimized for 8x8 kernels
+- **Processing Units**: 16 dedicated FFT/IFFT cores
+- **Memory Architecture**: Register-based buffering for minimal latency
+- **Continuous Processing**: Pipelined architecture with 7-stage data flow
 
 ---
 
-**✨ Let's redefine convolution operations, one FFT at a time!**
+## **🔧 Integration & Customization**
+### **Integration Example**
+```verilog
+// Instantiate Celeste-Core convolution block
+celeste_conv_2d TOP (
+    .clk(system_clock),
+    .rst(system_reset),
+    .Ip_0_R(input_real[0]), .Ip_0_I(input_imag[0]),
+    // ... (connect all 64 input pairs)
+    .ker_in_0_R(kernel_real[0]), .ker_in_0_I(kernel_imag[0]),
+    // ... (connect kernel coefficients)
+    .Op_0_R(output_real[0]), .Op_0_I(output_imag[0])
+    // ... (connect all 64 output pairs)
+);
+```
 
---- 
+### **Easy Integration**
+The modular design of Celeste-Core makes it simple to integrate into existing systems:
+- **Standalone Operation**: No external dependencies or complex interfaces
+- **Standard Verilog**: Compatible with any FPGA or ASIC design flow
+- **Configurable Kernels**: Easy kernel coefficient modification via parameter assignment
+- **Scalable Design**: Architecture supports extension to larger matrix sizes
+
+### **Customization Options**
+- **Kernel Modification**: Update IEEE 754 coefficients for different filter types
+- **Interface Adaptation**: Modify I/O width or add control signals as needed  
+- **Pipeline Optimization**: Adjust buffer sizes for specific timing requirements
+- **Resource Scaling**: Modify parallel unit count based on resource constraints
+
+**✨ Revolutionizing convolution processing, one FFT pipeline at a time!**
