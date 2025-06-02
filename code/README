@@ -1,6 +1,0 @@
-### The verilog testbench to run it.
-
-To convert any image to to hex file run the following 
-```
-./convert.py image_to_file <image name.jpg> <output.txt>
-```
