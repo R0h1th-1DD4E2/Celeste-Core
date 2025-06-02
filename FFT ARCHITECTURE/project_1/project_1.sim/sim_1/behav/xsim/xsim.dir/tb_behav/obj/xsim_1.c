@@ -1342,7 +1342,7 @@ void wrapper_func_0(char *dp)
 
 void simulate(char *dp)
 {
-iki_register_root_pointers(6, 12942824, -5,0,12942456, -5,0,12942640, -5,0,12947848, -5,0,17274224, 15,0,12943008, -5,0) ; 
+iki_register_root_pointers(7, 12942824, -5,0,12942456, -5,0,12942640, -5,0,12943008, -5,0,12947848, -5,0,12997248, 12,0,12997432, 17,0) ; 
 		iki_schedule_processes_at_time_zero(dp, "xsim.dir/tb_behav/xsim.reloc");
 	wrapper_func_0(dp);
 

@@ -88,11 +88,25 @@ def mem_to_image(input_file, output_file, width=None, height=None):
     else:
         # For MEM format
         # Regular expression to match 8-character hex values, ignoring comments
-        hex_pattern = re.compile(r'^(?!//)([0-9a-fA-F]{8})$', re.MULTILINE)
+        #hex_pattern = re.compile(r'^(?!//)([0-9a-fA-F]{8})$', re.MULTILINE)
         
         # Find all hex values in the file
-        hex_values = hex_pattern.findall(content)
-        pixel_values = [ieee754_32bit_int(x) for x in hex_values]
+        #hex_values = hex_pattern.findall(content)
+        #pixel_values = [ieee754_32bit_int(x) for x in hex_values]
+        lines = [line.strip() for line in content.split('\n') if line.strip() and not line.strip().startswith('//')]
+        
+        pixel_values = []
+        for line in lines:
+            line = line.strip()
+            if re.match(r'^[0-9a-fA-F]{8}$', line):
+                # 8-character hex value (32-bit IEEE 754 float)
+                pixel_values.append(ieee754_32bit_int(line))
+            elif re.match(r'^[0-9a-fA-F]{1,2}$', line):
+                # 1-2 character hex value
+                pixel_values.append(int(line, 16))
+            elif line.isdigit():
+                # Simple decimal number
+                pixel_values.append(int(line))
     
     # If dimensions still not determined, try to make a square image
     if width is None or height is None:
@@ -106,7 +120,7 @@ def mem_to_image(input_file, output_file, width=None, height=None):
         raise ValueError("Invalid image dimensions. Please specify width and height manually.")
     
     # Create image array
-    img_array = np.zeros((height, width), dtype=np.int32)
+    img_array = np.zeros((height, width), dtype=np.uint8)
     
     # Determine chunk arrangement
     chunks_x = (width + 7) // 8
@@ -130,7 +144,9 @@ def mem_to_image(input_file, output_file, width=None, height=None):
                     
                     # Get pixel value if available
                     if pixel_index < len(pixel_values):
-                        img_array[img_y, img_x] = pixel_values[pixel_index]
+                        # img_array[img_y, img_x] = pixel_values[pixel_index]
+                        clamped_value = max(0, min(255, pixel_values[pixel_index]))
+                        img_array[img_y, img_x] = clamped_value
                         pixel_index += 1
     
     # Create and save the image
