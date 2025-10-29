@@ -1,0 +1,238 @@
+1.Algorithms
+@book{1,
+  author    = {Rao, K. R.},
+  title     = {Fast Fourier Transform -- Algorithms and Applications},
+  publisher = {IntechOpen},
+  year      = {2012},
+  doi       = {10.5772/51942},
+  url       = {https://doi.org/10.5772/51942}
+}
+
+2.Image Convolution 
+@inproceedings{casabella2018dynamic,
+  author    = {M. Casabella and S. Sulca and I. Vignolles and A. L. Pola},
+  title     = {Dynamic Reuse of Memory in 2D Convolution Applied to Image Processing},
+  booktitle = {Proceedings of CASE 2018},
+  year      = {2018},
+  pages     = {145--150},
+  isbn      = {978-987-46297-5-3},
+  note      = {Available at https://github.com/ivanvig/2dconv-FPGA}
+}
+
+3.CNN
+@article{lavin1509fast,
+  author    = {A. Lavin and S. Gray},
+  title     = {Fast Algorithms for Convolutional Neural Networks},
+  journal   = {arXiv preprint arXiv:1509.09308v2},
+  year      = {2015},
+  url       = {https://arxiv.org/abs/1509.09308v2}
+}
+
+4.2D -Convolution on x89 processors 
+@article{kelefouras2022convolution,
+  author    = {V. Kelefouras and G. Keramidas},
+  title     = {Design and Implementation of 2D Convolution on x86/x64 Processors},
+  journal   = {IEEE Transactions on Parallel and Distributed Systems},
+  volume    = {33},
+  number    = {12},
+  pages     = {3800--3814},
+  year      = {2022},
+  doi       = {10.1109/TPDS.2022.3187433}
+}
+
+5.Algorithmic Thesis
+@techreport{ghidirimschi2021convolution,
+  author      = {N. Ghidirimschi},
+  title       = {Convolution Algorithms for Integer data types},
+  institution = {Faculty of Science and Engineering, University of Groningen},
+  type        = {Bachelor’s Thesis},
+  year        = {2021},
+  month       = {July},
+  note        = {Supervisors: Dr. Arnold Meijster, Dr. Sietse van Netten},
+  url         = {https://fse.studenttheses.ub.rug.nl/25184/}
+}
+
+6.32pt RADIx2-FFT
+
+@mastersthesis{gao2015hardware32ptfft,
+  author       = {Y. Gao},
+  title        = {Hardware Implementation of a 32-point Radix-2 FFT Architecture},
+  school       = {Department of Electrical and Information Technology, Lund University},
+  type         = {Master’s Thesis},
+  year         = {2015},
+  month        = {June},
+  note         = {Supervisors: R. Gangarajaiah, E. Hertz, P. Nilsson}
+}
+
+7.FPGA of 8pt 
+@online{roy2019fpga8ptfft,
+  author       = {S. Roy},
+  title        = {FPGA Implementation of 8-Point FFT},
+  year         = {2019},
+  month        = {May},
+  day          = {14},
+  howpublished = {Online tutorial, Digital System Design},
+  url          = {https://digitalsystemdesign.in/fpga-implementation-of-8-point-fft/},
+  note         = {Accessed: [insert date you accessed]}
+}
+
+8.FFT accelerator using RISC-V
+@INPROCEEDINGS{10265722,
+  author={Jiang, Shijie and Zou, Yi and Wang, Hao and Li, Wanwan},
+  booktitle={2023 IEEE 34th International Conference on Application-specific Systems, Architectures and Processors (ASAP)}, 
+  title={An FFT Accelerator Using Deeply-coupled RISC-V Instruction Set Extension for Arbitrary Number of Points}, 
+  year={2023},
+  volume={},
+  number={},
+  pages={165-171},
+  keywords={Power demand;Costs;Reduced instruction set computing;Microprocessors;Systems architecture;Signal processing algorithms;Digital signal processing;ISA Extension;FFT Accelerator;ASIP;RISC-V},
+  doi={10.1109/ASAP57973.2023.00036}}
+
+9.Flaoting Point Adder 
+@article{gollamudi2013ieee754adder,
+  author    = {P. S. Gollamudi and M. Kamaraju},
+  title     = {Design of High Performance IEEE-754 Single Precision (32-bit) Floating Point Adder Using VHDL},
+  journal   = {International Journal of Engineering Research \& Technology (IJERT)},
+  volume    = {2},
+  number    = {7},
+  pages     = {1--6},
+  year      = {2013},
+  month     = {Jul.},
+  institution = {Dept. of Electronics \& Communications Engineering, Gudlavalleru Engineering College, Andhra Pradesh, India},
+  url       = {https://www.ijert.org/design-of-high-performance-ieee-754-single-precision-32-bit-floating-point-adder-using-vhdl}
+}
+
+
+10.FLoating point on FPGA
+
+M. Shirke, S. Chandrababu and Y. Abhyankar, "Implementation of IEEE 754 compliant single precision floating-point adder unit supporting denormal inputs on Xilinx FPGA," 2017 IEEE International Conference on Power, Control, Signals and Instrumentation Engineering (ICPCSI), Chennai, India, 2017, pp. 408-412, doi: 10.1109/ICPCSI.2017.8392326. keywords: {Adders;Standards;Signal processing algorithms;Detectors;Resource management;Prediction algorithms;Conferences;FPGA;IEEE 754;Floating-Point;single precision;Reconfigurable Computing},
+
+
+11.Flaoting point adder 32 bit 
+
+@article{dhobale2015ieee754adder,
+  author    = {Rupali Dhobale and Soni Chaturvedi},
+  title     = {Implementation of 32-Bit Binary Floating Point Adder Using IEEE 754 Single Precision Format},
+  journal   = {IOSR Journal of VLSI and Signal Processing (IOSR-JVSP)},
+  volume    = {5},
+  number    = {1},
+  pages     = {50--53},
+  year      = {2015},
+  month     = {Jan.–Feb.},
+  doi       = {10.9790/4200-05115053},
+  issn      = {2319–4200},
+  url       = {https://www.iosrjournals.org/papers/vol5-issue1/Version-1/I05115053.pdf}
+}
+
+
+
+12. FLaoting Point Multiplier 
+@article{marode2022ieee754multiplier,
+  author    = {Marode, Shubham Hemant and Raghuwanshi, Neetesh},
+  title     = {VLSI Design and Analysis of IEEE 754 Floating Point Multiplier},
+  journal   = {International Journal of Engineering Research and Technology (IJERT)},
+  volume    = {10},
+  number    = {2},
+  year      = {2022},
+  issn      = {2348-4098},
+  note      = {ISSN (Print): 2395-4752. Licensed under CC BY 4.0},
+  url       = {http://creativecommons.org/licenses/by/4.0}
+}
+
+13.Multipleir 
+M. Al-Ashrafy, A. Salem and W. Anis, "An efficient implementation of floating point multiplier," 2011 Saudi International Electronics, Communications and Photonics Conference (SIECPC), Riyadh, Saudi Arabia, 2011, pp. 1-5, doi: 10.1109/SIECPC.2011.5876905. keywords: {Adders;Field programmable gate arrays;Pipeline processing;Logic gates;Arrays;Graphics;Clocks;floating point;multiplication;FPGA;CAD design flow},
+
+14.
+HARDWARE ACCELEARTION ON pynq-Z2
+@techreport{mandi2022hardwarepynq,
+  author    = {Ákos Mándi and Jeney Máté and Stefan Oniga},
+  title     = {Hardware Accelerated Image Processing on FPGA-Based PYNQ-Z2 Board},
+  institution = {Intelligent Embedded System Research Laboratory, University of Debrecen},
+  address   = {Debrecen, Hungary},
+  year      = {2022}
+}
+
+https://ieec.utcluj.ro/cjece/vol/14-2021/04-cjece-2021-0001.pdf
+
+15.PYNQ_based FFT accelerator 
+
+K. Agrawal and A. Asati, "Improved Implementation of PYNQ-Based FFT Hardware Accelerator," 2024 2nd International Conference on Device Intelligence, Computing and Communication Technologies (DICCT), Dehradun, India, 2024, pp. 414-418, doi: 10.1109/DICCT61038.2024.10532842. keywords: {Power demand;Fast Fourier transforms;Buildings;Transforms;Switches;Software;Hardware acceleration;Zynq;PYNQ;Python;FPGA;FFT},
+
+
+
+16. SImialr tetsign method sued in AUIDO based shit
+@techreport{stornaiuolo2022audiofpga,
+  author      = {Luca Stornaiuolo and Massimo Perini and Marco D. Santambrogio and Donatella Sciuto},
+  title       = {FPGA-Based Embedded System Implementation of Audio Signal Alignment},
+  institution = {Politecnico di Milano, Dipartimento di Elettronica, Informazione e Bioingegneria (DEIB)},
+  address     = {Milan, Italy},
+  year        = {2022},
+  url         = {mailto:luca.stornaiuolo@polimi.it}
+}
+
+17.FFT on an ARTY board
+@online{taylor2022microzedfft,
+  author       = {Adam Taylor},
+  title        = {MicroZed Chronicles: Signal Processing, FFT, and PYNQ},
+  year         = {2022},
+  month        = {June},
+  day          = {15},
+  howpublished = {Blog post, Adiuvo Engineering \& Training Ltd.},
+  url          = {https://www.adiuvoengineering.com/post/microzed-chronicles-signal-processing-fft-and-pynq},
+  note         = {Accessed: [Insert date you accessed]}
+}
+
+18.High Resolution FFT
+N. Mahdavi, R. Teymourzadeh and M. B. Othman, "VLSI Implementation of High Speed and High Resolution FFT Algorithm Based on Radix 2 for DSP Application," 2007 5th Student Conference on Research and Development, Selangor, Malaysia, 2007, pp. 1-4, doi: 10.1109/SCORED.2007.4451381. keywords: {Very large scale integration;Digital signal processing;Signal processing algorithms;Pipeline processing;Delay;Signal resolution;Fast Fourier transforms;Signal design;Algorithm design and analysis;Mathematics;Radix;FFT;Butterfly;VLSI;Floating point},
+
+
+19.Design and power measurement of different points FFT using Rad
+
+M. Patrikar and V. Tehre, "Design and power measurement of different points FFT using Radix-2 algorithm for FPGA implementation," 2017 International conference of Electronics, Communication and Aerospace Technology (ICECA), Coimbatore, India, 2017, pp. 190-195, doi: 10.1109/ICECA.2017.8203669. keywords: {Algorithm design and analysis;Discrete Fourier transforms;Signal processing algorithms;Field programmable gate arrays;Fast Fourier transforms;Aerospace electronics;Aerodynamics;Fast Fourier transform (FFT);Discrete Fourier transform (DFT);DIT;Radix-2;VHDL;FPGA},
+
+20.An efficient design of high-accuracy and low-cost FFT
+
+Ma Cuimei, H. Chen and Ma Long, "An efficient design of high-accuracy and low-cost FFT," IET International Radar Conference 2013, Xi'an, 2013, pp. 1-4, doi: 10.1049/cp.2013.0290. keywords: {FFT;twiddle factor;radix-4 FFT;fixed-point number format},
+
+21.FFT and sparse FFT techniques and applications
+B. N. Mohapatra and R. K. Mohapatra, "FFT and sparse FFT techniques and applications," 2017 Fourteenth International Conference on Wireless and Optical Communications Networks (WOCN), Mumbai, India, 2017, pp. 1-5, doi: 10.1109/WOCN.2017.8065859. keywords: {Discrete Fourier transforms;Signal processing algorithms;Image reconstruction;Fast Fourier transforms;Frequency-domain analysis;Signal Processing;DFT;FFT;Radix FFT;Sparse FFT},
+
+22.FFt on psartan 
+L. Santhosh and A. Thomas, "Implementation of radix 2 and radix 22 FFT algorithms on Spartan6 FPGA," 2013 Fourth International Conference on Computing, Communications and Networking Technologies (ICCCNT), Tiruchengode, India, 2013, pp. 1-4, doi: 10.1109/ICCCNT.2013.6726840. keywords: {Signal processing algorithms;Field programmable gate arrays;Adders;Flow graphs;Hardware design languages;Hardware;Equations;radix-2 FFT algorithm;radix-22 FFT algorithm;Verilog;Spartan6;FPGA},
+
+23.Radix 2^N algo
+L. Pang, Y. Huang, C. Wang, C. Yang, Y. Xie and H. Chen, "Design and Implementation of High Performance FFT Processor with Radix-2kAlgorithm," 2019 IEEE International Conference on Signal, Information and Data Processing (ICSIDP), Chongqing, China, 2019, pp. 1-4, doi: 10.1109/ICSIDP47821.2019.9173055. keywords: {Fast Fourier transforms;Optimization methods;Data processing;Hardware;Delays;Logic;Resource management;radix-2k;fixed-point;word length configuration;fast Fourier transform;single-path delay feedback},
+
+24.Design and Verification of High-Speed Radix-2 Butterfly FFT Module
+
+U. Kumar Malviya, "Design and Verification of High-Speed Radix-2 Butterfly FFT Module for DSP Applications," 2020 4th International Conference on Trends in Electronics and Informatics (ICOEI)(48184), Tirunelveli, India, 2020, pp. 37-42, doi: 10.1109/ICOEI48184.2020.9143051. keywords: {Adders;Random access memory;Pipeline processing;Conferences;Market research;Informatics;Digital signal processing;semi-pipelined Fast Fourier transform (SPFFT);decimation in frequency (DIF);DSP (Digital Signal Processors)},
+
+
+25.Performance Comparison of Radix-2 FFT Butterfly Unit with 
+K. Haridas, S. K. N and A. Chalil, "Performance Comparison of Radix-2 FFT Butterfly Unit with Baugh Wooley and Modified Baugh Wooley," 2021 Second International Conference on Electronics and Sustainable Communication Systems (ICESC), Coimbatore, India, 2021, pp. 240-245, doi: 10.1109/ICESC51422.2021.9532681. keywords: {Wireless communication;Technological innovation;Fast Fourier transforms;Signal processing algorithms;Signal processing;Parallel processing;Delays;BrentKung;CLA;Multiplier;FFT;ButterflyUnit;PPA},
+
+
+26.Parallel radix 4 FFT algorithms on an eight-neighbor processor array
+K. Tanno, T. Takeda and S. Horiguchi, "Parallel radix 4 FFT algorithms on an eight-neighbor processor array," TENCON'92 - Technology Enabling Tomorrow, Melbourne, VIC, Australia, 1992, pp. 855-859 vol.2, doi: 10.1109/TENCON.1992.271849. keywords: {Signal processing algorithms;Concurrent computing;Hardware;Parallel algorithms;FETs;Discrete Fourier transforms;Information science;Fast Fourier transforms;Parallel processing;Multiprocessing systems},
+
+27.esource-Efficient Pipelined Architectures for Radix-2 Real-Valued FFT With Real Datapatpyh
+X. -B. Yin, F. Yu and Z. -G. Ma, "Resource-Efficient Pipelined Architectures for Radix-2 Real-Valued FFT With Real Datapaths," in IEEE Transactions on Circuits and Systems II: Express Briefs, vol. 63, no. 8, pp. 803-807, Aug. 2016, doi: 10.1109/TCSII.2016.2530862.
+keywords: {Computer architecture;Parallel processing;Circuits and systems;Fast Fourier transforms;Delays;Hardware;Indexes;Parallelism;pipelined architecture;real datapath;real-valued fast Fourier transform (RFFT);resource-efficient},
+
+
+28.Low Power Pipelined FFT Processor Architecture on FPGA,
+S. L. M. Hassan, N. Sulaiman and I. S. A. Halim, "Low Power Pipelined FFT Processor Architecture on FPGA," 2018 9th IEEE Control and System Graduate Research Colloquium (ICSGRC), Shah Alam, Malaysia, 2018, pp. 31-34, doi: 10.1109/ICSGRC.2018.8657583. keywords: {Field programmable gate arrays;Computer architecture;Matlab;Hardware;Power dissipation;Discrete Fourier transforms;Mathematical model;FFT;FPGA;pipelined;power;radix-4;radix-8},
+
+29.A efficient design of a real-time FFT architecture based on FPGA
+Chen Yang and He Chen, "A efficient design of a real-time FFT architecture based on FPGA," IET International Radar Conference 2013, Xi'an, 2013, pp. 1-5, doi: 10.1049/cp.2013.0368. keywords: {SAR imaging;R22SDF FFT;fixed-point algorithm;real-time},
+
+
+
+
+
+
+
+
+
+
+
