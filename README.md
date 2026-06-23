@@ -56,6 +56,8 @@ The goal of **Celeste-Core** is to provide a **standalone convolution hardware b
 ---
 
 ##  Hardware Architecture
+<img width="1612" height="1636" alt="archi_bd" src="https://github.com/user-attachments/assets/ccd45634-3da7-4e1e-afa4-a3deed9df69e" />
+
 ### Core Components:
 - **8 Parallel FFT Units**: Dedicated 8-point FFT processors for row/column operations
 - **8 Parallel IFFT Units**: Inverse FFT processors for spatial domain reconstruction  
@@ -111,5 +113,12 @@ The modular design of Celeste-Core makes it simple to integrate into existing sy
 - **Interface Adaptation**: Modify I/O width or add control signals as needed  
 - **Pipeline Optimization**: Adjust buffer sizes for specific timing requirements
 - **Resource Scaling**: Modify parallel unit count based on resource constraints
+
+
+ ###  Results of applied Image filters 
+<img width="1908" height="1023" alt="res1_emboss" src="https://github.com/user-attachments/assets/56355863-b25c-43f4-ac89-4850cb34bfa6" />
+<img width="1892" height="952" alt="res2_edge" src="https://github.com/user-attachments/assets/6649ac55-c5d1-4209-9d7d-cdee88d518c2" />
+<img width="1913" height="967" alt="res3_gaussian_blur" src="https://github.com/user-attachments/assets/4a7026a6-e0d6-4472-aaf9-b4d6aa8198f4" />
+
 
 Revolutionizing convolution processing, one FFT pipeline at a time!
