@@ -38,6 +38,7 @@ The goal of **Celeste-Core** is to provide a **standalone convolution hardware b
 ## Algorithm Overview
 ### **FFT-Based Convolution Pipeline:**
 **Celeste-Core** implements a sophisticated 7-stage processing pipeline that transforms spatial domain convolution into efficient frequency domain operations:
+<img width="1216" height="1424" alt="bd" src="https://github.com/user-attachments/assets/132c686d-5ecc-405c-a523-b06b141d1a2e" />
 
 1. **Input Buffering** - Captures incoming 32-bit complex data
 2. **Row-wise FFT Processing** - 8 parallel FFT units process matrix rows
@@ -56,6 +57,7 @@ The goal of **Celeste-Core** is to provide a **standalone convolution hardware b
 ---
 
 ##  Hardware Architecture
+
 <img width="1612" height="1636" alt="archi_bd" src="https://github.com/user-attachments/assets/ccd45634-3da7-4e1e-afa4-a3deed9df69e" />
 
 ### Core Components:
